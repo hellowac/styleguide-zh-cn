@@ -1,0 +1,2149 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="3 Python 代码风格规则" href="3styllerule.html" /><link rel="prev" title="1 背景" href="1background.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2023.03.27 -->
+        <title>2 Python 语言规则 - google编程样式指南 1.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">google编程样式指南 1.0 文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">google编程样式指南 1.0 文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Python</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1background.html">1 背景</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">2 Python 语言规则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3styllerule.html">3 Python 代码风格规则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3styllerule.html#consistency">4 告别辞</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="python">
+<span id="id1"></span><span id="python-language-rules"></span><span id="s2-python-language-rules"></span><h1>2 Python 语言规则<a class="headerlink" href="#python" title="此标题的永久链接">#</a></h1>
+<p>2 Python Language Rules</p>
+<section id="id2">
+<span id="lint"></span><span id="s2-1-lint"></span><span id="id3"></span><h2>2.1 Lint<a class="headerlink" href="#id2" title="此标题的永久链接">#</a></h2>
+<p>2.1 Lint</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">中文</label><div class="tab-content docutils container">
+<p>使用此 <a class="reference external" href="https://google.github.io/styleguide/pylintrc">pylintrc</a> 在您的代码上运行 <cite>pylint</cite>。</p>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">英文</label><div class="tab-content docutils container">
+<p>Run <cite>pylint</cite> over your code using this <a class="reference external" href="https://google.github.io/styleguide/pylintrc">pylintrc</a> .</p>
+</div>
+</div>
+<section id="lint-definition">
+<span id="definition"></span><span id="s2-1-1-definition"></span><span id="id5"></span><h3>2.1.1 定义<a class="headerlink" href="#lint-definition" title="此标题的永久链接">#</a></h3>
+<p>2.1.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">中文</label><div class="tab-content docutils container">
+<p><cite>pylint</cite> 是一款用于查找 Python 源代码中的错误和代码风格问题的工具。它可以发现一些通常被 C 和 C++ 等动态性较差的语言的编译器捕获的问题。由于 Python 的动态特性，某些警告可能不正确；但是，虚假警告应该很少出现。</p>
+</div>
+<input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">英文</label><div class="tab-content docutils container">
+<p><cite>pylint</cite> is a tool for finding bugs and style problems in Python source code. It finds problems that are typically caught by a compiler for less dynamic languages like C and C++. Because of the dynamic nature of Python, some warnings may be incorrect; however, spurious warnings should be fairly infrequent.</p>
+</div>
+</div>
+</section>
+<section id="lint-pros">
+<span id="pros"></span><span id="s2-1-2-pros"></span><span id="id6"></span><h3>2.1.2 优点<a class="headerlink" href="#lint-pros" title="此标题的永久链接">#</a></h3>
+<p>2.1.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">中文</label><div class="tab-content docutils container">
+<p>捕捉容易错过的错误，如拼写错误、赋值前使用变量等。</p>
+</div>
+<input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">英文</label><div class="tab-content docutils container">
+<p>Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.</p>
+</div>
+</div>
+</section>
+<section id="lint-cons">
+<span id="cons"></span><span id="s2-1-3-cons"></span><span id="id7"></span><h3>2.1.3 缺点<a class="headerlink" href="#lint-cons" title="此标题的永久链接">#</a></h3>
+<p>2.1.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">中文</label><div class="tab-content docutils container">
+<p><cite>pylint</cite> 并不完美。为了充分利用它，有时我们需要绕过它，抑制它的警告，或者修复它。</p>
+</div>
+<input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">英文</label><div class="tab-content docutils container">
+<p><cite>pylint</cite> isn’t perfect. To take advantage of it, sometimes we’ll need to write around it, suppress its warnings or fix it.</p>
+</div>
+</div>
+</section>
+<section id="lint-decision">
+<span id="decision"></span><span id="s2-1-4-decision"></span><span id="id8"></span><h3>2.1.4 决策<a class="headerlink" href="#lint-decision" title="此标题的永久链接">#</a></h3>
+<p>2.1.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--1">中文</label><div class="tab-content docutils container">
+<p>确保对你的代码运行 <cite>pylint</cite>。</p>
+<p>如果某些警告不适用，应将其抑制，以避免掩盖其他问题。要抑制警告，可以添加一行级注释：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">do_PUT</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># WSGI 名称，因此 pylint: disable=invalid-name</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>每个 <code class="code docutils literal notranslate"><span class="pre">pylint</span></code> 警告都有一个符号名称（如 <code class="code docutils literal notranslate"><span class="pre">empty-docstring</span></code>），Google 特定的警告则以 <code class="code docutils literal notranslate"><span class="pre">g-</span></code> 开头。</p>
+<p>如果从符号名称无法清晰看出抑制原因，应添加说明。</p>
+<p>以这种方式抑制的好处是，我们可以轻松搜索出这些抑制点并重新评估。</p>
+<p>你可以通过以下命令获取所有 <code class="code docutils literal notranslate"><span class="pre">pylint</span></code> 警告列表：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pylint<span class="w"> </span>--list-msgs
+</pre></div>
+</div>
+<p>如需获取某个特定警告的详细信息，可使用：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pylint<span class="w"> </span>--help-msg<span class="o">=</span>invalid-name
+</pre></div>
+</div>
+<p>优先使用 <code class="code docutils literal notranslate"><span class="pre">pylint:</span> <span class="pre">disable</span></code>，而非已弃用的旧格式 <code class="code docutils literal notranslate"><span class="pre">pylint:</span> <span class="pre">disable-msg</span></code>。</p>
+<p>对于未使用的参数警告，可以在函数开始处删除该变量来抑制。务必附带注释说明为何删除，使用 “Unused.” 即可。例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">viking_cafe_order</span><span class="p">(</span><span class="n">spam</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">beans</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">eggs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">del</span> <span class="n">beans</span><span class="p">,</span> <span class="n">eggs</span>  <span class="c1"># Unused by vikings.</span>
+    <span class="k">return</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">spam</span>
+</pre></div>
+</div>
+<p>其他常见的抑制方式包括使用 ‘<code class="code docutils literal notranslate"><span class="pre">_</span></code>’ 作为未使用参数的标识符，或为参数名前加上 ‘<code class="code docutils literal notranslate"><span class="pre">unused_</span></code>’ 前缀，或者将它们赋值给 ‘<cite>_</cite>’。这些方式是允许的，但已不再推荐。它们会破坏基于命名参数调用的代码，并且无法强制确保参数确实未被使用。</p>
+</div>
+<input class="tab-input" id="tab-set--4-input--2" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--2">英文</label><div class="tab-content docutils container">
+<p>Make sure you run <code class="code docutils literal notranslate"><span class="pre">pylint</span></code> on your code.</p>
+<p>Suppress warnings if they are inappropriate so that other issues are not hidden. To suppress warnings, you can set a line-level comment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">do_PUT</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># WSGI name, so pylint: disable=invalid-name</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal notranslate"><span class="pre">pylint</span></code> warnings are each identified by symbolic name (<code class="code docutils literal notranslate"><span class="pre">empty-docstring</span></code>) Google-specific warnings start with <code class="code docutils literal notranslate"><span class="pre">g-</span></code>.</p>
+<p>If the reason for the suppression is not clear from the symbolic name, add an explanation.</p>
+<p>Suppressing in this way has the advantage that we can easily search for suppressions and revisit them.</p>
+<p>You can get a list of <code class="code docutils literal notranslate"><span class="pre">pylint</span></code> warnings by doing:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pylint<span class="w"> </span>--list-msgs
+</pre></div>
+</div>
+<p>To get more information on a particular message, use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pylint<span class="w"> </span>--help-msg<span class="o">=</span>invalid-name
+</pre></div>
+</div>
+<p>Prefer <code class="code docutils literal notranslate"><span class="pre">pylint:</span> <span class="pre">disable</span></code> to the deprecated older form <code class="code docutils literal notranslate"><span class="pre">pylint:</span> <span class="pre">disable-msg</span></code>.</p>
+<p>Unused argument warnings can be suppressed by deleting the variables at the
+beginning of the function. Always include a comment explaining why you are
+deleting it. “Unused.” is sufficient. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">viking_cafe_order</span><span class="p">(</span><span class="n">spam</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">beans</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">eggs</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">del</span> <span class="n">beans</span><span class="p">,</span> <span class="n">eggs</span>  <span class="c1"># Unused by vikings.</span>
+    <span class="k">return</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">spam</span>
+</pre></div>
+</div>
+<p>Other common forms of suppressing this warning include using ‘<code class="code docutils literal notranslate"><span class="pre">_</span></code>’ as the
+identifier for the unused argument or prefixing the argument name with
+‘<code class="code docutils literal notranslate"><span class="pre">unused_</span></code>’, or assigning them to ‘<cite>_</cite>’. These forms are allowed but no longer
+encouraged. These break callers that pass arguments by name and do not enforce
+that the arguments are actually unused.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="id9">
+<span id="imports"></span><span id="s2-2-imports"></span><span id="id10"></span><h2>2.2 导入<a class="headerlink" href="#id9" title="此标题的永久链接">#</a></h2>
+<p>2.2 Imports</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--5-input--1" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--1">中文</label><div class="tab-content docutils container">
+<p>仅对包和模块使用 <code class="code docutils literal notranslate"><span class="pre">import</span></code> 语句，而不是对单个类型、类或函数使用。</p>
+</div>
+<input class="tab-input" id="tab-set--5-input--2" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--2">英文</label><div class="tab-content docutils container">
+<p>Use <code class="code docutils literal notranslate"><span class="pre">import</span></code> statements for packages and modules only, not for individual types, classes, or functions.</p>
+</div>
+</div>
+<section id="imports-definition">
+<span id="id11"></span><span id="s2-2-1-definition"></span><span id="id12"></span><h3>2.2.1 定义<a class="headerlink" href="#imports-definition" title="此标题的永久链接">#</a></h3>
+<p>2.2.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--6-input--1" name="tab-set--6" type="radio"><label class="tab-label" for="tab-set--6-input--1">中文</label><div class="tab-content docutils container">
+<p>从一个模块到另一个模块共享代码的可重用机制。</p>
+</div>
+<input class="tab-input" id="tab-set--6-input--2" name="tab-set--6" type="radio"><label class="tab-label" for="tab-set--6-input--2">英文</label><div class="tab-content docutils container">
+<p>Reusability mechanism for sharing code from one module to another.</p>
+</div>
+</div>
+</section>
+<section id="imports-pros">
+<span id="id13"></span><span id="s2-2-2-pros"></span><span id="id14"></span><h3>2.2.2 优点<a class="headerlink" href="#imports-pros" title="此标题的永久链接">#</a></h3>
+<p>2.2.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--7-input--1" name="tab-set--7" type="radio"><label class="tab-label" for="tab-set--7-input--1">中文</label><div class="tab-content docutils container">
+<p>命名空间管理约定很简单。每个标识符的来源都以一致的方式指示； <code class="docutils literal notranslate"><span class="pre">x.Obj</span></code> 表示对象 <code class="docutils literal notranslate"><span class="pre">Obj</span></code> 在模块 <code class="docutils literal notranslate"><span class="pre">x</span></code> 中定义。</p>
+</div>
+<input class="tab-input" id="tab-set--7-input--2" name="tab-set--7" type="radio"><label class="tab-label" for="tab-set--7-input--2">英文</label><div class="tab-content docutils container">
+<p>The namespace management convention is simple. The source of each identifier is indicated in a consistent way; <code class="code docutils literal notranslate"><span class="pre">x.Obj</span></code> says that object <code class="code docutils literal notranslate"><span class="pre">Obj</span></code> is defined in module <cite>x</cite>.</p>
+</div>
+</div>
+</section>
+<section id="imports-cons">
+<span id="id15"></span><span id="s2-2-3-cons"></span><span id="id16"></span><h3>2.2.3 缺点<a class="headerlink" href="#imports-cons" title="此标题的永久链接">#</a></h3>
+<p>2.2.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--8-input--1" name="tab-set--8" type="radio"><label class="tab-label" for="tab-set--8-input--1">中文</label><div class="tab-content docutils container">
+<p>模块名称仍然可能冲突。有些模块名称太长，不方便使用。</p>
+</div>
+<input class="tab-input" id="tab-set--8-input--2" name="tab-set--8" type="radio"><label class="tab-label" for="tab-set--8-input--2">英文</label><div class="tab-content docutils container">
+<p>Module names can still collide. Some module names are inconveniently long.</p>
+</div>
+</div>
+</section>
+<section id="imports-decision">
+<span id="id17"></span><span id="s2-2-4-decision"></span><span id="id18"></span><h3>2.2.4 决策<a class="headerlink" href="#imports-decision" title="此标题的永久链接">#</a></h3>
+<p>2.2.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--9-input--1" name="tab-set--9" type="radio"><label class="tab-label" for="tab-set--9-input--1">中文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>导入包和模块时使用 <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">x</span></code>。</p></li>
+<li><p>当 <code class="code docutils literal notranslate"><span class="pre">x</span></code> 是包前缀而 <code class="code docutils literal notranslate"><span class="pre">y</span></code> 是不带前缀的模块名时，使用 <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">x</span> <span class="pre">import</span> <span class="pre">y</span></code>。</p></li>
+<li><p>在以下任一情形中使用 <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">x</span> <span class="pre">import</span> <span class="pre">y</span> <span class="pre">as</span> <span class="pre">z</span></code>：</p>
+<ul>
+<li><p>需要导入两个名称为 <code class="code docutils literal notranslate"><span class="pre">y</span></code> 的模块。</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">y</span></code> 与当前模块中定义的顶层名称冲突。</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">y</span></code> 与公共 API 中常见的参数名称冲突（例如 <code class="code docutils literal notranslate"><span class="pre">features</span></code>）。</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">y</span></code> 名称过长，不便使用。</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">y</span></code> 在当前代码上下文中名称过于通用（例如：<code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">storage.file_system</span> <span class="pre">import</span> <span class="pre">options</span> <span class="pre">as</span> <span class="pre">fs_options</span></code> ）。</p></li>
+</ul>
+</li>
+<li><p>仅当 <code class="code docutils literal notranslate"><span class="pre">z</span></code> 是标准缩写时，才使用 <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">y</span> <span class="pre">as</span> <span class="pre">z`（例如：`import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>）。</p></li>
+</ul>
+<p>例如，可以如下方式导入模块 <code class="code docutils literal notranslate"><span class="pre">sound.effects.echo</span></code>：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sound.effects</span><span class="w"> </span><span class="kn">import</span> <span class="n">echo</span>
+<span class="o">...</span>
+<span class="n">echo</span><span class="o">.</span><span class="n">EchoFilter</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">atten</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>不要在导入中使用相对路径名称。即使模块位于同一包中，也应使用完整的包名称。这有助于避免无意中重复导入某个包。</p>
+</div>
+<input class="tab-input" id="tab-set--9-input--2" name="tab-set--9" type="radio"><label class="tab-label" for="tab-set--9-input--2">英文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>Use <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">x</span></code> for importing packages and modules.</p></li>
+<li><p>Use <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">x</span> <span class="pre">import</span> <span class="pre">y</span></code> where <code class="code docutils literal notranslate"><span class="pre">x</span></code> is the package prefix and <code class="code docutils literal notranslate"><span class="pre">y</span></code> is the module name with no prefix.</p></li>
+<li><p>Use <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">x</span> <span class="pre">import</span> <span class="pre">y</span> <span class="pre">as</span> <span class="pre">z</span></code> in any of the following circumstances:
+- Two modules named <code class="code docutils literal notranslate"><span class="pre">y</span></code> are to be imported.
+- <code class="code docutils literal notranslate"><span class="pre">y</span></code> conflicts with a top-level name defined in the current module.
+- <code class="code docutils literal notranslate"><span class="pre">y</span></code> conflicts with a common parameter name that is part of the public API (e.g., <code class="code docutils literal notranslate"><span class="pre">features</span></code>).
+- <code class="code docutils literal notranslate"><span class="pre">y</span></code> is an inconveniently long name.
+- <code class="code docutils literal notranslate"><span class="pre">y</span></code> is too generic in the context of your code (e.g., <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">storage.file_system</span> <span class="pre">import</span> <span class="pre">options</span> <span class="pre">as</span> <span class="pre">fs_options</span></code>).</p></li>
+<li><p>Use <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">y</span> <span class="pre">as</span> <span class="pre">z</span></code> only when <cite>z</cite> is a standard abbreviation (e.g., <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>).</p></li>
+</ul>
+<p>For example the module <code class="code docutils literal notranslate"><span class="pre">sound.effects.echo</span></code> may be imported as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sound.effects</span><span class="w"> </span><span class="kn">import</span> <span class="n">echo</span>
+<span class="o">...</span>
+<span class="n">echo</span><span class="o">.</span><span class="n">EchoFilter</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">atten</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do not use relative names in imports. Even if the module is in the same package,
+use the full package name. This helps prevent unintentionally importing a
+package twice.</p>
+</div>
+</div>
+<section id="imports-exemptions">
+<span id="id19"></span><h4>2.2.4.1 豁免<a class="headerlink" href="#imports-exemptions" title="此标题的永久链接">#</a></h4>
+<p>2.2.4.1 Exemptions</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--10-input--1" name="tab-set--10" type="radio"><label class="tab-label" for="tab-set--10-input--1">中文</label><div class="tab-content docutils container">
+<p>以下情形可不遵守此规则：</p>
+<ul class="simple">
+<li><p>来自以下模块的符号用于支持静态分析和类型检查：</p>
+<ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">typing</span></code> 模块 - 见 <a class="reference internal" href="3styllerule.html#typing-imports"><span class="std std-ref">3.19.12 类型的导入</span></a></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">collections.abc</span></code> 模块 - 见 <a class="reference internal" href="3styllerule.html#typing-imports"><span class="std std-ref">3.19.12 类型的导入</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/python/typing_extensions/blob/main/README.md">typing_extensions</a> 模块</p></li>
+</ul>
+</li>
+<li><p>来自 <a class="reference external" href="https://six.readthedocs.io/#module-six.moves">six.moves module</a> 的重定向导入。</p></li>
+</ul>
+</div>
+<input class="tab-input" id="tab-set--10-input--2" name="tab-set--10" type="radio"><label class="tab-label" for="tab-set--10-input--2">英文</label><div class="tab-content docutils container">
+<p>Exemptions from this rule:</p>
+<ul class="simple">
+<li><p>Symbols from the following modules are used to support static analysis and type checking:</p>
+<ul>
+<li><p><code class="code docutils literal notranslate"><span class="pre">typing</span></code> module - see <a class="reference internal" href="3styllerule.html#typing-imports"><span class="std std-ref">3.19.12 类型的导入</span></a></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">collections.abc</span></code> module - see <a class="reference internal" href="3styllerule.html#typing-imports"><span class="std std-ref">3.19.12 类型的导入</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/python/typing_extensions/blob/main/README.md">typing_extensions</a> module</p></li>
+</ul>
+</li>
+<li><p>Redirects from the <a class="reference external" href="https://six.readthedocs.io/#module-six.moves">six.moves</a> module</p></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="id21">
+<span id="packages"></span><span id="s2-3-packages"></span><span id="id22"></span><h2>2.3 包<a class="headerlink" href="#id21" title="此标题的永久链接">#</a></h2>
+<p>2.3 Packages</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--11-input--1" name="tab-set--11" type="radio"><label class="tab-label" for="tab-set--11-input--1">中文</label><div class="tab-content docutils container">
+<p>使用模块的完整路径名位置导入每个模块。</p>
+</div>
+<input class="tab-input" id="tab-set--11-input--2" name="tab-set--11" type="radio"><label class="tab-label" for="tab-set--11-input--2">英文</label><div class="tab-content docutils container">
+<p>Import each module using the full pathname location of the module.</p>
+</div>
+</div>
+<section id="packages-pros">
+<span id="id23"></span><span id="s2-3-1-pros"></span><span id="id24"></span><h3>2.3.1 优点<a class="headerlink" href="#packages-pros" title="此标题的永久链接">#</a></h3>
+<p>2.3.1 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--12-input--1" name="tab-set--12" type="radio"><label class="tab-label" for="tab-set--12-input--1">中文</label><div class="tab-content docutils container">
+<p>避免由于模块搜索路径不符合作者预期而导致模块名称冲突或导入错误。使模块查找更加便捷。</p>
+</div>
+<input class="tab-input" id="tab-set--12-input--2" name="tab-set--12" type="radio"><label class="tab-label" for="tab-set--12-input--2">英文</label><div class="tab-content docutils container">
+<p>Avoids conflicts in module names or incorrect imports due to the module search path not being what the author expected. Makes it easier to find modules.</p>
+</div>
+</div>
+</section>
+<section id="packages-cons">
+<span id="id25"></span><span id="s2-3-2-cons"></span><span id="id26"></span><h3>2.3.2 缺点<a class="headerlink" href="#packages-cons" title="此标题的永久链接">#</a></h3>
+<p>2.3.2 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--13-input--1" name="tab-set--13" type="radio"><label class="tab-label" for="tab-set--13-input--1">中文</label><div class="tab-content docutils container">
+<p>由于必须复制包的层次结构，代码部署会变得更加困难。对于现代部署机制来说，这并非什么问题。</p>
+</div>
+<input class="tab-input" id="tab-set--13-input--2" name="tab-set--13" type="radio"><label class="tab-label" for="tab-set--13-input--2">英文</label><div class="tab-content docutils container">
+<p>Makes it harder to deploy code because you have to replicate the package hierarchy. Not really a problem with modern deployment mechanisms.</p>
+</div>
+</div>
+</section>
+<section id="packages-decision">
+<span id="id27"></span><span id="s2-3-3-decision"></span><span id="id28"></span><h3>2.3.3 决策<a class="headerlink" href="#packages-decision" title="此标题的永久链接">#</a></h3>
+<p>2.3.3 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--14-input--1" name="tab-set--14" type="radio"><label class="tab-label" for="tab-set--14-input--1">中文</label><div class="tab-content docutils container">
+<p>所有新代码都应通过完整的包名称导入模块。</p>
+<p>导入语句应如下所示：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+<span class="c1"># 在代码中通过完整名称引用 absl.flags（较为冗长但清晰）。</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">absl.flags</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">doctor.who</span><span class="w"> </span><span class="kn">import</span> <span class="n">jodie</span>
+
+<span class="n">_FOO</span> <span class="o">=</span> <span class="n">absl</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+<span class="c1"># 在代码中仅通过模块名引用 flags（常见做法）。</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">absl</span><span class="w"> </span><span class="kn">import</span> <span class="n">flags</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">doctor.who</span><span class="w"> </span><span class="kn">import</span> <span class="n">jodie</span>
+
+<span class="n">_FOO</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>(假设该文件位于</em> <code class="docutils literal notranslate"><span class="pre">doctor/who/</span></code> ，<em>且</em> <code class="docutils literal notranslate"><span class="pre">jodie.py</span></code> <em>也在同一目录中)</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>
+<span class="c1"># 无法明确作者希望导入哪个模块，也无法确定实际会导入哪个模块。</span>
+<span class="c1"># 实际的导入行为依赖于控制 sys.path 的外部因素。</span>
+<span class="c1"># 作者是想导入哪个 jodie 模块？</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jodie</span>
+</pre></div>
+</div>
+<p>不应假设主程序所在目录会自动添加到 <code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> 中，尽管在某些环境中确实如此。
+因此，代码应默认 <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">jodie</span></code> 指的是某个第三方或顶层包 <code class="code docutils literal notranslate"><span class="pre">jodie</span></code>，而非本地的 <code class="code docutils literal notranslate"><span class="pre">jodie.py</span></code> 文件。</p>
+</div>
+<input class="tab-input" id="tab-set--14-input--2" name="tab-set--14" type="radio"><label class="tab-label" for="tab-set--14-input--2">英文</label><div class="tab-content docutils container">
+<p>All new code should import each module by its full package name.</p>
+<p>Imports should be as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+<span class="c1"># Reference absl.flags in code with the complete name (verbose).</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">absl.flags</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">doctor.who</span><span class="w"> </span><span class="kn">import</span> <span class="n">jodie</span>
+
+<span class="n">_FOO</span> <span class="o">=</span> <span class="n">absl</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+<span class="c1"># Reference flags in code with just the module name (common).</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">absl</span><span class="w"> </span><span class="kn">import</span> <span class="n">flags</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">doctor.who</span><span class="w"> </span><span class="kn">import</span> <span class="n">jodie</span>
+
+<span class="n">_FOO</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>(assume this file lives in</em> <code class="code docutils literal notranslate"><span class="pre">doctor/who/</span></code> <em>where</em> <code class="code docutils literal notranslate"><span class="pre">jodie.py</span></code> <em>also exists)</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>
+<span class="c1"># Unclear what module the author wanted and what will be imported.  The actual</span>
+<span class="c1"># import behavior depends on external factors controlling sys.path.</span>
+<span class="c1"># Which possible jodie module did the author intend to import?</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jodie</span>
+</pre></div>
+</div>
+<p>The directory the main binary is located in should not be assumed to be in
+<code class="code docutils literal notranslate"><span class="pre">sys.path</span></code> despite that happening in some environments. This being the case,
+code should assume that <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">jodie</span></code> refers to a third-party or top-level
+package named <code class="code docutils literal notranslate"><span class="pre">jodie</span></code>, not a local <code class="code docutils literal notranslate"><span class="pre">jodie.py</span></code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="id29">
+<span id="exceptions"></span><span id="s2-4-exceptions"></span><span id="id30"></span><h2>2.4 异常<a class="headerlink" href="#id29" title="此标题的永久链接">#</a></h2>
+<p>2.4 Exceptions</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--15-input--1" name="tab-set--15" type="radio"><label class="tab-label" for="tab-set--15-input--1">中文</label><div class="tab-content docutils container">
+<p>允许例外，但必须谨慎使用。</p>
+</div>
+<input class="tab-input" id="tab-set--15-input--2" name="tab-set--15" type="radio"><label class="tab-label" for="tab-set--15-input--2">英文</label><div class="tab-content docutils container">
+<p>Exceptions are allowed but must be used carefully.</p>
+</div>
+</div>
+<section id="exceptions-definition">
+<span id="id31"></span><span id="s2-4-1-definition"></span><span id="id32"></span><h3>2.4.1 定义<a class="headerlink" href="#exceptions-definition" title="此标题的永久链接">#</a></h3>
+<p>2.4.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--16-input--1" name="tab-set--16" type="radio"><label class="tab-label" for="tab-set--16-input--1">中文</label><div class="tab-content docutils container">
+<p>异常是打破正常控制流来处理错误或其他异常情况的一种手段。</p>
+</div>
+<input class="tab-input" id="tab-set--16-input--2" name="tab-set--16" type="radio"><label class="tab-label" for="tab-set--16-input--2">英文</label><div class="tab-content docutils container">
+<p>Exceptions are a means of breaking out of normal control flow to handle errors or other exceptional conditions.</p>
+</div>
+</div>
+</section>
+<section id="exceptions-pros">
+<span id="id33"></span><span id="s2-4-2-pros"></span><span id="id34"></span><h3>2.4.2 优点<a class="headerlink" href="#exceptions-pros" title="此标题的永久链接">#</a></h3>
+<p>2.4.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--17-input--1" name="tab-set--17" type="radio"><label class="tab-label" for="tab-set--17-input--1">中文</label><div class="tab-content docutils container">
+<p>正常操作代码的控制流不会被错误处理代码弄得杂乱无章。它还允许控制流在特定条件发生时跳过多个帧，例如，一步即可从 N 个嵌套函数返回，而无需逐一查找错误代码。</p>
+</div>
+<input class="tab-input" id="tab-set--17-input--2" name="tab-set--17" type="radio"><label class="tab-label" for="tab-set--17-input--2">英文</label><div class="tab-content docutils container">
+<p>The control flow of normal operation code is not cluttered by error-handling
+code. It also allows the control flow to skip multiple frames when a certain
+condition occurs, e.g., returning from N nested functions in one step instead of
+having to plumb error codes through.</p>
+</div>
+</div>
+</section>
+<section id="exceptions-cons">
+<span id="id35"></span><span id="s2-4-3-cons"></span><span id="id36"></span><h3>2.4.3 缺点<a class="headerlink" href="#exceptions-cons" title="此标题的永久链接">#</a></h3>
+<p>2.4.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--18-input--1" name="tab-set--18" type="radio"><label class="tab-label" for="tab-set--18-input--1">中文</label><div class="tab-content docutils container">
+<p>可能导致控制流混乱。调用库时容易遗漏错误情况。</p>
+</div>
+<input class="tab-input" id="tab-set--18-input--2" name="tab-set--18" type="radio"><label class="tab-label" for="tab-set--18-input--2">英文</label><div class="tab-content docutils container">
+<p>May cause the control flow to be confusing. Easy to miss error cases when making library calls.</p>
+</div>
+</div>
+</section>
+<section id="exceptions-decision">
+<span id="id37"></span><span id="s2-4-4-decision"></span><span id="id38"></span><h3>2.4.4 决策<a class="headerlink" href="#exceptions-decision" title="此标题的永久链接">#</a></h3>
+<p>2.4.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--19-input--1" name="tab-set--19" type="radio"><label class="tab-label" for="tab-set--19-input--1">中文</label><div class="tab-content docutils container">
+<p>异常的使用必须遵循以下要求：</p>
+<ul>
+<li><p>在合适的情况下使用内建异常类。例如，当违反前置条件（如函数参数校验）时，抛出 <code class="code docutils literal notranslate"><span class="pre">ValueError</span></code> 以表示程序设计错误。</p></li>
+<li><p>不应使用 <code class="code docutils literal notranslate"><span class="pre">assert</span></code> 语句替代条件语句或前置条件验证。 <code class="code docutils literal notranslate"><span class="pre">assert</span></code> 语句不能作为应用逻辑的关键部分。判断依据是：移除该 <code class="code docutils literal notranslate"><span class="pre">assert</span></code> 后，代码仍应能正常运行。 <code class="code docutils literal notranslate"><span class="pre">assert</span></code> 条件并不保证一定会被执行，详见
+<a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement">官方文档说明</a>。
+在使用 <a class="reference external" href="https://pytest.org">pytest</a> 进行测试时，可以且应该使用 <code class="code docutils literal notranslate"><span class="pre">assert</span></code> 来验证预期行为。例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connect_to_next_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;连接到下一个可用端口。</span>
+
+<span class="sd">    参数：</span>
+<span class="sd">    minimum：大于或等于 1024 的端口号。</span>
+
+<span class="sd">    返回：</span>
+<span class="sd">    新的最小端口值。</span>
+
+<span class="sd">    异常：</span>
+<span class="sd">    ConnectionError：如果找不到可用端口。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">minimum</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+        <span class="c1"># 注意，这里的 ValueError 没有出现在文档字符串的 &quot;Raises:&quot; 部分，</span>
+        <span class="c1"># 因为不应对 API 误用行为的特定反应提供保证。</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Min. port must be at least 1024, not </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_next_open_port</span><span class="p">(</span><span class="n">minimum</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Could not connect to service on port </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1"> or higher.&#39;</span><span class="p">)</span>
+    <span class="c1"># 程序逻辑并不依赖于这个 assert 的结果。</span>
+    <span class="k">assert</span> <span class="n">port</span> <span class="o">&gt;=</span> <span class="n">minimum</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Unexpected port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s1"> when minimum was </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">port</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connect_to_next_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;连接到下一个可用端口。</span>
+
+<span class="sd">    参数：</span>
+<span class="sd">    minimum：大于或等于 1024 的端口号。</span>
+
+<span class="sd">    返回：</span>
+<span class="sd">    新的最小端口值。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">minimum</span> <span class="o">&gt;=</span> <span class="mi">1024</span><span class="p">,</span> <span class="s1">&#39;Minimum port must be at least 1024.&#39;</span>
+    <span class="c1"># 后续代码依赖于上述 assert。</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_next_open_port</span><span class="p">(</span><span class="n">minimum</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="c1"># 返回语句的类型检查依赖于该 assert。</span>
+    <span class="k">return</span> <span class="n">port</span>
+</pre></div>
+</div>
+</li>
+<li><p>库或包可以定义自定义异常，但必须继承自某个已有的异常类。异常名称应以 <code class="code docutils literal notranslate"><span class="pre">Error</span></code> 结尾，且不应出现重复命名（如 <code class="code docutils literal notranslate"><span class="pre">foo.FooError</span></code>）。</p></li>
+<li><p>不要使用捕获所有异常的 <code class="code docutils literal notranslate"><span class="pre">except:</span></code> 语句，也不要捕获 <code class="code docutils literal notranslate"><span class="pre">Exception</span></code> 或 <code class="code docutils literal notranslate"><span class="pre">StandardError</span></code>，除非你：</p>
+<ul class="simple">
+<li><p>要重新抛出该异常，或</p></li>
+<li><p>要创建程序中的一个“隔离点”，在该位置异常不会被继续传播，而是被记录或忽略，例如为了防止线程崩溃而保护其最外层的代码块。</p></li>
+</ul>
+<p>Python 在这方面非常宽容， <code class="code docutils literal notranslate"><span class="pre">except:</span></code> 会捕获所有内容，包括拼写错误的名称、<cite>sys.exit()</cite> 调用、按下 Ctrl+C、单元测试失败等各种你并不想捕获的异常。</p>
+</li>
+<li><p>尽量减少 <code class="code docutils literal notranslate"><span class="pre">try</span></code>/<code class="code docutils literal notranslate"><span class="pre">except</span></code> 块中包含的代码量。<code class="code docutils literal notranslate"><span class="pre">try</span></code> 块越大，越有可能捕获到你意料之外的异常。在这种情况下，<code class="code docutils literal notranslate"><span class="pre">try</span></code>/<code class="code docutils literal notranslate"><span class="pre">except</span></code> 可能会掩盖真正的错误。</p></li>
+<li><p>使用 <code class="code docutils literal notranslate"><span class="pre">finally</span></code> 子句来编写无论是否发生异常都需要执行的代码。这在进行清理操作时非常有用，比如关闭文件。</p></li>
+</ul>
+</div>
+<input class="tab-input" id="tab-set--19-input--2" name="tab-set--19" type="radio"><label class="tab-label" for="tab-set--19-input--2">英文</label><div class="tab-content docutils container">
+<p>Exceptions must follow certain conditions:</p>
+<ul>
+<li><p>Make use of built-in exception classes when it makes sense. For example,
+raise a <code class="code docutils literal notranslate"><span class="pre">ValueError</span></code> to indicate a programming mistake like a violated
+precondition, such as may happen when validating function arguments.</p></li>
+<li><p>Do not use <code class="code docutils literal notranslate"><span class="pre">assert</span></code> statements in place of conditionals or validating
+preconditions. They must not be critical to the application logic. A litmus
+test would be that the <code class="code docutils literal notranslate"><span class="pre">assert</span></code> could be removed without breaking the code.
+<code class="code docutils literal notranslate"><span class="pre">assert</span></code> conditionals are
+not guaranteed <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement">https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement</a>
+to be evaluated. For <a class="reference external" href="https://pytest.org">pytest</a>  based tests, <code class="code docutils literal notranslate"><span class="pre">assert</span></code> is
+okay and expected to verify expectations. For
+example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connect_to_next_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connects to the next available port.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    minimum: A port value greater or equal to 1024.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    The new minimum port.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">    ConnectionError: If no available port is found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">minimum</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+    <span class="c1"># Note that this raising of ValueError is not mentioned in the doc</span>
+    <span class="c1"># string&#39;s &quot;Raises:&quot; section because it is not appropriate to</span>
+    <span class="c1"># guarantee this specific behavioral reaction to API misuse.</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Min. port must be at least 1024, not </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+      <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_next_open_port</span><span class="p">(</span><span class="n">minimum</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Could not connect to service on port </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1"> or higher.&#39;</span><span class="p">)</span>
+      <span class="c1"># The code does not depend on the result of this assert.</span>
+      <span class="k">assert</span> <span class="n">port</span> <span class="o">&gt;=</span> <span class="n">minimum</span><span class="p">,</span> <span class="p">(</span>
+          <span class="sa">f</span><span class="s1">&#39;Unexpected port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s1"> when minimum was </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">port</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connect_to_next_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connects to the next available port.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    minimum: A port value greater or equal to 1024.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    The new minimum port.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">minimum</span> <span class="o">&gt;=</span> <span class="mi">1024</span><span class="p">,</span> <span class="s1">&#39;Minimum port must be at least 1024.&#39;</span>
+    <span class="c1"># The following code depends on the previous assert.</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_next_open_port</span><span class="p">(</span><span class="n">minimum</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="c1"># The type checking of the return statement relies on the assert.</span>
+    <span class="k">return</span> <span class="n">port</span>
+</pre></div>
+</div>
+</li>
+<li><p>Libraries or packages may define their own exceptions. When doing so they
+must inherit from an existing exception class. Exception names should end in
+<code class="code docutils literal notranslate"><span class="pre">Error</span></code> and should not introduce repetition (<code class="code docutils literal notranslate"><span class="pre">foo.FooError</span></code>).</p></li>
+<li><p>Never use catch-all <code class="code docutils literal notranslate"><span class="pre">except:</span></code> statements, or catch <code class="code docutils literal notranslate"><span class="pre">Exception</span></code> or
+<code class="code docutils literal notranslate"><span class="pre">StandardError</span></code>, unless you are</p>
+<ul class="simple">
+<li><p>re-raising the exception, or</p></li>
+<li><p>creating an isolation point in the program where exceptions are not
+propagated but are recorded and suppressed instead, such as protecting a
+thread from crashing by guarding its outermost block.</p></li>
+</ul>
+<p>Python is very tolerant in this regard and <code class="code docutils literal notranslate"><span class="pre">except:</span></code> will really catch
+everything including misspelled names, sys.exit() calls, Ctrl+C interrupts,
+unittest failures and all kinds of other exceptions that you simply don’t
+want to catch.</p>
+</li>
+<li><p>Minimize the amount of code in a <code class="code docutils literal notranslate"><span class="pre">try</span></code>/<code class="code docutils literal notranslate"><span class="pre">except</span></code> block. The larger the body
+of the <code class="code docutils literal notranslate"><span class="pre">try</span></code>, the more likely that an exception will be raised by a line of
+code that you didn’t expect to raise an exception. In those cases, the
+<code class="code docutils literal notranslate"><span class="pre">try</span></code>/<code class="code docutils literal notranslate"><span class="pre">except</span></code> block hides a real error.</p></li>
+<li><p>Use the <code class="code docutils literal notranslate"><span class="pre">finally</span></code> clause to execute code whether or not an exception is
+raised in the <code class="code docutils literal notranslate"><span class="pre">try</span></code> block. This is often useful for cleanup, i.e., closing a
+file.</p></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="id41">
+<span id="global-state"></span><span id="s2-5-global-state"></span><span id="global-variables"></span><span id="s2-5-global-variables"></span><span id="id42"></span><h2>2.5 可变全局状态<a class="headerlink" href="#id41" title="此标题的永久链接">#</a></h2>
+<p>2.5 Mutable Global State</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--20-input--1" name="tab-set--20" type="radio"><label class="tab-label" for="tab-set--20-input--1">中文</label><div class="tab-content docutils container">
+<p>避免可变的全局状态。</p>
+</div>
+<input class="tab-input" id="tab-set--20-input--2" name="tab-set--20" type="radio"><label class="tab-label" for="tab-set--20-input--2">英文</label><div class="tab-content docutils container">
+<p>Avoid mutable global state.</p>
+</div>
+</div>
+<section id="global-variables-definition">
+<span id="id43"></span><span id="s2-5-1-definition"></span><span id="id44"></span><h3>2.5.1 定义<a class="headerlink" href="#global-variables-definition" title="此标题的永久链接">#</a></h3>
+<p>2.5.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--21-input--1" name="tab-set--21" type="radio"><label class="tab-label" for="tab-set--21-input--1">中文</label><div class="tab-content docutils container">
+<p>程序执行期间可能发生变异的模块级值或类属性。</p>
+</div>
+<input class="tab-input" id="tab-set--21-input--2" name="tab-set--21" type="radio"><label class="tab-label" for="tab-set--21-input--2">英文</label><div class="tab-content docutils container">
+<p>Module-level values or class attributes that can get mutated during program execution.</p>
+</div>
+</div>
+</section>
+<section id="global-variables-pros">
+<span id="id45"></span><span id="s2-5-2-pros"></span><span id="id46"></span><h3>2.5.2 优点<a class="headerlink" href="#global-variables-pros" title="此标题的永久链接">#</a></h3>
+<p>2.5.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--22-input--1" name="tab-set--22" type="radio"><label class="tab-label" for="tab-set--22-input--1">中文</label><div class="tab-content docutils container">
+<p>偶尔有用。</p>
+</div>
+<input class="tab-input" id="tab-set--22-input--2" name="tab-set--22" type="radio"><label class="tab-label" for="tab-set--22-input--2">英文</label><div class="tab-content docutils container">
+<p>Occasionally useful.</p>
+</div>
+</div>
+</section>
+<section id="global-variables-cons">
+<span id="id47"></span><span id="s2-5-3-cons"></span><span id="id48"></span><h3>2.5.3 缺点<a class="headerlink" href="#global-variables-cons" title="此标题的永久链接">#</a></h3>
+<p>2.5.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--23-input--1" name="tab-set--23" type="radio"><label class="tab-label" for="tab-set--23-input--1">中文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>打破封装性：这类设计可能会妨碍实现合理的目标。例如，如果使用全局状态来管理数据库连接，那么同时连接两个不同的数据库（例如在迁移期间用于比较差异）将变得困难。类似的问题也很容易出现在全局注册表的使用中。</p></li>
+<li><p>有可能在模块导入期间改变模块的行为，因为全局变量的赋值是在模块首次导入时执行的。</p></li>
+</ul>
+</div>
+<input class="tab-input" id="tab-set--23-input--2" name="tab-set--23" type="radio"><label class="tab-label" for="tab-set--23-input--2">英文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>Breaks encapsulation: Such design can make it hard to achieve valid objectives. For example, if global state is used to manage a database connection, then connecting to two different databases at the same time (such as for computing differences during a migration) becomes difficult. Similar problems easily arise with global registries.</p></li>
+<li><p>Has the potential to change module behavior during the import, because assignments to global variables are done when the module is first imported.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="global-variables-decision">
+<span id="id49"></span><span id="s2-5-4-decision"></span><span id="id50"></span><h3>2.5.4 决策<a class="headerlink" href="#global-variables-decision" title="此标题的永久链接">#</a></h3>
+<p>2.5.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--24-input--1" name="tab-set--24" type="radio"><label class="tab-label" for="tab-set--24-input--1">中文</label><div class="tab-content docutils container">
+<p>避免使用可变的全局状态。</p>
+<p>在极少数确有必要使用全局状态的情况下，应将可变的全局实体声明在模块级别或作为类属性，并通过在名称前加下划线 <cite>_</cite> 使其成为内部实现。如有必要，外部对可变全局状态的访问必须通过公共函数或类方法进行。参见下文的 <a class="reference internal" href="3styllerule.html#s3-16-naming"><span class="std std-ref">命名规范</span></a>。请在注释中或注释中链接的文档中说明使用可变全局状态的设计原因。</p>
+<p>允许并鼓励使用模块级常量。例如：用于内部用途的常量 <cite>_MAX_HOLY_HANDGRENADE_COUNT = 3</cite>，或用于公共 API 的常量 <cite>SIR_LANCELOTS_FAVORITE_COLOR = “blue”</cite>。常量名称必须使用全大写加下划线的格式。参见下文的 <a class="reference internal" href="3styllerule.html#s3-16-naming"><span class="std std-ref">命名规范</span></a> 。</p>
+</div>
+<input class="tab-input" id="tab-set--24-input--2" name="tab-set--24" type="radio"><label class="tab-label" for="tab-set--24-input--2">英文</label><div class="tab-content docutils container">
+<p>Avoid mutable global state.</p>
+<p>In those rare cases where using global state is warranted, mutable global
+entities should be declared at the module level or as a class attribute and made
+internal by prepending an <cite>_</cite> to the name. If necessary, external access to
+mutable global state must be done through public functions or class methods. See
+<a class="reference internal" href="3styllerule.html#s3-16-naming"><span class="std std-ref">Naming</span></a> below. Please explain the design reasons why mutable
+global state is being used in a comment or a doc linked to from a comment.</p>
+<p>Module-level constants are permitted and encouraged. For example:
+<cite>_MAX_HOLY_HANDGRENADE_COUNT = 3</cite> for an internal use constant or
+<cite>SIR_LANCELOTS_FAVORITE_COLOR = “blue”</cite> for a public API constant. Constants
+must be named using all caps with underscores. See <a class="reference internal" href="3styllerule.html#s3-16-naming"><span class="std std-ref">Naming</span></a>
+below.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="nested-classes-functions">
+<span id="nested"></span><span id="s2-6-nested"></span><span id="id51"></span><h2>2.6 嵌套/本地/内部类和函数<a class="headerlink" href="#nested-classes-functions" title="此标题的永久链接">#</a></h2>
+<p>2.6 Nested/Local/Inner Classes and Functions</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--25-input--1" name="tab-set--25" type="radio"><label class="tab-label" for="tab-set--25-input--1">中文</label><div class="tab-content docutils container">
+<p>嵌套的局部函数或类可以用来覆盖局部变量。内部类也很好。</p>
+</div>
+<input class="tab-input" id="tab-set--25-input--2" name="tab-set--25" type="radio"><label class="tab-label" for="tab-set--25-input--2">英文</label><div class="tab-content docutils container">
+<p>Nested local functions or classes are fine when used to close over a local variable. Inner classes are fine.</p>
+</div>
+</div>
+<section id="nested-classes-functions-definition">
+<span id="id52"></span><span id="s2-6-1-definition"></span><span id="id53"></span><h3>2.6.1 定义<a class="headerlink" href="#nested-classes-functions-definition" title="此标题的永久链接">#</a></h3>
+<p>2.6.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--26-input--1" name="tab-set--26" type="radio"><label class="tab-label" for="tab-set--26-input--1">中文</label><div class="tab-content docutils container">
+<p>类可以在方法、函数或类内部定义。函数可以在方法或函数内部定义。嵌套函数对封闭作用域中定义的变量具有只读访问权限。</p>
+</div>
+<input class="tab-input" id="tab-set--26-input--2" name="tab-set--26" type="radio"><label class="tab-label" for="tab-set--26-input--2">英文</label><div class="tab-content docutils container">
+<p>A class can be defined inside of a method, function, or class. A function can be defined inside a method or function. Nested functions have read-only access to variables defined in enclosing scopes.</p>
+</div>
+</div>
+</section>
+<section id="nested-classes-functions-pros">
+<span id="id54"></span><span id="s2-6-2-pros"></span><span id="id55"></span><h3>2.6.2优点<a class="headerlink" href="#nested-classes-functions-pros" title="此标题的永久链接">#</a></h3>
+<p>2.6.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--27-input--1" name="tab-set--27" type="radio"><label class="tab-label" for="tab-set--27-input--1">中文</label><div class="tab-content docutils container">
+<p>允许定义仅在非常有限的范围内使用的实用程序类和函数。非常符合 <a class="reference external" href="https://en.wikipedia.org/wiki/Abstract_data_type">ADT</a> 规范。常用于实现装饰器。</p>
+</div>
+<input class="tab-input" id="tab-set--27-input--2" name="tab-set--27" type="radio"><label class="tab-label" for="tab-set--27-input--2">英文</label><div class="tab-content docutils container">
+<p>Allows definition of utility classes and functions that are only used inside of a very limited scope. Very <a class="reference external" href="https://en.wikipedia.org/wiki/Abstract_data_type">ADT</a> -y. Commonly used for implementing decorators.</p>
+</div>
+</div>
+</section>
+<section id="nested-classes-functions-cons">
+<span id="id57"></span><span id="s2-6-3-cons"></span><span id="id58"></span><h3>2.6.3 缺点<a class="headerlink" href="#nested-classes-functions-cons" title="此标题的永久链接">#</a></h3>
+<p>2.6.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--28-input--1" name="tab-set--28" type="radio"><label class="tab-label" for="tab-set--28-input--1">中文</label><div class="tab-content docutils container">
+<p>嵌套函数和类无法直接测试。嵌套会使外部函数变得更长，可读性更差。</p>
+</div>
+<input class="tab-input" id="tab-set--28-input--2" name="tab-set--28" type="radio"><label class="tab-label" for="tab-set--28-input--2">英文</label><div class="tab-content docutils container">
+<p>Nested functions and classes cannot be directly tested. Nesting can make the outer function longer and less readable.</p>
+</div>
+</div>
+</section>
+<section id="nested-classes-functions-decision">
+<span id="id59"></span><span id="s2-6-4-decision"></span><span id="id60"></span><h3>2.6.4 决策<a class="headerlink" href="#nested-classes-functions-decision" title="此标题的永久链接">#</a></h3>
+<p>2.6.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--29-input--1" name="tab-set--29" type="radio"><label class="tab-label" for="tab-set--29-input--1">中文</label><div class="tab-content docutils container">
+<p>它们没有问题，但有一些注意事项。避免使用嵌套函数或类，除非需要覆盖除 <code class="code docutils literal notranslate"><span class="pre">self</span></code> 或 <code class="code docutils literal notranslate"><span class="pre">cls</span></code> 之外的本地值。不要仅仅为了向模块用户隐藏函数而嵌套函数。相反，应该在模块级别为其名称添加 <code class="docutils literal notranslate"><span class="pre">_</span></code> 前缀，以便测试仍然可以访问它。</p>
+</div>
+<input class="tab-input" id="tab-set--29-input--2" name="tab-set--29" type="radio"><label class="tab-label" for="tab-set--29-input--2">英文</label><div class="tab-content docutils container">
+<p>They are fine with some caveats. Avoid nested functions or classes except when closing over a local value other than <code class="code docutils literal notranslate"><span class="pre">self</span></code> or <code class="code docutils literal notranslate"><span class="pre">cls</span></code>. Do not nest a function just to hide it from users of a module. Instead, prefix its name with an <code class="docutils literal notranslate"><span class="pre">_</span></code> at the module level so that it can still be accessed by tests.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="comprehensions">
+<span id="id62"></span><span id="id61"></span><span id="list-comprehensions"></span><span id="s2-7-list-comprehensions"></span><span id="s2-7-comprehensions"></span><span id="id63"></span><h2>2.7 推导式与生成器表达式<a class="headerlink" href="#comprehensions" title="此标题的永久链接">#</a></h2>
+<p>2.7 Comprehensions &amp; Generator Expressions</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--30-input--1" name="tab-set--30" type="radio"><label class="tab-label" for="tab-set--30-input--1">中文</label><div class="tab-content docutils container">
+<p>可以用于简单的情况。</p>
+</div>
+<input class="tab-input" id="tab-set--30-input--2" name="tab-set--30" type="radio"><label class="tab-label" for="tab-set--30-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay to use for simple cases.</p>
+</div>
+</div>
+<section id="comprehensions-definition">
+<span id="id64"></span><span id="s2-7-1-definition"></span><span id="id65"></span><h3>2.7.1 定义<a class="headerlink" href="#comprehensions-definition" title="此标题的永久链接">#</a></h3>
+<p>2.7.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--31-input--1" name="tab-set--31" type="radio"><label class="tab-label" for="tab-set--31-input--1">中文</label><div class="tab-content docutils container">
+<p>列表、字典和集合推导以及生成器表达式提供了一种简洁有效的方法来创建容器类型和迭代器，而无需使用传统循环、<code class="code docutils literal notranslate"><span class="pre">map()</span></code>、<code class="code docutils literal notranslate"><span class="pre">filter()</span></code> 或 <code class="code docutils literal notranslate"><span class="pre">lambda</span></code>。</p>
+</div>
+<input class="tab-input" id="tab-set--31-input--2" name="tab-set--31" type="radio"><label class="tab-label" for="tab-set--31-input--2">英文</label><div class="tab-content docutils container">
+<p>List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, <code class="code docutils literal notranslate"><span class="pre">map()</span></code>, <code class="code docutils literal notranslate"><span class="pre">filter()</span></code>, or <code class="code docutils literal notranslate"><span class="pre">lambda</span></code>.</p>
+</div>
+</div>
+</section>
+<section id="comprehensions-pros">
+<span id="id66"></span><span id="s2-7-2-pros"></span><span id="id67"></span><h3>2.7.2 优点<a class="headerlink" href="#comprehensions-pros" title="此标题的永久链接">#</a></h3>
+<p>2.7.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--32-input--1" name="tab-set--32" type="radio"><label class="tab-label" for="tab-set--32-input--1">中文</label><div class="tab-content docutils container">
+<p>简单的推导式比其他字典、列表或集合的创建技术更清晰、更简洁。生成器表达式可以非常高效，因为它们完全避免了创建列表。</p>
+</div>
+<input class="tab-input" id="tab-set--32-input--2" name="tab-set--32" type="radio"><label class="tab-label" for="tab-set--32-input--2">英文</label><div class="tab-content docutils container">
+<p>Simple comprehensions can be clearer and simpler than other dict, list, or set creation techniques. Generator expressions can be very efficient, since they avoid the creation of a list entirely.</p>
+</div>
+</div>
+</section>
+<section id="comprehensions-cons">
+<span id="id68"></span><span id="s2-7-3-cons"></span><span id="id69"></span><h3>2.7.3 缺点<a class="headerlink" href="#comprehensions-cons" title="此标题的永久链接">#</a></h3>
+<p>2.7.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--33-input--1" name="tab-set--33" type="radio"><label class="tab-label" for="tab-set--33-input--1">中文</label><div class="tab-content docutils container">
+<p>复杂的理解或生成器表达式可能难以阅读。</p>
+</div>
+<input class="tab-input" id="tab-set--33-input--2" name="tab-set--33" type="radio"><label class="tab-label" for="tab-set--33-input--2">英文</label><div class="tab-content docutils container">
+<p>Complicated comprehensions or generator expressions can be hard to read.</p>
+</div>
+</div>
+</section>
+<section id="comprehensions-decision">
+<span id="id70"></span><span id="s2-7-4-decision"></span><span id="id71"></span><h3>2.7.4 决策<a class="headerlink" href="#comprehensions-decision" title="此标题的永久链接">#</a></h3>
+<p>2.7.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--34-input--1" name="tab-set--34" type="radio"><label class="tab-label" for="tab-set--34-input--1">中文</label><div class="tab-content docutils container">
+<p>允许使用推导式，但不允许使用多个 <code class="code docutils literal notranslate"><span class="pre">for</span></code> 子句或过滤表达式。优化重点在于可读性，而非简洁性。</p>
+</div>
+<input class="tab-input" id="tab-set--34-input--2" name="tab-set--34" type="radio"><label class="tab-label" for="tab-set--34-input--2">英文</label><div class="tab-content docutils container">
+<p>Comprehensions are allowed, however multiple <code class="code docutils literal notranslate"><span class="pre">for</span></code> clauses or filter expressions are not permitted. Optimize for readability, not conciseness.</p>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">mapping_expr</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="k">if</span> <span class="n">filter_expr</span><span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">is_valid</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">interesting_iterable</span>
+            <span class="k">if</span> <span class="n">a_longer_filter_expression</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">descriptive_name</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">transform</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">},</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">generate_iterable</span><span class="p">(</span><span class="n">some_input</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">complicated_condition_is_met</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">complicated_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">long_generator_function</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">unique_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span>
+        <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">z</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="default-iterators-operators">
+<span id="s2-8-default-iterators-and-operators"></span><span id="id72"></span><h2>2.8 默认迭代器和运算符<a class="headerlink" href="#default-iterators-operators" title="此标题的永久链接">#</a></h2>
+<p>2.8 Default Iterators and Operators</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--35-input--1" name="tab-set--35" type="radio"><label class="tab-label" for="tab-set--35-input--1">中文</label><div class="tab-content docutils container">
+<p>对支持它们的类型（如列表、字典和文件）使用默认迭代器和运算符。</p>
+</div>
+<input class="tab-input" id="tab-set--35-input--2" name="tab-set--35" type="radio"><label class="tab-label" for="tab-set--35-input--2">英文</label><div class="tab-content docutils container">
+<p>Use default iterators and operators for types that support them, like lists, dictionaries, and files.</p>
+</div>
+</div>
+<section id="default-iterators-operators-definition">
+<span id="id73"></span><span id="s2-8-1-definition"></span><span id="id74"></span><h3>2.8.1 定义<a class="headerlink" href="#default-iterators-operators-definition" title="此标题的永久链接">#</a></h3>
+<p>2.8.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--36-input--1" name="tab-set--36" type="radio"><label class="tab-label" for="tab-set--36-input--1">中文</label><div class="tab-content docutils container">
+<p>容器类型，如字典和列表，定义默认迭代器和成员资格测试运算符（“in”和“not in”）。</p>
+</div>
+<input class="tab-input" id="tab-set--36-input--2" name="tab-set--36" type="radio"><label class="tab-label" for="tab-set--36-input--2">英文</label><div class="tab-content docutils container">
+<p>Container types, like dictionaries and lists, define default iterators and membership test operators (“in” and “not in”).</p>
+</div>
+</div>
+</section>
+<section id="default-iterators-operators-pros">
+<span id="id75"></span><span id="s2-8-2-pros"></span><span id="id76"></span><h3>2.8.2 优点<a class="headerlink" href="#default-iterators-operators-pros" title="此标题的永久链接">#</a></h3>
+<p>2.8.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--37-input--1" name="tab-set--37" type="radio"><label class="tab-label" for="tab-set--37-input--1">中文</label><div class="tab-content docutils container">
+<p>默认的迭代器和运算符简单高效。它们直接表达操作，无需额外的方法调用。使用默认运算符的函数是泛型函数。它可以用于任何支持该操作的类型。</p>
+</div>
+<input class="tab-input" id="tab-set--37-input--2" name="tab-set--37" type="radio"><label class="tab-label" for="tab-set--37-input--2">英文</label><div class="tab-content docutils container">
+<p>The default iterators and operators are simple and efficient. They express the operation directly, without extra method calls. A function that uses default operators is generic. It can be used with any type that supports the operation.</p>
+</div>
+</div>
+</section>
+<section id="default-iterators-operators-cons">
+<span id="id77"></span><span id="s2-8-3-cons"></span><span id="id78"></span><h3>2.8.3 缺点<a class="headerlink" href="#default-iterators-operators-cons" title="此标题的永久链接">#</a></h3>
+<p>2.8.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--38-input--1" name="tab-set--38" type="radio"><label class="tab-label" for="tab-set--38-input--1">中文</label><div class="tab-content docutils container">
+<p>你无法通过读取方法名称来判断对象的类型（除非变量有类型注释）。这也是一个优点。</p>
+</div>
+<input class="tab-input" id="tab-set--38-input--2" name="tab-set--38" type="radio"><label class="tab-label" for="tab-set--38-input--2">英文</label><div class="tab-content docutils container">
+<p>You can’t tell the type of objects by reading the method names (unless the variable has type annotations). This is also an advantage.</p>
+</div>
+</div>
+</section>
+<section id="default-iterators-operators-decision">
+<span id="id79"></span><span id="s2-8-4-decision"></span><span id="id80"></span><h3>2.8.4 决策<a class="headerlink" href="#default-iterators-operators-decision" title="此标题的永久链接">#</a></h3>
+<p>2.8.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--39-input--1" name="tab-set--39" type="radio"><label class="tab-label" for="tab-set--39-input--1">中文</label><div class="tab-content docutils container">
+<p>对于支持默认迭代器和运算符的类型，例如列表、字典和文件，请使用默认迭代器和运算符。内置类型也定义了迭代器方法。优先使用这些方法，而不是返回列表的方法，但迭代容器时不应对其进行修改。</p>
+</div>
+<input class="tab-input" id="tab-set--39-input--2" name="tab-set--39" type="radio"><label class="tab-label" for="tab-set--39-input--2">英文</label><div class="tab-content docutils container">
+<p>Use default iterators and operators for types that support them, like lists, dictionaries, and files. The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it.</p>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>  <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">adict</span><span class="p">:</span> <span class="o">...</span>
+      <span class="k">if</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">:</span> <span class="o">...</span>
+      <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">afile</span><span class="p">:</span> <span class="o">...</span>
+      <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>   <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">adict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="o">...</span>
+      <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">afile</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span> <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id81">
+<span id="generators"></span><span id="s2-9-generators"></span><span id="id82"></span><h2>2.9 生成器<a class="headerlink" href="#id81" title="此标题的永久链接">#</a></h2>
+<p>2.9 Generators</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--40-input--1" name="tab-set--40" type="radio"><label class="tab-label" for="tab-set--40-input--1">中文</label><div class="tab-content docutils container">
+<p>根据需要使用生成器。</p>
+</div>
+<input class="tab-input" id="tab-set--40-input--2" name="tab-set--40" type="radio"><label class="tab-label" for="tab-set--40-input--2">英文</label><div class="tab-content docutils container">
+<p>Use generators as needed.</p>
+</div>
+</div>
+<section id="generators-definition">
+<span id="id83"></span><span id="s2-9-1-definition"></span><span id="id84"></span><h3>2.9.1 定义<a class="headerlink" href="#generators-definition" title="此标题的永久链接">#</a></h3>
+<p>2.9.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--41-input--1" name="tab-set--41" type="radio"><label class="tab-label" for="tab-set--41-input--1">中文</label><div class="tab-content docutils container">
+<p>生成器函数返回一个迭代器，该迭代器每次执行 yield 语句时都会产生一个值。产生一个值后，生成器函数的运行时状态将被暂停，直到需要下一个值为止。</p>
+</div>
+<input class="tab-input" id="tab-set--41-input--2" name="tab-set--41" type="radio"><label class="tab-label" for="tab-set--41-input--2">英文</label><div class="tab-content docutils container">
+<p>A generator function returns an iterator that yields a value each time it executes a yield statement. After it yields a value, the runtime state of the generator function is suspended until the next value is needed.</p>
+</div>
+</div>
+</section>
+<section id="generators-pros">
+<span id="id85"></span><span id="s2-9-2-pros"></span><span id="id86"></span><h3>2.9.2 优点<a class="headerlink" href="#generators-pros" title="此标题的永久链接">#</a></h3>
+<p>2.9.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--42-input--1" name="tab-set--42" type="radio"><label class="tab-label" for="tab-set--42-input--1">中文</label><div class="tab-content docutils container">
+<p>代码更简洁，因为每次调用时局部变量的状态和控制流都会被保留。生成器比一次性创建整个值列表的函数占用更少的内存。</p>
+</div>
+<input class="tab-input" id="tab-set--42-input--2" name="tab-set--42" type="radio"><label class="tab-label" for="tab-set--42-input--2">英文</label><div class="tab-content docutils container">
+<p>Simpler code, because the state of local variables and control flow are preserved for each call. A generator uses less memory than a function that creates an entire list of values at once.</p>
+</div>
+</div>
+</section>
+<section id="generators-cons">
+<span id="id87"></span><span id="s2-9-3-cons"></span><span id="id88"></span><h3>2.9.3 缺点<a class="headerlink" href="#generators-cons" title="此标题的永久链接">#</a></h3>
+<p>2.9.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--43-input--1" name="tab-set--43" type="radio"><label class="tab-label" for="tab-set--43-input--1">中文</label><div class="tab-content docutils container">
+<p>生成器中的局部变量将不会被垃圾收集，直到生成器耗尽或自身被垃圾收集为止。</p>
+</div>
+<input class="tab-input" id="tab-set--43-input--2" name="tab-set--43" type="radio"><label class="tab-label" for="tab-set--43-input--2">英文</label><div class="tab-content docutils container">
+<p>Local variables in the generator will not be garbage collected until the generator is either consumed to exhaustion or itself garbage collected.</p>
+</div>
+</div>
+</section>
+<section id="generators-decision">
+<span id="id89"></span><span id="s2-9-4-decision"></span><span id="id90"></span><h3>2.9.4 决策<a class="headerlink" href="#generators-decision" title="此标题的永久链接">#</a></h3>
+<p>2.9.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--44-input--1" name="tab-set--44" type="radio"><label class="tab-label" for="tab-set--44-input--1">中文</label><div class="tab-content docutils container">
+<p>好的。在生成器函数的文档字符串中使用“Yields:”而不是“Returns:”。</p>
+<p>如果生成器管理的是高开销的资源，请务必强制清理。</p>
+<p>一个好的清理方法是用上下文管理器 <a class="reference external" href="https://peps.python.org/pep-0533/">PEP-0533</a> 包装生成器。</p>
+</div>
+<input class="tab-input" id="tab-set--44-input--2" name="tab-set--44" type="radio"><label class="tab-label" for="tab-set--44-input--2">英文</label><div class="tab-content docutils container">
+<p>Fine. Use “Yields:” rather than “Returns:” in the docstring for generator functions.</p>
+<p>If the generator manages an expensive resource, make sure to force the clean up.</p>
+<p>A good way to do the clean up is by wrapping the generator with a context manager <a class="reference external" href="https://peps.python.org/pep-0533/">PEP-0533</a> .</p>
+</div>
+</div>
+</section>
+</section>
+<section id="lambda">
+<span id="lambdas"></span><span id="lambda-functions"></span><span id="s2-10-lambda-functions"></span><h2>2.10 Lambda 函数<a class="headerlink" href="#lambda" title="此标题的永久链接">#</a></h2>
+<p>2.10 Lambda Functions</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--45-input--1" name="tab-set--45" type="radio"><label class="tab-label" for="tab-set--45-input--1">中文</label><div class="tab-content docutils container">
+<p>单行代码就行。建议使用生成器表达式，而不是 <code class="code docutils literal notranslate"><span class="pre">map()</span></code> 或 <code class="code docutils literal notranslate"><span class="pre">filter()</span></code>，并使用 <code class="code docutils literal notranslate"><span class="pre">lambda</span></code>。</p>
+</div>
+<input class="tab-input" id="tab-set--45-input--2" name="tab-set--45" type="radio"><label class="tab-label" for="tab-set--45-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay for one-liners. Prefer generator expressions over <code class="code docutils literal notranslate"><span class="pre">map()</span></code> or <code class="code docutils literal notranslate"><span class="pre">filter()</span></code> with a <code class="code docutils literal notranslate"><span class="pre">lambda</span></code>.</p>
+</div>
+</div>
+<section id="lambdas-definition">
+<span id="id92"></span><span id="s2-10-1-definition"></span><span id="id93"></span><h3>2.10.1 定义<a class="headerlink" href="#lambdas-definition" title="此标题的永久链接">#</a></h3>
+<p>2.10.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--46-input--1" name="tab-set--46" type="radio"><label class="tab-label" for="tab-set--46-input--1">中文</label><div class="tab-content docutils container">
+<p>Lambdas 在表达式中定义匿名函数，而不是语句。</p>
+</div>
+<input class="tab-input" id="tab-set--46-input--2" name="tab-set--46" type="radio"><label class="tab-label" for="tab-set--46-input--2">英文</label><div class="tab-content docutils container">
+<p>Lambdas define anonymous functions in an expression, as opposed to a statement.</p>
+</div>
+</div>
+</section>
+<section id="lambdas-pros">
+<span id="id94"></span><span id="s2-10-2-pros"></span><span id="id95"></span><h3>2.10.2 优点<a class="headerlink" href="#lambdas-pros" title="此标题的永久链接">#</a></h3>
+<p>2.10.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--47-input--1" name="tab-set--47" type="radio"><label class="tab-label" for="tab-set--47-input--1">中文</label><div class="tab-content docutils container">
+<p>方便的。</p>
+</div>
+<input class="tab-input" id="tab-set--47-input--2" name="tab-set--47" type="radio"><label class="tab-label" for="tab-set--47-input--2">英文</label><div class="tab-content docutils container">
+<p>Convenient.</p>
+</div>
+</div>
+</section>
+<section id="lambdas-cons">
+<span id="id96"></span><span id="s2-10-3-cons"></span><span id="id97"></span><h3>2.10.3 缺点<a class="headerlink" href="#lambdas-cons" title="此标题的永久链接">#</a></h3>
+<p>2.10.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--48-input--1" name="tab-set--48" type="radio"><label class="tab-label" for="tab-set--48-input--1">中文</label><div class="tab-content docutils container">
+<p>比本地函数更难阅读和调试。缺少名称意味着堆栈跟踪更难理解。由于函数可能只包含一个表达式，因此表达能力有限。</p>
+</div>
+<input class="tab-input" id="tab-set--48-input--2" name="tab-set--48" type="radio"><label class="tab-label" for="tab-set--48-input--2">英文</label><div class="tab-content docutils container">
+<p>Harder to read and debug than local functions. The lack of names means stack traces are more difficult to understand. Expressiveness is limited because the function may only contain an expression.</p>
+</div>
+</div>
+</section>
+<section id="lambdas-decision">
+<span id="id98"></span><span id="s2-10-4-decision"></span><span id="id99"></span><h3>2.10.4 决策<a class="headerlink" href="#lambdas-decision" title="此标题的永久链接">#</a></h3>
+<p>2.10.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--49-input--1" name="tab-set--49" type="radio"><label class="tab-label" for="tab-set--49-input--1">中文</label><div class="tab-content docutils container">
+<p>允许使用 Lambda 表达式。如果 Lambda 函数内的代码跨越多行或长度超过 60-80 个字符，最好将其定义为常规的 <a class="reference internal" href="#id139"><span class="std std-ref">嵌套函数</span></a>。</p>
+<p>对于乘法等常见运算，请使用 <code class="code docutils literal notranslate"><span class="pre">operator</span></code> 模块中的函数，而不是 Lambda 函数。例如，建议使用 <code class="code docutils literal notranslate"><span class="pre">operator.mul</span></code> 而不是 <code class="code docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">y:</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code>。</p>
+</div>
+<input class="tab-input" id="tab-set--49-input--2" name="tab-set--49" type="radio"><label class="tab-label" for="tab-set--49-input--2">英文</label><div class="tab-content docutils container">
+<p>Lambdas are allowed. If the code inside the lambda function spans multiple lines or is longer than 60-80 chars, it might be better to define it as a regular <a class="reference internal" href="#id139"><span class="std std-ref">nested function</span></a>.</p>
+<p>For common operations like multiplication, use the functions from the <code class="code docutils literal notranslate"><span class="pre">operator</span></code> module instead of lambda functions. For example, prefer <code class="code docutils literal notranslate"><span class="pre">operator.mul</span></code> to <code class="code docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">y:</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="id100">
+<span id="conditional-expressions"></span><span id="s2-11-conditional-expressions"></span><span id="id101"></span><h2>2.11 条件表达式<a class="headerlink" href="#id100" title="此标题的永久链接">#</a></h2>
+<p>2.11 Conditional Expressions</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--50-input--1" name="tab-set--50" type="radio"><label class="tab-label" for="tab-set--50-input--1">中文</label><div class="tab-content docutils container">
+<p>对于简单的情况来说还行。</p>
+</div>
+<input class="tab-input" id="tab-set--50-input--2" name="tab-set--50" type="radio"><label class="tab-label" for="tab-set--50-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay for simple cases.</p>
+</div>
+</div>
+<section id="conditional-expressions-definition">
+<span id="id102"></span><span id="s2-11-1-definition"></span><span id="id103"></span><h3>2.11.1 定义<a class="headerlink" href="#conditional-expressions-definition" title="此标题的永久链接">#</a></h3>
+<p>2.11.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--51-input--1" name="tab-set--51" type="radio"><label class="tab-label" for="tab-set--51-input--1">中文</label><div class="tab-content docutils container">
+<p>条件表达式（有时也称为“三元运算符”）是一种为 if 语句提供更简洁语法的机制。例如：<code class="code docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">if</span> <span class="pre">cond</span> <span class="pre">else</span> <span class="pre">2</span></code> 。</p>
+</div>
+<input class="tab-input" id="tab-set--51-input--2" name="tab-set--51" type="radio"><label class="tab-label" for="tab-set--51-input--2">英文</label><div class="tab-content docutils container">
+<p>Conditional expressions (sometimes called a “ternary operator”) are mechanisms that provide a shorter syntax for if statements. For example: <code class="code docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">if</span> <span class="pre">cond</span> <span class="pre">else</span> <span class="pre">2</span></code>.</p>
+</div>
+</div>
+</section>
+<section id="conditional-expressions-pros">
+<span id="id104"></span><span id="s2-11-2-pros"></span><span id="id105"></span><h3>2.11.2 优点<a class="headerlink" href="#conditional-expressions-pros" title="此标题的永久链接">#</a></h3>
+<p>2.11.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--52-input--1" name="tab-set--52" type="radio"><label class="tab-label" for="tab-set--52-input--1">中文</label><div class="tab-content docutils container">
+<p>比 if 语句更短、更方便。</p>
+</div>
+<input class="tab-input" id="tab-set--52-input--2" name="tab-set--52" type="radio"><label class="tab-label" for="tab-set--52-input--2">英文</label><div class="tab-content docutils container">
+<p>Shorter and more convenient than an if statement.</p>
+</div>
+</div>
+</section>
+<section id="conditional-expressions-cons">
+<span id="id106"></span><span id="s2-11-3-cons"></span><span id="id107"></span><h3>2.11.3 缺点<a class="headerlink" href="#conditional-expressions-cons" title="此标题的永久链接">#</a></h3>
+<p>2.11.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--53-input--1" name="tab-set--53" type="radio"><label class="tab-label" for="tab-set--53-input--1">中文</label><div class="tab-content docutils container">
+<p>可能比 if 语句更难读。如果表达式很长，可能难以找到条件。</p>
+</div>
+<input class="tab-input" id="tab-set--53-input--2" name="tab-set--53" type="radio"><label class="tab-label" for="tab-set--53-input--2">英文</label><div class="tab-content docutils container">
+<p>May be harder to read than an if statement. The condition may be difficult to locate if the expression is long.</p>
+</div>
+</div>
+</section>
+<section id="conditional-expressions-decision">
+<span id="id108"></span><span id="s2-11-4-decision"></span><span id="id109"></span><h3>2.11.4 决策<a class="headerlink" href="#conditional-expressions-decision" title="此标题的永久链接">#</a></h3>
+<p>2.11.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--54-input--1" name="tab-set--54" type="radio"><label class="tab-label" for="tab-set--54-input--1">中文</label><div class="tab-content docutils container">
+<p>适用于简单情况。每个部分必须放在一行：真值表达式、if 表达式、else 表达式。如果情况更复杂，请使用完整的 if 语句。</p>
+</div>
+<input class="tab-input" id="tab-set--54-input--2" name="tab-set--54" type="radio"><label class="tab-label" for="tab-set--54-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay to use for simple cases. Each portion must fit on one line: true-expression, if-expression, else-expression. Use a complete if statement when things get more complicated.</p>
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span>
+    <span class="n">one_line</span> <span class="o">=</span> <span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span>
+    <span class="n">slightly_split</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="s1">&#39;no, nein, nyet&#39;</span><span class="p">)</span>
+    <span class="n">the_longest_ternary_style_that_can_be_done</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;yes, true, affirmative, confirmed, correct&#39;</span>
+        <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span> <span class="s1">&#39;no, false, negative, nay&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>
+    <span class="n">bad_line_breaking</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">else</span>
+                        <span class="s1">&#39;no&#39;</span><span class="p">)</span>
+    <span class="n">portion_too_long</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span>
+                        <span class="k">if</span> <span class="n">some_long_module</span><span class="o">.</span><span class="n">some_long_predicate_function</span><span class="p">(</span>
+                            <span class="n">really_long_variable_name</span><span class="p">)</span>
+                        <span class="k">else</span> <span class="s1">&#39;no, false, negative, nay&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="default-arguments">
+<span id="default-argument-values"></span><span id="s2-12-default-argument-values"></span><span id="id110"></span><h2>2.12 默认参数值<a class="headerlink" href="#default-arguments" title="此标题的永久链接">#</a></h2>
+<p>2.12 Default Argument Values</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--55-input--1" name="tab-set--55" type="radio"><label class="tab-label" for="tab-set--55-input--1">中文</label><div class="tab-content docutils container">
+<p>大多数情况下都可以。</p>
+</div>
+<input class="tab-input" id="tab-set--55-input--2" name="tab-set--55" type="radio"><label class="tab-label" for="tab-set--55-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay in most cases.</p>
+</div>
+</div>
+<section id="default-arguments-definition">
+<span id="id111"></span><span id="s2-12-1-definition"></span><span id="id112"></span><h3>2.12.1 定义<a class="headerlink" href="#default-arguments-definition" title="此标题的永久链接">#</a></h3>
+<p>2.12.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--56-input--1" name="tab-set--56" type="radio"><label class="tab-label" for="tab-set--56-input--1">中文</label><div class="tab-content docutils container">
+<p>您可以在函数参数列表的末尾指定变量的值，例如：<code class="code docutils literal notranslate"><span class="pre">def</span> <span class="pre">foo(a,</span> <span class="pre">b=0):</span></code>。如果仅使用一个参数调用 <code class="code docutils literal notranslate"><span class="pre">foo</span></code>，则 <code class="code docutils literal notranslate"><span class="pre">b</span></code> 设置为 0。如果使用两个参数调用，则 <code class="code docutils literal notranslate"><span class="pre">b</span></code> 具有第二个参数的值。</p>
+</div>
+<input class="tab-input" id="tab-set--56-input--2" name="tab-set--56" type="radio"><label class="tab-label" for="tab-set--56-input--2">英文</label><div class="tab-content docutils container">
+<p>You can specify values for variables at the end of a function’s parameter list, e.g., <code class="code docutils literal notranslate"><span class="pre">def</span> <span class="pre">foo(a,</span> <span class="pre">b=0):</span></code>. If <code class="code docutils literal notranslate"><span class="pre">foo</span></code> is called with only one argument, <code class="code docutils literal notranslate"><span class="pre">b</span></code> is set to 0. If it is called with two arguments, <code class="code docutils literal notranslate"><span class="pre">b</span></code> has the value of the second argument.</p>
+</div>
+</div>
+</section>
+<section id="default-arguments-pros">
+<span id="id113"></span><span id="s2-12-2-pros"></span><span id="id114"></span><h3>2.12.2 优点<a class="headerlink" href="#default-arguments-pros" title="此标题的永久链接">#</a></h3>
+<p>2.12.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--57-input--1" name="tab-set--57" type="radio"><label class="tab-label" for="tab-set--57-input--1">中文</label><div class="tab-content docutils container">
+<p>通常，你会遇到一个使用大量默认值的函数，但在极少数情况下，你会想要覆盖这些默认值。默认参数值提供了一种简单的方法来实现这一点，而无需为这些罕见的例外情况定义大量的函数。由于 Python 不支持重载方法/函数，默认参数是一种“伪造(faking)”重载行为的简单方法。</p>
+</div>
+<input class="tab-input" id="tab-set--57-input--2" name="tab-set--57" type="radio"><label class="tab-label" for="tab-set--57-input--2">英文</label><div class="tab-content docutils container">
+<p>Often you have a function that uses lots of default values, but on rare occasions you want to override the defaults. Default argument values provide an easy way to do this, without having to define lots of functions for the rare exceptions. As Python does not support overloaded methods/functions, default arguments are an easy way of “faking” the overloading behavior.</p>
+</div>
+</div>
+</section>
+<section id="default-arguments-cons">
+<span id="id115"></span><span id="s2-12-3-cons"></span><span id="id116"></span><h3>2.12.3 缺点<a class="headerlink" href="#default-arguments-cons" title="此标题的永久链接">#</a></h3>
+<p>2.12.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--58-input--1" name="tab-set--58" type="radio"><label class="tab-label" for="tab-set--58-input--1">中文</label><div class="tab-content docutils container">
+<p>默认参数在模块加载时会被求值一次。如果参数是可变对象（例如列表或字典），则可能会导致问题。如果函数修改了该对象（例如，将一个项附加到列表中），则默认值也会被修改。</p>
+</div>
+<input class="tab-input" id="tab-set--58-input--2" name="tab-set--58" type="radio"><label class="tab-label" for="tab-set--58-input--2">英文</label><div class="tab-content docutils container">
+<p>Default arguments are evaluated once at module load time. This may cause problems if the argument is a mutable object such as a list or a dictionary. If the function modifies the object (e.g., by appending an item to a list), the default value is modified.</p>
+</div>
+</div>
+</section>
+<section id="default-arguments-decision">
+<span id="id117"></span><span id="s2-12-4-decision"></span><span id="id118"></span><h3>2.12.4 决策<a class="headerlink" href="#default-arguments-decision" title="此标题的永久链接">#</a></h3>
+<p>2.12.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--59-input--1" name="tab-set--59" type="radio"><label class="tab-label" for="tab-set--59-input--1">中文</label><div class="tab-content docutils container">
+<p>可以使用，但需要注意以下事项：</p>
+<p>请勿在函数或方法定义中使用可变对象作为默认值。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Yes</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Yes</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="p">()):</span>  <span class="c1"># 空元组可以，因为元组是不可变的.</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">absl</span><span class="w"> </span><span class="kn">import</span> <span class="n">flags</span>
+<span class="n">_FOO</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="o">...</span>
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()):</span>  <span class="c1"># “b” 是否应该代表该模块的加载时间？</span>
+        <span class="o">...</span>
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">_FOO</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>  <span class="c1"># sys.argv 尚未被解析...</span>
+        <span class="o">...</span>
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Mapping</span> <span class="o">=</span> <span class="p">{}):</span>  <span class="c1"># 仍可能传递给未经检查的代码。</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--59-input--2" name="tab-set--59" type="radio"><label class="tab-label" for="tab-set--59-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay to use with the following caveat:</p>
+<p>Do not use mutable objects as default values in the function or method definition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Yes</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Yes</span><span class="p">:</span> <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="p">()):</span>  <span class="c1"># Empty tuple OK since tuples are immutable.</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">absl</span><span class="w"> </span><span class="kn">import</span> <span class="n">flags</span>
+<span class="n">_FOO</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">DEFINE_string</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="o">...</span>
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()):</span>  <span class="c1"># Is `b` supposed to represent when this module was loaded?</span>
+        <span class="o">...</span>
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">_FOO</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>  <span class="c1"># sys.argv has not yet been parsed...</span>
+        <span class="o">...</span>
+<span class="n">No</span><span class="p">:</span>  <span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Mapping</span> <span class="o">=</span> <span class="p">{}):</span>  <span class="c1"># Could still get passed to unchecked code.</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id119">
+<span id="properties"></span><span id="s2-13-properties"></span><span id="id120"></span><h2>2.13 属性<a class="headerlink" href="#id119" title="此标题的永久链接">#</a></h2>
+<p>2.13 Properties</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--60-input--1" name="tab-set--60" type="radio"><label class="tab-label" for="tab-set--60-input--1">中文</label><div class="tab-content docutils container">
+<p>属性可用于控制需要简单计算或逻辑的属性的获取或设置。属性的实现必须符合常规属性访问的一般期望：简洁、直接且不令人意外。</p>
+</div>
+<input class="tab-input" id="tab-set--60-input--2" name="tab-set--60" type="radio"><label class="tab-label" for="tab-set--60-input--2">英文</label><div class="tab-content docutils container">
+<p>Properties may be used to control getting or setting attributes that require trivial computations or logic. Property implementations must match the general expectations of regular attribute access: that they are cheap, straightforward, and unsurprising.</p>
+</div>
+</div>
+<section id="properties-definition">
+<span id="id121"></span><span id="s2-13-1-definition"></span><span id="id122"></span><h3>2.13.1 定义<a class="headerlink" href="#properties-definition" title="此标题的永久链接">#</a></h3>
+<p>2.13.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--61-input--1" name="tab-set--61" type="radio"><label class="tab-label" for="tab-set--61-input--1">中文</label><div class="tab-content docutils container">
+<p>将获取和设置属性的方法调用包装为标准属性访问的方式。</p>
+</div>
+<input class="tab-input" id="tab-set--61-input--2" name="tab-set--61" type="radio"><label class="tab-label" for="tab-set--61-input--2">英文</label><div class="tab-content docutils container">
+<p>A way to wrap method calls for getting and setting an attribute as a standard attribute access.</p>
+</div>
+</div>
+</section>
+<section id="properties-pros">
+<span id="id123"></span><span id="s2-13-2-pros"></span><span id="id124"></span><h3>2.13.2 优点<a class="headerlink" href="#properties-pros" title="此标题的永久链接">#</a></h3>
+<p>2.13.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--62-input--1" name="tab-set--62" type="radio"><label class="tab-label" for="tab-set--62-input--1">中文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>允许使用属性访问和赋值 API，而不是 <a class="reference internal" href="3styllerule.html#getters-and-setters"><span class="std std-ref">getter 和 setter</span></a> 方法调用。</p></li>
+<li><p>可用于将属性设为只读。</p></li>
+<li><p>允许延迟计算。</p></li>
+<li><p>当类的内部结构独立于类的使用者而发展时，提供一种维护类的公共接口的方法。</p></li>
+</ul>
+</div>
+<input class="tab-input" id="tab-set--62-input--2" name="tab-set--62" type="radio"><label class="tab-label" for="tab-set--62-input--2">英文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>Allows for an attribute access and assignment API rather than <a class="reference internal" href="3styllerule.html#getters-and-setters"><span class="std std-ref">getter and setter</span></a> method calls.</p></li>
+<li><p>Can be used to make an attribute read-only.</p></li>
+<li><p>Allows calculations to be lazy.</p></li>
+<li><p>Provides a way to maintain the public interface of a class when the internals evolve independently of class users.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="properties-cons">
+<span id="id125"></span><span id="s2-13-3-cons"></span><span id="id126"></span><h3>2.13.3 缺点<a class="headerlink" href="#properties-cons" title="此标题的永久链接">#</a></h3>
+<p>2.13.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--63-input--1" name="tab-set--63" type="radio"><label class="tab-label" for="tab-set--63-input--1">中文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>可以像运算符重载一样隐藏副作用。</p></li>
+<li><p>可能会使子类感到困惑。</p></li>
+</ul>
+</div>
+<input class="tab-input" id="tab-set--63-input--2" name="tab-set--63" type="radio"><label class="tab-label" for="tab-set--63-input--2">英文</label><div class="tab-content docutils container">
+<ul class="simple">
+<li><p>Can hide side-effects much like operator overloading.</p></li>
+<li><p>Can be confusing for subclasses.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="properties-decision">
+<span id="id127"></span><span id="s2-13-4-decision"></span><span id="id128"></span><h3>2.13.4 决策<a class="headerlink" href="#properties-decision" title="此标题的永久链接">#</a></h3>
+<p>2.13.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--64-input--1" name="tab-set--64" type="radio"><label class="tab-label" for="tab-set--64-input--1">中文</label><div class="tab-content docutils container">
+<p>允许使用属性，但与运算符重载类似，应仅在必要时使用，并且应符合典型属性访问的预期；否则，请遵循 <a class="reference internal" href="3styllerule.html#getters-and-setters"><span class="std std-ref">getters 和 setters</span></a> 规则。</p>
+<p>例如，不允许使用属性简单地同时获取和设置内部属性：因为没有进行任何计算，因此该属性是不必要的（<a class="reference internal" href="3styllerule.html#getters-and-setters"><span class="std std-ref">改为将属性公开</span></a>）。相比之下，允许使用属性来控制属性访问或计算 <em>简单</em> 派生的值：其逻辑简单且不足为奇。</p>
+<p>应使用 <code class="code docutils literal notranslate"><span class="pre">&#64;property</span></code> <a class="reference internal" href="#s2-17-function-and-method-decorators"><span class="std std-ref">装饰器</span></a> 创建属性。手动实现属性描述符被视为一项 <a class="reference internal" href="#id162"><span class="std std-ref">强大功能</span></a>。</p>
+<p>属性的继承可能不明显。请勿使用属性来实现子类可能想要重写和扩展的计算。</p>
+</div>
+<input class="tab-input" id="tab-set--64-input--2" name="tab-set--64" type="radio"><label class="tab-label" for="tab-set--64-input--2">英文</label><div class="tab-content docutils container">
+<p>Properties are allowed, but, like operator overloading, should only be used when necessary and match the expectations of typical attribute access; follow the <a class="reference internal" href="3styllerule.html#getters-and-setters"><span class="std std-ref">getters 和 setters</span></a> rules otherwise.</p>
+<p>For example, using a property to simply both get and set an internal attribute isn’t allowed: there is no computation occurring, so the property is unnecessary (<a class="reference internal" href="3styllerule.html#getters-and-setters"><span class="std std-ref">make the attribute public instead</span></a>). In comparison, using a property to control attribute access or to calculate a <em>trivially</em> derived value is allowed: the logic is simple and unsurprising.</p>
+<p>Properties should be created with the <code class="code docutils literal notranslate"><span class="pre">&#64;property</span></code> <a class="reference internal" href="#s2-17-function-and-method-decorators"><span class="std std-ref">decorator</span></a> Manually implementing a property descriptor is considered a <a class="reference internal" href="#id162"><span class="std std-ref">power feature</span></a>.</p>
+<p>Inheritance with properties can be non-obvious. Do not use properties to implement computations a subclass may ever want to override and extend.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="id129">
+<span id="truefalse-evaluations"></span><span id="s2-14-truefalse-evaluations"></span><span id="id130"></span><h2>2.14 真/假判断<a class="headerlink" href="#id129" title="此标题的永久链接">#</a></h2>
+<p>2.14 True/False Evaluations</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--65-input--1" name="tab-set--65" type="radio"><label class="tab-label" for="tab-set--65-input--1">中文</label><div class="tab-content docutils container">
+<p>如果可能的话，使用“隐式”错误（有一些警告）。</p>
+</div>
+<input class="tab-input" id="tab-set--65-input--2" name="tab-set--65" type="radio"><label class="tab-label" for="tab-set--65-input--2">英文</label><div class="tab-content docutils container">
+<p>Use the “implicit” false if at all possible (with a few caveats).</p>
+</div>
+</div>
+<section id="truefalse-evaluations-definition">
+<span id="id131"></span><span id="s2-14-1-definition"></span><span id="id132"></span><h3>2.14.1 定义<a class="headerlink" href="#truefalse-evaluations-definition" title="此标题的永久链接">#</a></h3>
+<p>2.14.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--66-input--1" name="tab-set--66" type="radio"><label class="tab-label" for="tab-set--66-input--1">中文</label><div class="tab-content docutils container">
+<p>Python 在布尔上下文中将某些值计算为 <code class="code docutils literal notranslate"><span class="pre">False</span></code>。一个简单的“经验法则”是，所有“空”值都被视为 false，因此 <code class="code docutils literal notranslate"><span class="pre">0、None、[]、{}、''</span></code> 在布尔上下文中均被计算为 false。</p>
+</div>
+<input class="tab-input" id="tab-set--66-input--2" name="tab-set--66" type="radio"><label class="tab-label" for="tab-set--66-input--2">英文</label><div class="tab-content docutils container">
+<p>Python evaluates certain values as <code class="code docutils literal notranslate"><span class="pre">False</span></code> when in a boolean context. A quick “rule of thumb” is that all “empty” values are considered false, so <code class="code docutils literal notranslate"><span class="pre">0,</span> <span class="pre">None,</span> <span class="pre">[],</span> <span class="pre">{},</span> <span class="pre">''</span></code> all evaluate as false in a boolean context.</p>
+</div>
+</div>
+</section>
+<section id="truefalse-evaluations-pros">
+<span id="id133"></span><span id="s2-14-2-pros"></span><span id="id134"></span><h3>2.14.2 优点<a class="headerlink" href="#truefalse-evaluations-pros" title="此标题的永久链接">#</a></h3>
+<p>2.14.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--67-input--1" name="tab-set--67" type="radio"><label class="tab-label" for="tab-set--67-input--1">中文</label><div class="tab-content docutils container">
+<p>使用 Python 布尔值来设置条件更易于阅读，且不易出错。在大多数情况下，它们的速度也更快。</p>
+</div>
+<input class="tab-input" id="tab-set--67-input--2" name="tab-set--67" type="radio"><label class="tab-label" for="tab-set--67-input--2">英文</label><div class="tab-content docutils container">
+<p>Conditions using Python booleans are easier to read and less error-prone. In most cases, they’re also faster.</p>
+</div>
+</div>
+</section>
+<section id="truefalse-evaluations-cons">
+<span id="id135"></span><span id="s2-14-3-cons"></span><span id="id136"></span><h3>2.14.3 缺点<a class="headerlink" href="#truefalse-evaluations-cons" title="此标题的永久链接">#</a></h3>
+<p>2.14.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--68-input--1" name="tab-set--68" type="radio"><label class="tab-label" for="tab-set--68-input--1">中文</label><div class="tab-content docutils container">
+<p>对于 C/C++ 开发人员来说可能看起来很奇怪。</p>
+</div>
+<input class="tab-input" id="tab-set--68-input--2" name="tab-set--68" type="radio"><label class="tab-label" for="tab-set--68-input--2">英文</label><div class="tab-content docutils container">
+<p>May look strange to C/C++ developers.</p>
+</div>
+</div>
+</section>
+<section id="truefalse-evaluations-decision">
+<span id="id137"></span><span id="s2-14-4-decision"></span><span id="id138"></span><h3>2.14.4 决策<a class="headerlink" href="#truefalse-evaluations-decision" title="此标题的永久链接">#</a></h3>
+<p>2.14.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--69-input--1" name="tab-set--69" type="radio"><label class="tab-label" for="tab-set--69-input--1">中文</label><div class="tab-content docutils container">
+<p>尽可能使用“隐式”假值判断，例如使用 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo:</span></code> 而不是 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">!=</span> <span class="pre">[]:</span></code>。不过，也有一些注意事项需要留意：</p>
+<ul>
+<li><p>检查一个值是否为 <code class="code docutils literal notranslate"><span class="pre">None</span></code> 时，应始终使用 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">is</span> <span class="pre">None:</span></code> （或 <code class="code docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code> ）。
+例如，在判断一个默认值为 <code class="code docutils literal notranslate"><span class="pre">None</span></code> 的变量或参数是否被赋予了其他值时。其他值可能在布尔上下文中也会被判断为假！</p></li>
+<li><p>永远不要通过 <code class="code docutils literal notranslate"><span class="pre">==</span></code> 将布尔变量与 <code class="code docutils literal notranslate"><span class="pre">False</span></code> 进行比较，应使用 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">x:</span></code>。
+如果你需要区分 <code class="code docutils literal notranslate"><span class="pre">False</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">None</span></code>，可以链式组合表达式，如 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">x</span> <span class="pre">and</span> <span class="pre">x</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code>。</p></li>
+<li><p>对于序列（字符串、列表、元组），应利用空序列为假值的事实，因此使用 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">seq:</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">seq:</span></code> 比使用 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">len(seq):</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">len(seq):</span></code> 更佳。</p></li>
+<li><p>在处理整数时，隐式假值可能弊大于利（例如，可能会误将 <code class="code docutils literal notranslate"><span class="pre">None</span></code> 当作 0 处理）。你可以将已知为整数（且不是 <code class="code docutils literal notranslate"><span class="pre">len()</span></code> 的结果）的值与整数 0 进行比较。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">users</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no users&#39;</span><span class="p">)</span>
+
+     <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle_multiple_of_ten</span><span class="p">()</span>
+
+     <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no users&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle_multiple_of_ten</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="ow">or</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</li>
+<li><p>注意，<code class="code docutils literal notranslate"><span class="pre">'0'</span></code> （即字符串形式的 <code class="code docutils literal notranslate"><span class="pre">0</span></code> ）在布尔上下文中会被视为真值。</p></li>
+<li><p>注意，Numpy 数组在隐式布尔上下文中可能会抛出异常。判断 <code class="code docutils literal notranslate"><span class="pre">np.array</span></code> 是否为空时，推荐使用其 <code class="code docutils literal notranslate"><span class="pre">.size</span></code> 属性（例如 <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">users.size</span></code>）。</p></li>
+</ul>
+</div>
+<input class="tab-input" id="tab-set--69-input--2" name="tab-set--69" type="radio"><label class="tab-label" for="tab-set--69-input--2">英文</label><div class="tab-content docutils container">
+<p>Use the “implicit” false if possible, e.g., <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo:</span></code> rather than <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">!=</span> <span class="pre">[]:</span></code>. There are a few caveats that you should keep in mind though:</p>
+<ul>
+<li><p>Always use <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">foo</span> <span class="pre">is</span> <span class="pre">None:</span></code> (or <code class="code docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>) to check for a <code class="code docutils literal notranslate"><span class="pre">None</span></code> value.
+E.g., when testing whether a variable or argument that defaults to <code class="code docutils literal notranslate"><span class="pre">None</span></code>
+was set to some other value. The other value might be a value that’s false
+in a boolean context!</p></li>
+<li><p>Never compare a boolean variable to <code class="code docutils literal notranslate"><span class="pre">False</span></code> using <code class="code docutils literal notranslate"><span class="pre">==</span></code>. Use <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">x:</span></code>
+instead. If you need to distinguish <code class="code docutils literal notranslate"><span class="pre">False</span></code> from <code class="code docutils literal notranslate"><span class="pre">None</span></code> then chain the
+expressions, such as <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">x</span> <span class="pre">and</span> <span class="pre">x</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code>.</p></li>
+<li><p>For sequences (strings, lists, tuples), use the fact that empty sequences
+are false, so <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">seq:</span></code> and <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">seq:</span></code> are preferable to <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">len(seq):</span></code>
+and <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">len(seq):</span></code> respectively.</p></li>
+<li><p>When handling integers, implicit false may involve more risk than benefit
+(i.e., accidentally handling <code class="code docutils literal notranslate"><span class="pre">None</span></code> as 0). You may compare a value which is
+known to be an integer (and is not the result of <code class="code docutils literal notranslate"><span class="pre">len()</span></code>) against the
+integer 0.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">:</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">users</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no users&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle_multiple_of_ten</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">:</span>  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no users&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handle_multiple_of_ten</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="ow">or</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Note that <code class="code docutils literal notranslate"><span class="pre">'0'</span></code> (i.e., <code class="code docutils literal notranslate"><span class="pre">0</span></code> as string) evaluates to true.</p></li>
+<li><p>Note that Numpy arrays may raise an exception in an implicit boolean
+context. Prefer the <code class="code docutils literal notranslate"><span class="pre">.size</span></code> attribute when testing emptiness of a <code class="code docutils literal notranslate"><span class="pre">np.array</span></code> (e.g. <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">users.size</span></code>).</p></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="id139">
+<span id="lexical-scoping"></span><span id="s2-16-lexical-scoping"></span><span id="id140"></span><h2>2.16 词法作用域<a class="headerlink" href="#id139" title="此标题的永久链接">#</a></h2>
+<p>2.16 Lexical Scoping</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--70-input--1" name="tab-set--70" type="radio"><label class="tab-label" for="tab-set--70-input--1">中文</label><div class="tab-content docutils container">
+<p>可以用。</p>
+</div>
+<input class="tab-input" id="tab-set--70-input--2" name="tab-set--70" type="radio"><label class="tab-label" for="tab-set--70-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay to use.</p>
+</div>
+</div>
+<section id="lexical-scoping-definition">
+<span id="id141"></span><span id="s2-16-1-definition"></span><span id="id142"></span><h3>2.16.1 定义<a class="headerlink" href="#lexical-scoping-definition" title="此标题的永久链接">#</a></h3>
+<p>2.16.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--71-input--1" name="tab-set--71" type="radio"><label class="tab-label" for="tab-set--71-input--1">中文</label><div class="tab-content docutils container">
+<p>嵌套的 Python 函数可以引用封闭函数中定义的变量，但不能赋值给它们。变量绑定使用词法作用域进行解析，即基于静态程序文本。在代码块中对名称的任何赋值都会导致 Python 将所有对该名称的引用视为局部变量，即使使用先于赋值。如果出现全局声明，则该名称将被视为全局变量。</p>
+<p>此功能的一个使用示例如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_adder</span><span class="p">(</span><span class="n">summand1</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;返回将数字添加到给定数字的函数.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adder</span><span class="p">(</span><span class="n">summand2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">summand1</span> <span class="o">+</span> <span class="n">summand2</span>
+
+    <span class="k">return</span> <span class="n">adder</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--71-input--2" name="tab-set--71" type="radio"><label class="tab-label" for="tab-set--71-input--2">英文</label><div class="tab-content docutils container">
+<p>A nested Python function can refer to variables defined in enclosing functions,
+but cannot assign to them. Variable bindings are resolved using lexical scoping,
+that is, based on the static program text. Any assignment to a name in a block
+will cause Python to treat all references to that name as a local variable, even
+if the use precedes the assignment. If a global declaration occurs, the name is
+treated as a global variable.</p>
+<p>An example of the use of this feature is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_adder</span><span class="p">(</span><span class="n">summand1</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a function that adds numbers to a given number.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">adder</span><span class="p">(</span><span class="n">summand2</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">summand1</span> <span class="o">+</span> <span class="n">summand2</span>
+
+    <span class="k">return</span> <span class="n">adder</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lexical-scoping-pros">
+<span id="id143"></span><span id="s2-16-2-pros"></span><span id="id144"></span><h3>2.16.2 优点<a class="headerlink" href="#lexical-scoping-pros" title="此标题的永久链接">#</a></h3>
+<p>2.16.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--72-input--1" name="tab-set--72" type="radio"><label class="tab-label" for="tab-set--72-input--1">中文</label><div class="tab-content docutils container">
+<p>通常会导致代码更清晰、更优雅。尤其适合经验丰富的 Lisp 和 Scheme（以及 Haskell、ML 等等）程序员。</p>
+</div>
+<input class="tab-input" id="tab-set--72-input--2" name="tab-set--72" type="radio"><label class="tab-label" for="tab-set--72-input--2">英文</label><div class="tab-content docutils container">
+<p>Often results in clearer, more elegant code. Especially comforting to experienced Lisp and Scheme (and Haskell and ML and …) programmers.</p>
+</div>
+</div>
+</section>
+<section id="lexical-scoping-cons">
+<span id="id145"></span><span id="s2-16-3-cons"></span><span id="id146"></span><h3>2.16.3 缺点<a class="headerlink" href="#lexical-scoping-cons" title="此标题的永久链接">#</a></h3>
+<p>2.16.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--73-input--1" name="tab-set--73" type="radio"><label class="tab-label" for="tab-set--73-input--1">中文</label><div class="tab-content docutils container">
+<p>可能会导致令人困惑的错误，例如基于 <a class="reference external" href="https://peps.python.org/pep-0227/">PEP-0227</a> 的这个示例：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+    <span class="c1"># 这里有一堆代码</span>
+    <span class="c1"># ...</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>  <span class="c1"># 阿哈, i *is* local to foo, so this is what bar sees</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>So <code class="code docutils literal notranslate"><span class="pre">foo([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code> will print <code class="code docutils literal notranslate"><span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">3</span></code>, not <code class="code docutils literal notranslate"><span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span></code>.</p>
+</div>
+<input class="tab-input" id="tab-set--73-input--2" name="tab-set--73" type="radio"><label class="tab-label" for="tab-set--73-input--2">英文</label><div class="tab-content docutils container">
+<p>Can lead to confusing bugs, such as this example based on <a class="reference external" href="https://peps.python.org/pep-0227/">PEP-0227</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+    <span class="c1"># A bunch of code here</span>
+    <span class="c1"># ...</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>  <span class="c1"># Ah, i *is* local to foo, so this is what bar sees</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>So <code class="code docutils literal notranslate"><span class="pre">foo([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code> will print <code class="code docutils literal notranslate"><span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">3</span></code>, not <code class="code docutils literal notranslate"><span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span></code>.</p>
+</div>
+</div>
+</section>
+<section id="lexical-scoping-decision">
+<span id="id148"></span><span id="s2-16-4-decision"></span><span id="id149"></span><h3>2.16.4 决策<a class="headerlink" href="#lexical-scoping-decision" title="此标题的永久链接">#</a></h3>
+<p>2.16.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--74-input--1" name="tab-set--74" type="radio"><label class="tab-label" for="tab-set--74-input--1">中文</label><div class="tab-content docutils container">
+<p>可以用。</p>
+</div>
+<input class="tab-input" id="tab-set--74-input--2" name="tab-set--74" type="radio"><label class="tab-label" for="tab-set--74-input--2">英文</label><div class="tab-content docutils container">
+<p>Okay to use.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="decorators">
+<span id="id150"></span><span id="function-and-method-decorators"></span><span id="s2-17-function-and-method-decorators"></span><span id="id151"></span><h2>2.17 函数和方法装饰器<a class="headerlink" href="#decorators" title="此标题的永久链接">#</a></h2>
+<p>2.17 Function and Method Decorators</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--75-input--1" name="tab-set--75" type="radio"><label class="tab-label" for="tab-set--75-input--1">中文</label><div class="tab-content docutils container">
+<p>当装饰器有明显优势时，请谨慎使用。避免使用 <code class="code docutils literal notranslate"><span class="pre">staticmethod</span></code> 并限制使用 <code class="code docutils literal notranslate"><span class="pre">classmethod</span></code>。</p>
+</div>
+<input class="tab-input" id="tab-set--75-input--2" name="tab-set--75" type="radio"><label class="tab-label" for="tab-set--75-input--2">英文</label><div class="tab-content docutils container">
+<p>Use decorators judiciously when there is a clear advantage. Avoid <code class="code docutils literal notranslate"><span class="pre">staticmethod</span></code> and limit use of <code class="code docutils literal notranslate"><span class="pre">classmethod</span></code>.</p>
+</div>
+</div>
+<section id="decorators-definition">
+<span id="id152"></span><span id="s2-17-1-definition"></span><span id="id153"></span><h3>2.17.1 定义<a class="headerlink" href="#decorators-definition" title="此标题的永久链接">#</a></h3>
+<p>2.17.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--76-input--1" name="tab-set--76" type="radio"><label class="tab-label" for="tab-set--76-input--1">中文</label><div class="tab-content docutils container">
+<p><cite>函数和方法的装饰器 &lt;https://docs.python.org/3/glossary.html#term-decorator&gt;`_（又称“ :code:`&#64;</cite> 符号 ”）。一个常见的装饰器是 <code class="code docutils literal notranslate"><span class="pre">&#64;property</span></code>，用于将普通方法转换为动态计算的属性。然而，装饰器语法也允许用户自定义装饰器。具体来说，对于某个函数 <code class="code docutils literal notranslate"><span class="pre">my_decorator</span></code>，如下所示：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">:</span>
+    <span class="nd">@my_decorator</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># method body ...</span>
+</pre></div>
+</div>
+<p>相当于:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># method body ...</span>
+
+    <span class="n">method</span> <span class="o">=</span> <span class="n">my_decorator</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--76-input--2" name="tab-set--76" type="radio"><label class="tab-label" for="tab-set--76-input--2">英文</label><div class="tab-content docutils container">
+<p><a class="reference external" href="https://docs.python.org/3/glossary.html#term-decorator">Decorators for Functions and Methods</a>
+(a.k.a “the <code class="code docutils literal notranslate"><span class="pre">&#64;</span></code> notation”). One common decorator is <code class="code docutils literal notranslate"><span class="pre">&#64;property</span></code>, used for
+converting ordinary methods into dynamically computed attributes. However, the
+decorator syntax allows for user-defined decorators as well. Specifically, for
+some function <code class="code docutils literal notranslate"><span class="pre">my_decorator</span></code>, this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">:</span>
+    <span class="nd">@my_decorator</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># method body ...</span>
+</pre></div>
+</div>
+<p>is equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># method body ...</span>
+
+    <span class="n">method</span> <span class="o">=</span> <span class="n">my_decorator</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decorators-pros">
+<span id="id154"></span><span id="s2-17-2-pros"></span><span id="id155"></span><h3>2.17.2 优点<a class="headerlink" href="#decorators-pros" title="此标题的永久链接">#</a></h3>
+<p>2.17.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--77-input--1" name="tab-set--77" type="radio"><label class="tab-label" for="tab-set--77-input--1">中文</label><div class="tab-content docutils container">
+<p>优雅地指定方法上的一些转换；转换可能会消除一些重复的代码，强制执行不变量等。</p>
+</div>
+<input class="tab-input" id="tab-set--77-input--2" name="tab-set--77" type="radio"><label class="tab-label" for="tab-set--77-input--2">英文</label><div class="tab-content docutils container">
+<p>Elegantly specifies some transformation on a method; the transformation might eliminate some repetitive code, enforce invariants, etc.</p>
+</div>
+</div>
+</section>
+<section id="decorators-cons">
+<span id="id156"></span><span id="s2-17-3-cons"></span><span id="id157"></span><h3>2.17.3 缺点<a class="headerlink" href="#decorators-cons" title="此标题的永久链接">#</a></h3>
+<p>2.17.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--78-input--1" name="tab-set--78" type="radio"><label class="tab-label" for="tab-set--78-input--1">中文</label><div class="tab-content docutils container">
+<p>装饰器可以对函数的参数或返回值执行任意操作，从而导致令人意外的隐式行为。此外，装饰器在对象定义时执行。对于模块级对象（类、模块函数等），这发生在导入时。装饰器代码中的错误几乎无法恢复。</p>
+</div>
+<input class="tab-input" id="tab-set--78-input--2" name="tab-set--78" type="radio"><label class="tab-label" for="tab-set--78-input--2">英文</label><div class="tab-content docutils container">
+<p>Decorators can perform arbitrary operations on a function’s arguments or return values, resulting in surprising implicit behavior. Additionally, decorators execute at object definition time. For module-level objects (classes, module functions, …) this happens at import time. Failures in decorator code are pretty much impossible to recover from.</p>
+</div>
+</div>
+</section>
+<section id="decorators-decision">
+<span id="id158"></span><span id="s2-17-4-decision"></span><span id="id159"></span><h3>2.17.4 决策<a class="headerlink" href="#decorators-decision" title="此标题的永久链接">#</a></h3>
+<p>2.17.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--79-input--1" name="tab-set--79" type="radio"><label class="tab-label" for="tab-set--79-input--1">中文</label><div class="tab-content docutils container">
+<p>当装饰器有明显优势时，请谨慎使用。装饰器应遵循与函数相同的导入和命名准则。装饰器文档字符串应清晰地声明该函数是一个装饰器。请为装饰器编写单元测试。</p>
+<p>避免在装饰器本身中引入外部依赖（例如，不要依赖文件、套接字、数据库连接等），因为这些依赖在装饰器运行时可能不可用（在导入时，可能是从 <code class="code docutils literal notranslate"><span class="pre">pydoc</span></code> 或其他工具导入）。使用有效参数调用的装饰器应（尽可能）保证在所有情况下都能成功调用。</p>
+<p>装饰器是“顶层代码”的一种特殊情况 - 更多讨论请参阅 <a class="reference internal" href="3styllerule.html#s3-17-main"><span class="std std-ref">main</span></a>。</p>
+<p>除非为了与现有库中定义的 API 集成而被迫使用 <code class="code docutils literal notranslate"><span class="pre">staticmethod</span></code>，否则切勿使用 <code class="code docutils literal notranslate"><span class="pre">staticmethod</span></code>。请改为编写模块级函数。</p>
+<p>仅在编写命名构造函数或修改必要的全局状态（例如进程范围的缓存）的特定于类的例程时使用 <code class="code docutils literal notranslate"><span class="pre">classmethod</span></code>。</p>
+</div>
+<input class="tab-input" id="tab-set--79-input--2" name="tab-set--79" type="radio"><label class="tab-label" for="tab-set--79-input--2">英文</label><div class="tab-content docutils container">
+<p>Use decorators judiciously when there is a clear advantage. Decorators should follow the same import and naming guidelines as functions. A decorator docstring should clearly state that the function is a decorator. Write unit tests for decorators.</p>
+<p>Avoid external dependencies in the decorator itself (e.g. don’t rely on files, sockets, database connections, etc.), since they might not be available when the decorator runs (at import time, perhaps from <code class="code docutils literal notranslate"><span class="pre">pydoc</span></code> or other tools). A decorator that is called with valid parameters should (as much as possible) be guaranteed to succeed in all cases.</p>
+<p>Decorators are a special case of “top-level code” - see <a class="reference internal" href="3styllerule.html#s3-17-main"><span class="std std-ref">main</span></a> for
+more discussion.</p>
+<p>Never use <code class="code docutils literal notranslate"><span class="pre">staticmethod</span></code> unless forced to in order to integrate with an API defined in an existing library. Write a module-level function instead.</p>
+<p>Use <code class="code docutils literal notranslate"><span class="pre">classmethod</span></code> only when writing a named constructor, or a class-specific routine that modifies necessary global state such as a process-wide cache.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="id160">
+<span id="threading"></span><span id="s2-18-threading"></span><span id="id161"></span><h2>2.18 线程<a class="headerlink" href="#id160" title="此标题的永久链接">#</a></h2>
+<p>2.18 Threading</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--80-input--1" name="tab-set--80" type="radio"><label class="tab-label" for="tab-set--80-input--1">中文</label><div class="tab-content docutils container">
+<p>不要依赖内置类型的原子性。</p>
+<p>虽然 Python 的内置数据类型（例如字典）似乎具有原子操作，但在某些情况下它们并非原子操作（例如，如果 <code class="code docutils literal notranslate"><span class="pre">__hash__</span></code> 或 <code class="code docutils literal notranslate"><span class="pre">__eq__</span></code> 被实现为 Python 方法），则不应依赖它们的原子性。也不应该依赖原子变量赋值（因为这反过来又依赖于字典）。</p>
+<p>使用 <code class="code docutils literal notranslate"><span class="pre">queue</span></code> 模块的 <code class="code docutils literal notranslate"><span class="pre">Queue</span></code> 数据类型作为线程间数据通信的首选方式。否则，请使用 <code class="code docutils literal notranslate"><span class="pre">threading</span></code> 模块及其锁定原语。优先使用条件变量和 <code class="code docutils literal notranslate"><span class="pre">threading.Condition</span></code>，而不是使用低级锁。</p>
+</div>
+<input class="tab-input" id="tab-set--80-input--2" name="tab-set--80" type="radio"><label class="tab-label" for="tab-set--80-input--2">英文</label><div class="tab-content docutils container">
+<p>Do not rely on the atomicity of built-in types.</p>
+<p>While Python’s built-in data types such as dictionaries appear to have atomic operations, there are corner cases where they aren’t atomic (e.g. if <code class="code docutils literal notranslate"><span class="pre">__hash__</span></code> or <code class="code docutils literal notranslate"><span class="pre">__eq__</span></code> are implemented as Python methods) and their atomicity should not be relied upon. Neither should you rely on atomic variable assignment (since this in turn depends on dictionaries).</p>
+<p>Use the <code class="code docutils literal notranslate"><span class="pre">queue</span></code> module’s <code class="code docutils literal notranslate"><span class="pre">Queue</span></code> data type as the preferred way to communicate data between threads. Otherwise, use the <code class="code docutils literal notranslate"><span class="pre">threading</span></code> module and its locking primitives. Prefer condition variables and <code class="code docutils literal notranslate"><span class="pre">threading.Condition</span></code> instead of using lower-level locks.</p>
+</div>
+</div>
+</section>
+<section id="id162">
+<span id="power-features"></span><span id="s2-19-power-features"></span><span id="id163"></span><h2>2.19 强大的功能<a class="headerlink" href="#id162" title="此标题的永久链接">#</a></h2>
+<p>2.19 Power Features</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--81-input--1" name="tab-set--81" type="radio"><label class="tab-label" for="tab-set--81-input--1">中文</label><div class="tab-content docutils container">
+<p>避免这些功能。</p>
+</div>
+<input class="tab-input" id="tab-set--81-input--2" name="tab-set--81" type="radio"><label class="tab-label" for="tab-set--81-input--2">英文</label><div class="tab-content docutils container">
+<p>Avoid these features.</p>
+</div>
+</div>
+<section id="power-features-definition">
+<span id="id164"></span><span id="s2-19-1-definition"></span><span id="id165"></span><h3>2.19.1 定义<a class="headerlink" href="#power-features-definition" title="此标题的永久链接">#</a></h3>
+<p>2.19.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--82-input--1" name="tab-set--82" type="radio"><label class="tab-label" for="tab-set--82-input--1">中文</label><div class="tab-content docutils container">
+<p>Python 是一种非常灵活的语言，它为您提供了许多奇特的功能，例如自定义元类、访问字节码、动态编译、动态继承、对象重新父级、导入黑客、反射（例如 <code class="code docutils literal notranslate"><span class="pre">getattr()</span></code> 的一些用途）、修改系统内部、 <code class="code docutils literal notranslate"><span class="pre">__del__</span></code> 方法实现自定义清理等。</p>
+</div>
+<input class="tab-input" id="tab-set--82-input--2" name="tab-set--82" type="radio"><label class="tab-label" for="tab-set--82-input--2">英文</label><div class="tab-content docutils container">
+<p>Python is an extremely flexible language and gives you many fancy features such as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic inheritance, object reparenting, import hacks, reflection (e.g. some uses of <code class="code docutils literal notranslate"><span class="pre">getattr()</span></code>), modification of system internals, <code class="code docutils literal notranslate"><span class="pre">__del__</span></code> methods implementing customized cleanup, etc.</p>
+</div>
+</div>
+</section>
+<section id="power-features-pros">
+<span id="id166"></span><span id="s2-19-2-pros"></span><span id="id167"></span><h3>2.19.2 优点<a class="headerlink" href="#power-features-pros" title="此标题的永久链接">#</a></h3>
+<p>2.19.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--83-input--1" name="tab-set--83" type="radio"><label class="tab-label" for="tab-set--83-input--1">中文</label><div class="tab-content docutils container">
+<p>这些都是强大的语言特性。它们可以让你的代码更加紧凑。</p>
+</div>
+<input class="tab-input" id="tab-set--83-input--2" name="tab-set--83" type="radio"><label class="tab-label" for="tab-set--83-input--2">英文</label><div class="tab-content docutils container">
+<p>These are powerful language features. They can make your code more compact.</p>
+</div>
+</div>
+</section>
+<section id="power-features-cons">
+<span id="id168"></span><span id="s2-19-3-cons"></span><span id="id169"></span><h3>2.19.3 缺点<a class="headerlink" href="#power-features-cons" title="此标题的永久链接">#</a></h3>
+<p>2.19.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--84-input--1" name="tab-set--84" type="radio"><label class="tab-label" for="tab-set--84-input--1">中文</label><div class="tab-content docutils container">
+<p>当这些“酷炫”的功能并非绝对必要的时候，人们很容易就会去使用这些功能。然而，如果代码中使用了不常见的功能，阅读、理解和调试起来就会更加困难。乍一看（对原作者来说）似乎并非如此，但当你重新审视这些代码时，你会发现，它们往往比那些更长但更简单的代码更难理解。</p>
+</div>
+<input class="tab-input" id="tab-set--84-input--2" name="tab-set--84" type="radio"><label class="tab-label" for="tab-set--84-input--2">英文</label><div class="tab-content docutils container">
+<p>It’s very tempting to use these “cool” features when they’re not absolutely necessary. It’s harder to read, understand, and debug code that’s using unusual features underneath. It doesn’t seem that way at first (to the original author), but when revisiting the code, it tends to be more difficult than code that is longer but is straightforward.</p>
+</div>
+</div>
+</section>
+<section id="power-features-decision">
+<span id="id170"></span><span id="s2-19-4-decision"></span><span id="id171"></span><h3>2.19.4 决策<a class="headerlink" href="#power-features-decision" title="此标题的永久链接">#</a></h3>
+<p>2.19.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--85-input--1" name="tab-set--85" type="radio"><label class="tab-label" for="tab-set--85-input--1">中文</label><div class="tab-content docutils container">
+<p>避免在代码中使用这些功能。</p>
+<p>内部使用这些功能的标准库模块和类是可以使用的（例如：<code class="code docutils literal notranslate"><span class="pre">abc.ABCMeta</span></code> 、<code class="code docutils literal notranslate"><span class="pre">dataclasses</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">enum</span></code>）。</p>
+</div>
+<input class="tab-input" id="tab-set--85-input--2" name="tab-set--85" type="radio"><label class="tab-label" for="tab-set--85-input--2">英文</label><div class="tab-content docutils container">
+<p>Avoid these features in your code.</p>
+<p>Standard library modules and classes that internally use these features are okay to use (for example, <code class="code docutils literal notranslate"><span class="pre">abc.ABCMeta</span></code>, <code class="code docutils literal notranslate"><span class="pre">dataclasses</span></code>, and <code class="code docutils literal notranslate"><span class="pre">enum</span></code>).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="python-future">
+<span id="id172"></span><span id="from-future-imports"></span><span id="modern-python"></span><span id="s2-20-modern-python"></span><h2>2.20 现代 Python：从 <code class="docutils literal notranslate"><span class="pre">__future__</span></code> 导入<a class="headerlink" href="#python-future" title="此标题的永久链接">#</a></h2>
+<p>2.20 Modern Python: from <code class="docutils literal notranslate"><span class="pre">__future__</span></code> imports</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--86-input--1" name="tab-set--86" type="radio"><label class="tab-label" for="tab-set--86-input--1">中文</label><div class="tab-content docutils container">
+<p>新的语言版本语义变化可能会受到特殊未来导入的控制，以便在早期运行时按文件启用它们。</p>
+</div>
+<input class="tab-input" id="tab-set--86-input--2" name="tab-set--86" type="radio"><label class="tab-label" for="tab-set--86-input--2">英文</label><div class="tab-content docutils container">
+<p>New language version semantic changes may be gated behind a special future import to enable them on a per-file basis within earlier runtimes.</p>
+</div>
+</div>
+<section id="modern-python-definition">
+<span id="id173"></span><span id="s2-20-1-definition"></span><span id="id174"></span><h3>2.20.1 定义<a class="headerlink" href="#modern-python-definition" title="此标题的永久链接">#</a></h3>
+<p>2.20.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--87-input--1" name="tab-set--87" type="radio"><label class="tab-label" for="tab-set--87-input--1">中文</label><div class="tab-content docutils container">
+<p>能够通过 <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span></code> 语句启用一些更现代的功能，从而可以提前使用预期的未来 Python 版本中的功能。</p>
+</div>
+<input class="tab-input" id="tab-set--87-input--2" name="tab-set--87" type="radio"><label class="tab-label" for="tab-set--87-input--2">英文</label><div class="tab-content docutils container">
+<p>Being able to turn on some of the more modern features via <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span></code> statements allows early use of features from expected future Python versions.</p>
+</div>
+</div>
+</section>
+<section id="modern-python-pros">
+<span id="id175"></span><span id="s2-20-2-pros"></span><span id="id176"></span><h3>2.20.2 优点<a class="headerlink" href="#modern-python-pros" title="此标题的永久链接">#</a></h3>
+<p>2.20.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--88-input--1" name="tab-set--88" type="radio"><label class="tab-label" for="tab-set--88-input--1">中文</label><div class="tab-content docutils container">
+<p>事实证明，这可以使运行时版本升级更加顺畅，因为可以逐个文件进行更改，同时声明兼容性并防止这些文件中出现回归问题。现代代码更易于维护，因为它不太可能积累技术债务，而这些债务在未来的运行时升级中会造成问题。</p>
+</div>
+<input class="tab-input" id="tab-set--88-input--2" name="tab-set--88" type="radio"><label class="tab-label" for="tab-set--88-input--2">英文</label><div class="tab-content docutils container">
+<p>This has proven to make runtime version upgrades smoother as changes can be made on a per-file basis while declaring compatibility and preventing regressions within those files. Modern code is more maintainable as it is less likely to accumulate technical debt that will be problematic during future runtime upgrades.</p>
+</div>
+</div>
+</section>
+<section id="modern-python-cons">
+<span id="id177"></span><span id="s2-20-3-cons"></span><span id="id178"></span><h3>2.20.3 缺点<a class="headerlink" href="#modern-python-cons" title="此标题的永久链接">#</a></h3>
+<p>2.20.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--89-input--1" name="tab-set--89" type="radio"><label class="tab-label" for="tab-set--89-input--1">中文</label><div class="tab-content docutils container">
+<p>此类代码可能无法在引入所需的 Future 语句之前的旧解释器版本上运行。这种需求在支持极其多样化环境的项目中更为常见。</p>
+</div>
+<input class="tab-input" id="tab-set--89-input--2" name="tab-set--89" type="radio"><label class="tab-label" for="tab-set--89-input--2">英文</label><div class="tab-content docutils container">
+<p>Such code may not work on very old interpreter versions prior to the introduction of the needed future statement. The need for this is more common in projects supporting an extremely wide variety of environments.</p>
+</div>
+</div>
+</section>
+<section id="modern-python-decision">
+<span id="id179"></span><span id="s2-20-4-decision"></span><span id="id180"></span><h3>2.20.4 决策<a class="headerlink" href="#modern-python-decision" title="此标题的永久链接">#</a></h3>
+<p>2.20.4 Decision</p>
+<section id="future">
+<h4>从 <code class="docutils literal notranslate"><span class="pre">__future__</span></code> 导入<a class="headerlink" href="#future" title="此标题的永久链接">#</a></h4>
+<p>from <code class="docutils literal notranslate"><span class="pre">__future__</span></code> imports</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--90-input--1" name="tab-set--90" type="radio"><label class="tab-label" for="tab-set--90-input--1">中文</label><div class="tab-content docutils container">
+<p>鼓励使用 <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span></code> 语句。它允许给定的源文件立即使用更现代的 Python 语法特性。当您不再需要运行隐藏在 <code class="code docutils literal notranslate"><span class="pre">__future__</span></code> 导入语句后面的版本时，请随时删除这些代码行。</p>
+<p>在可能在 3.5 版（而非 &gt;= 3.7 版）上执行的代码中，导入：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">generator_stop</span>
+</pre></div>
+</div>
+<p>更多信息请阅读 <a class="reference external" href="https://docs.python.org/3/library/__future__.html">Python Future 语句定义</a> 文档。</p>
+<p>除非您确信代码只会在足够现代化的环境中运行，否则请勿删除这些导入语句。即使您目前没有在代码中使用特定 Future 导入语句启用的功能，将其保留在文件中也可以防止以后对代码的修改无意中依赖于旧的行为。</p>
+<p>请根据需要使用其他 <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span></code> 导入语句。</p>
+</div>
+<input class="tab-input" id="tab-set--90-input--2" name="tab-set--90" type="radio"><label class="tab-label" for="tab-set--90-input--2">英文</label><div class="tab-content docutils container">
+<p>Use of <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span></code> statements is encouraged. It allows a given source file to start using more modern Python syntax features today. Once you no longer need to run on a version where the features are hidden behind a <code class="code docutils literal notranslate"><span class="pre">__future__</span></code> import, feel free to remove those lines.</p>
+<p>In code that may execute on versions as old as 3.5 rather than &gt;= 3.7, import:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">generator_stop</span>
+</pre></div>
+</div>
+<p>For more information read the <a class="reference external" href="https://docs.python.org/3/library/__future__.html">Python future statement definitions</a> documentation.</p>
+<p>Please don’t remove these imports until you are confident the code is only ever used in a sufficiently modern environment. Even if you do not currently use the feature a specific future import enables in your code today, keeping it in place in the file prevents later modifications of the code from inadvertently depending on the older behavior.</p>
+<p>Use other <code class="code docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span></code> import statements as you see fit.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="id182">
+<span id="typed-code"></span><span id="type-annotated-code"></span><span id="s2-21-typed-code"></span><span id="s2-21-type-annotated-code"></span><span id="id183"></span><h2>2.21 带类型注释的代码<a class="headerlink" href="#id182" title="此标题的永久链接">#</a></h2>
+<p>2.21 Type Annotated Code</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--91-input--1" name="tab-set--91" type="radio"><label class="tab-label" for="tab-set--91-input--1">中文</label><div class="tab-content docutils container">
+<p>您可以使用 <a class="reference external" href="https://docs.python.org/3/library/typing.html">类型提示</a> 为 Python 代码添加注释。在构建时，请使用 <a class="reference external" href="https://github.com/google/pytype">pytype</a> 等类型检查工具对代码进行类型检查。在大多数情况下，如果可行，类型注释都包含在源文件中。对于第三方或扩展模块，注释可以包含在 <a class="reference external" href="https://peps.python.org/pep-0484/#stub-filespytype">stub .pyi 文件</a> 中。</p>
+<div class="admonition- admonition">
+<p class="admonition-title">译注</p>
+<p><a class="reference external" href="https://hellowac.github.io/mypy-zh-cn/">mypy</a> 是一个python官方支持的静态类型检查工具, 可以较好的结合各类IDE来检查你写的代码的静态类型。</p>
+</div>
+</div>
+<input class="tab-input" id="tab-set--91-input--2" name="tab-set--91" type="radio"><label class="tab-label" for="tab-set--91-input--2">英文</label><div class="tab-content docutils container">
+<p>You can annotate Python code with <a class="reference external" href="https://docs.python.org/3/library/typing.html">type hints</a> . Type-check the code at build time with a type checking tool like <a class="reference external" href="https://github.com/google/pytype">pytype</a> . In most cases, when feasible, type annotations are in source files. For third-party or extension modules, annotations can be in <a class="reference external" href="https://peps.python.org/pep-0484/#stub-filespytype">stub .pyi files</a> .</p>
+</div>
+</div>
+<section id="typed-code-definition">
+<span id="id186"></span><span id="s2-21-1-definition"></span><span id="id187"></span><h3>2.21.1 定义<a class="headerlink" href="#typed-code-definition" title="此标题的永久链接">#</a></h3>
+<p>2.21.1 Definition</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--92-input--1" name="tab-set--92" type="radio"><label class="tab-label" for="tab-set--92-input--1">中文</label><div class="tab-content docutils container">
+<p>类型注释（或“类型提示”）用于函数或方法的参数和返回值：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</pre></div>
+</div>
+<p>您还可以使用类似的语法声明变量的类型：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">:</span> <span class="n">SomeType</span> <span class="o">=</span> <span class="n">some_func</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<input class="tab-input" id="tab-set--92-input--2" name="tab-set--92" type="radio"><label class="tab-label" for="tab-set--92-input--2">英文</label><div class="tab-content docutils container">
+<p>Type annotations (or “type hints”) are for function or method arguments and return values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</pre></div>
+</div>
+<p>You can also declare the type of a variable using similar syntax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">:</span> <span class="n">SomeType</span> <span class="o">=</span> <span class="n">some_func</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="typed-code-pros">
+<span id="id188"></span><span id="s2-21-2-pros"></span><span id="id189"></span><h3>2.21.2 优点<a class="headerlink" href="#typed-code-pros" title="此标题的永久链接">#</a></h3>
+<p>2.21.2 Pros</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--93-input--1" name="tab-set--93" type="radio"><label class="tab-label" for="tab-set--93-input--1">中文</label><div class="tab-content docutils container">
+<p>类型注解可以提升代码的可读性和可维护性。类型检查器会将许多运行时错误转换为构建时错误，从而降低您使用 <a class="reference internal" href="#id162"><span class="std std-ref">强大功能</span></a> 的能力。</p>
+</div>
+<input class="tab-input" id="tab-set--93-input--2" name="tab-set--93" type="radio"><label class="tab-label" for="tab-set--93-input--2">英文</label><div class="tab-content docutils container">
+<p>Type annotations improve the readability and maintainability of your code. The type checker will convert many runtime errors to build-time errors, and reduce your ability to use <a class="reference internal" href="#id162"><span class="std std-ref">Power Features</span></a>.</p>
+</div>
+</div>
+</section>
+<section id="typed-code-cons">
+<span id="id190"></span><span id="s2-21-3-cons"></span><span id="id191"></span><h3>2.21.3 缺点<a class="headerlink" href="#typed-code-cons" title="此标题的永久链接">#</a></h3>
+<p>2.21.3 Cons</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--94-input--1" name="tab-set--94" type="radio"><label class="tab-label" for="tab-set--94-input--1">中文</label><div class="tab-content docutils container">
+<p>您必须保持类型声明的更新。您可能会看到一些您认为是有效代码的类型错误。使用 <a class="reference external" href="https://github.com/google/pytype">类型检查器</a> 可能会降低您使用 <a class="reference internal" href="#id162"><span class="std std-ref">强大功能</span></a> 的能力。</p>
+</div>
+<input class="tab-input" id="tab-set--94-input--2" name="tab-set--94" type="radio"><label class="tab-label" for="tab-set--94-input--2">英文</label><div class="tab-content docutils container">
+<p>You will have to keep the type declarations up to date. You might see type errors that you think are valid code. Use of a  <a class="reference external" href="https://github.com/google/pytype">type checker</a>  may reduce your ability to use <a class="reference internal" href="#id162"><span class="std std-ref">Power Features</span></a> .</p>
+</div>
+</div>
+</section>
+<section id="typed-code-decision">
+<span id="id193"></span><span id="s2-21-4-decision"></span><span id="id194"></span><h3>2.21.4 决策<a class="headerlink" href="#typed-code-decision" title="此标题的永久链接">#</a></h3>
+<p>2.21.4 Decision</p>
+<div class="tab-set docutils container">
+<input checked="True" class="tab-input" id="tab-set--95-input--1" name="tab-set--95" type="radio"><label class="tab-label" for="tab-set--95-input--1">中文</label><div class="tab-content docutils container">
+<p>强烈建议您在更新代码时启用 Python 类型分析。添加或修改公共 API 时，请在构建系统中添加类型注解并启用通过 pytype 进行检查的功能。由于静态分析对于 Python 来说相对较新，我们承认一些不良副作用（例如错误的类型推断）可能会阻碍某些项目的采用。在这种情况下，我们鼓励作者在 BUILD 文件或代码中添加 TODO 注释或指向 bug 的链接，以描述当前阻碍类型注解采用的问题。</p>
+</div>
+<input class="tab-input" id="tab-set--95-input--2" name="tab-set--95" type="radio"><label class="tab-label" for="tab-set--95-input--2">英文</label><div class="tab-content docutils container">
+<p>You are strongly encouraged to enable Python type analysis when updating code. When adding or modifying public APIs, include type annotations and enable checking via pytype in the build system. As static analysis is relatively new to Python, we acknowledge that undesired side-effects (such as wrongly inferred types) may prevent adoption by some projects. In those situations, authors are encouraged to add a comment with a TODO or link to a bug describing the issue(s) currently preventing type annotation adoption in the BUILD file or in the code itself as appropriate.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="3styllerule.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">3 Python 代码风格规则</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="1background.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">1 背景</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, google
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">2 Python 语言规则</a><ul>
+<li><a class="reference internal" href="#id2">2.1 Lint</a></li>
+<li><a class="reference internal" href="#id9">2.2 导入</a></li>
+<li><a class="reference internal" href="#id21">2.3 包</a></li>
+<li><a class="reference internal" href="#id29">2.4 异常</a></li>
+<li><a class="reference internal" href="#id41">2.5 可变全局状态</a></li>
+<li><a class="reference internal" href="#nested-classes-functions">2.6 嵌套/本地/内部类和函数</a></li>
+<li><a class="reference internal" href="#comprehensions">2.7 推导式与生成器表达式</a></li>
+<li><a class="reference internal" href="#default-iterators-operators">2.8 默认迭代器和运算符</a></li>
+<li><a class="reference internal" href="#id81">2.9 生成器</a></li>
+<li><a class="reference internal" href="#lambda">2.10 Lambda 函数</a></li>
+<li><a class="reference internal" href="#id100">2.11 条件表达式</a></li>
+<li><a class="reference internal" href="#default-arguments">2.12 默认参数值</a></li>
+<li><a class="reference internal" href="#id119">2.13 属性</a></li>
+<li><a class="reference internal" href="#id129">2.14 真/假判断</a></li>
+<li><a class="reference internal" href="#id139">2.16 词法作用域</a></li>
+<li><a class="reference internal" href="#decorators">2.17 函数和方法装饰器</a></li>
+<li><a class="reference internal" href="#id160">2.18 线程</a></li>
+<li><a class="reference internal" href="#id162">2.19 强大的功能</a></li>
+<li><a class="reference internal" href="#python-future">2.20 现代 Python：从 <code class="docutils literal notranslate"><span class="pre">__future__</span></code> 导入</a></li>
+<li><a class="reference internal" href="#id182">2.21 带类型注释的代码</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/translations.js"></script>
+    </body>
+</html>
