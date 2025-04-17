@@ -810,16 +810,15 @@
 
 .. tab:: 中文
 
+    * 打破封装性：这类设计可能会妨碍实现合理的目标。例如，如果使用全局状态来管理数据库连接，那么同时连接两个不同的数据库（例如在迁移期间用于比较差异）将变得困难。类似的问题也很容易出现在全局注册表的使用中。
+
+    * 有可能在模块导入期间改变模块的行为，因为全局变量的赋值是在模块首次导入时执行的。
+
 .. tab:: 英文
 
-* Breaks encapsulation: Such design can make it hard to achieve valid
-  objectives. For example, if global state is used to manage a database
-  connection, then connecting to two different databases at the same time
-  (such as for computing differences during a migration) becomes difficult.
-  Similar problems easily arise with global registries.
+    * Breaks encapsulation: Such design can make it hard to achieve valid objectives. For example, if global state is used to manage a database connection, then connecting to two different databases at the same time (such as for computing differences during a migration) becomes difficult. Similar problems easily arise with global registries.
 
-* Has the potential to change module behavior during the import, because
-  assignments to global variables are done when the module is first imported.
+    * Has the potential to change module behavior during the import, because assignments to global variables are done when the module is first imported.
 
 .. _s2.5.4-decision:
 .. _254-decision:
@@ -833,22 +832,29 @@
 
 .. tab:: 中文
 
+    避免使用可变的全局状态。
+
+    在极少数确有必要使用全局状态的情况下，应将可变的全局实体声明在模块级别或作为类属性，并通过在名称前加下划线 `_` 使其成为内部实现。如有必要，外部对可变全局状态的访问必须通过公共函数或类方法进行。参见下文的 :ref:`命名规范 <s3.16-naming>`。请在注释中或注释中链接的文档中说明使用可变全局状态的设计原因。
+
+    允许并鼓励使用模块级常量。例如：用于内部用途的常量 `_MAX_HOLY_HANDGRENADE_COUNT = 3`，或用于公共 API 的常量 `SIR_LANCELOTS_FAVORITE_COLOR = "blue"`。常量名称必须使用全大写加下划线的格式。参见下文的 :ref:`命名规范 <s3.16-naming>` 。
+
+
 .. tab:: 英文
 
-Avoid mutable global state.
+    Avoid mutable global state.
 
-In those rare cases where using global state is warranted, mutable global
-entities should be declared at the module level or as a class attribute and made
-internal by prepending an `_` to the name. If necessary, external access to
-mutable global state must be done through public functions or class methods. See
-[Naming](#s3.16-naming) below. Please explain the design reasons why mutable
-global state is being used in a comment or a doc linked to from a comment.
+    In those rare cases where using global state is warranted, mutable global
+    entities should be declared at the module level or as a class attribute and made
+    internal by prepending an `_` to the name. If necessary, external access to
+    mutable global state must be done through public functions or class methods. See
+    :ref:`Naming <s3.16-naming>` below. Please explain the design reasons why mutable
+    global state is being used in a comment or a doc linked to from a comment.
 
-Module-level constants are permitted and encouraged. For example:
-`_MAX_HOLY_HANDGRENADE_COUNT = 3` for an internal use constant or
-`SIR_LANCELOTS_FAVORITE_COLOR = "blue"` for a public API constant. Constants
-must be named using all caps with underscores. See [Naming](#s3.16-naming)
-below.
+    Module-level constants are permitted and encouraged. For example:
+    `_MAX_HOLY_HANDGRENADE_COUNT = 3` for an internal use constant or
+    `SIR_LANCELOTS_FAVORITE_COLOR = "blue"` for a public API constant. Constants
+    must be named using all caps with underscores. See :ref:`Naming <s3.16-naming>`
+    below.
 
 .. _s2.6-nested:
 .. _26-nested:
@@ -934,12 +940,11 @@ below.
 
 .. tab:: 中文
 
+    它们没有问题，但有一些注意事项。避免使用嵌套函数或类，除非需要覆盖除 :code:`self` 或 :code:`cls` 之外的本地值。不要仅仅为了向模块用户隐藏函数而嵌套函数。相反，应该在模块级别为其名称添加 ``_`` 前缀，以便测试仍然可以访问它。
+
 .. tab:: 英文
 
-They are fine with some caveats. Avoid nested functions or classes except when
-closing over a local value other than :code:`self` or :code:`cls`. Do not nest a function
-just to hide it from users of a module. Instead, prefix its name with an ``_`` at
-the module level so that it can still be accessed by tests.
+    They are fine with some caveats. Avoid nested functions or classes except when closing over a local value other than :code:`self` or :code:`cls`. Do not nest a function just to hide it from users of a module. Instead, prefix its name with an ``_`` at the module level so that it can still be accessed by tests.
 
 .. _s2.7-comprehensions:
 .. _s2.7-list_comprehensions:
@@ -956,9 +961,11 @@ the module level so that it can still be accessed by tests.
 
 .. tab:: 中文
 
+    可以用于简单的情况。
+
 .. tab:: 英文
 
-Okay to use for simple cases.
+    Okay to use for simple cases.
 
 .. _s2.7.1-definition:
 .. _271-definition:
@@ -972,11 +979,11 @@ Okay to use for simple cases.
 
 .. tab:: 中文
 
+    列表、字典和集合推导以及生成器表达式提供了一种简洁有效的方法来创建容器类型和迭代器，而无需使用传统循环、:code:`map()`、:code:`filter()` 或 :code:`lambda`。
+
 .. tab:: 英文
 
-List, Dict, and Set comprehensions as well as generator expressions provide a
-concise and efficient way to create container types and iterators without
-resorting to the use of traditional loops, :code:`map()`, :code:`filter()`, or :code:`lambda`.
+    List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, :code:`map()`, :code:`filter()`, or :code:`lambda`.
 
 .. _s2.7.2-pros:
 .. _272-pros:
@@ -990,11 +997,11 @@ resorting to the use of traditional loops, :code:`map()`, :code:`filter()`, or :
 
 .. tab:: 中文
 
+    简单的推导式比其他字典、列表或集合的创建技术更清晰、更简洁。生成器表达式可以非常高效，因为它们完全避免了创建列表。
+
 .. tab:: 英文
 
-Simple comprehensions can be clearer and simpler than other dict, list, or set
-creation techniques. Generator expressions can be very efficient, since they
-avoid the creation of a list entirely.
+    Simple comprehensions can be clearer and simpler than other dict, list, or set creation techniques. Generator expressions can be very efficient, since they avoid the creation of a list entirely.
 
 .. _s2.7.3-cons:
 .. _273-cons:
@@ -1008,9 +1015,11 @@ avoid the creation of a list entirely.
 
 .. tab:: 中文
 
+    复杂的理解或生成器表达式可能难以阅读。
+
 .. tab:: 英文
 
-Complicated comprehensions or generator expressions can be hard to read.
+    Complicated comprehensions or generator expressions can be hard to read.
 
 .. _s2.7.4-decision:
 .. _274-decision:
@@ -1024,10 +1033,11 @@ Complicated comprehensions or generator expressions can be hard to read.
 
 .. tab:: 中文
 
+    允许使用推导式，但不允许使用多个 :code:`for` 子句或过滤表达式。优化重点在于可读性，而非简洁性。
+
 .. tab:: 英文
 
-Comprehensions are allowed, however multiple :code:`for` clauses or filter expressions
-are not permitted. Optimize for readability, not conciseness.
+    Comprehensions are allowed, however multiple :code:`for` clauses or filter expressions are not permitted. Optimize for readability, not conciseness.
 
 .. code-block:: python
 
@@ -1037,20 +1047,20 @@ are not permitted. Optimize for readability, not conciseness.
         result = [
             is_valid(metric={'key': value})
             for value in interesting_iterable
-            if a_longer_filter_expression(value)
+                if a_longer_filter_expression(value)
         ]
 
         descriptive_name = [
             transform({'key': key, 'value': value}, color='black')
             for key, value in generate_iterable(some_input)
-            if complicated_condition_is_met(key, value)
+                if complicated_condition_is_met(key, value)
         ]
 
         result = []
         for x in range(10):
             for y in range(5):
-            if x * y > 10:
-                result.append((x, y))
+                if x * y > 10:
+                    result.append((x, y))
 
         return {
             x: complicated_transform(x)
@@ -1087,9 +1097,11 @@ are not permitted. Optimize for readability, not conciseness.
 
 .. tab:: 中文
 
+    对支持它们的类型（如列表、字典和文件）使用默认迭代器和运算符。
+
 .. tab:: 英文
 
-Use default iterators and operators for types that support them, like lists, dictionaries, and files.
+    Use default iterators and operators for types that support them, like lists, dictionaries, and files.
 
 .. _s2.8.1-definition:
 .. _281-definition:
@@ -1103,9 +1115,11 @@ Use default iterators and operators for types that support them, like lists, dic
 
 .. tab:: 中文
 
+    容器类型，如字典和列表，定义默认迭代器和成员资格测试运算符（“in”和“not in”）。
+
 .. tab:: 英文
 
-Container types, like dictionaries and lists, define default iterators and membership test operators ("in" and "not in").
+    Container types, like dictionaries and lists, define default iterators and membership test operators ("in" and "not in").
 
 .. _s2.8.2-pros:
 .. _282-pros:
@@ -1119,11 +1133,11 @@ Container types, like dictionaries and lists, define default iterators and membe
 
 .. tab:: 中文
 
+    默认的迭代器和运算符简单高效。它们直接表达操作，无需额外的方法调用。使用默认运算符的函数是泛型函数。它可以用于任何支持该操作的类型。
+
 .. tab:: 英文
 
-The default iterators and operators are simple and efficient. They express the
-operation directly, without extra method calls. A function that uses default
-operators is generic. It can be used with any type that supports the operation.
+    The default iterators and operators are simple and efficient. They express the operation directly, without extra method calls. A function that uses default operators is generic. It can be used with any type that supports the operation.
 
 .. _s2.8.3-cons:
 .. _283-cons:
@@ -1137,10 +1151,11 @@ operators is generic. It can be used with any type that supports the operation.
 
 .. tab:: 中文
 
+    你无法通过读取方法名称来判断对象的类型（除非变量有类型注释）。这也是一个优点。
+
 .. tab:: 英文
 
-You can't tell the type of objects by reading the method names (unless the
-variable has type annotations). This is also an advantage.
+    You can't tell the type of objects by reading the method names (unless the variable has type annotations). This is also an advantage.
 
 .. _s2.8.4-decision:
 .. _284-decision:
@@ -1154,12 +1169,11 @@ variable has type annotations). This is also an advantage.
 
 .. tab:: 中文
 
+    对于支持默认迭代器和运算符的类型，例如列表、字典和文件，请使用默认迭代器和运算符。内置类型也定义了迭代器方法。优先使用这些方法，而不是返回列表的方法，但迭代容器时不应对其进行修改。
+
 .. tab:: 英文
 
-Use default iterators and operators for types that support them, like lists,
-dictionaries, and files. The built-in types define iterator methods, too. Prefer
-these methods to methods that return lists, except that you should not mutate a
-container while iterating over it.
+    Use default iterators and operators for types that support them, like lists, dictionaries, and files. The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it.
 
 .. code-block:: python
 
@@ -1185,9 +1199,11 @@ container while iterating over it.
 
 .. tab:: 中文
 
+    根据需要使用生成器。
+
 .. tab:: 英文
 
-Use generators as needed.
+    Use generators as needed.
 
 .. _s2.9.1-definition:
 .. _291-definition:
@@ -1201,11 +1217,11 @@ Use generators as needed.
 
 .. tab:: 中文
 
+    生成器函数返回一个迭代器，该迭代器每次执行 yield 语句时都会产生一个值。产生一个值后，生成器函数的运行时状态将被暂停，直到需要下一个值为止。
+
 .. tab:: 英文
 
-A generator function returns an iterator that yields a value each time it
-executes a yield statement. After it yields a value, the runtime state of the
-generator function is suspended until the next value is needed.
+    A generator function returns an iterator that yields a value each time it executes a yield statement. After it yields a value, the runtime state of the generator function is suspended until the next value is needed.
 
 .. _s2.9.2-pros:
 .. _292-pros:
@@ -1219,11 +1235,11 @@ generator function is suspended until the next value is needed.
 
 .. tab:: 中文
 
+    代码更简洁，因为每次调用时局部变量的状态和控制流都会被保留。生成器比一次性创建整个值列表的函数占用更少的内存。
+
 .. tab:: 英文
 
-Simpler code, because the state of local variables and control flow are
-preserved for each call. A generator uses less memory than a function that
-creates an entire list of values at once.
+    Simpler code, because the state of local variables and control flow are preserved for each call. A generator uses less memory than a function that creates an entire list of values at once.
 
 .. _s2.9.3-cons:
 .. _293-cons:
@@ -1237,10 +1253,11 @@ creates an entire list of values at once.
 
 .. tab:: 中文
 
+    生成器中的局部变量将不会被垃圾收集，直到生成器耗尽或自身被垃圾收集为止。
+
 .. tab:: 英文
 
-Local variables in the generator will not be garbage collected until the
-generator is either consumed to exhaustion or itself garbage collected.
+    Local variables in the generator will not be garbage collected until the generator is either consumed to exhaustion or itself garbage collected.
 
 .. _s2.9.4-decision:
 .. _294-decision:
@@ -1254,15 +1271,19 @@ generator is either consumed to exhaustion or itself garbage collected.
 
 .. tab:: 中文
 
+    好的。在生成器函数的文档字符串中使用“Yields:”而不是“Returns:”。
+
+    如果生成器管理的是高开销的资源，请务必强制清理。
+
+    一个好的清理方法是用上下文管理器 `PEP-0533 <https://peps.python.org/pep-0533/>`_ 包装生成器。
+
 .. tab:: 英文
 
-Fine. Use "Yields:" rather than "Returns:" in the docstring for generator
-functions.
+    Fine. Use "Yields:" rather than "Returns:" in the docstring for generator functions.
 
-If the generator manages an expensive resource, make sure to force the clean up.
+    If the generator manages an expensive resource, make sure to force the clean up.
 
-A good way to do the clean up is by wrapping the generator with a context
-manager `PEP-0533 <https://peps.python.org/pep-0533/>`_ .
+    A good way to do the clean up is by wrapping the generator with a context manager `PEP-0533 <https://peps.python.org/pep-0533/>`_ .
 
 .. _s2.10-lambda-functions:
 .. _210-lambda-functions:
@@ -1276,10 +1297,11 @@ manager `PEP-0533 <https://peps.python.org/pep-0533/>`_ .
 
 .. tab:: 中文
 
+    单行代码就行。建议使用生成器表达式，而不是 :code:`map()` 或 :code:`filter()`，并使用 :code:`lambda`。
+
 .. tab:: 英文
 
-Okay for one-liners. Prefer generator expressions over `map()` or `filter()`
-with a `lambda`.
+    Okay for one-liners. Prefer generator expressions over :code:`map()` or :code:`filter()` with a :code:`lambda`.
 
 .. _s2.10.1-definition:
 .. _2101-definition:
@@ -1293,9 +1315,11 @@ with a `lambda`.
 
 .. tab:: 中文
 
+    Lambdas 在表达式中定义匿名函数，而不是语句。
+
 .. tab:: 英文
 
-Lambdas define anonymous functions in an expression, as opposed to a statement.
+    Lambdas define anonymous functions in an expression, as opposed to a statement.
 
 .. _s2.10.2-pros:
 .. _2102-pros:
@@ -1309,9 +1333,11 @@ Lambdas define anonymous functions in an expression, as opposed to a statement.
 
 .. tab:: 中文
 
+    方便的。
+
 .. tab:: 英文
 
-Convenient.
+    Convenient.
 
 .. _s2.10.3-cons:
 .. _2103-cons:
@@ -1325,11 +1351,11 @@ Convenient.
 
 .. tab:: 中文
 
+    比本地函数更难阅读和调试。缺少名称意味着堆栈跟踪更难理解。由于函数可能只包含一个表达式，因此表达能力有限。
+
 .. tab:: 英文
 
-Harder to read and debug than local functions. The lack of names means stack
-traces are more difficult to understand. Expressiveness is limited because the
-function may only contain an expression.
+    Harder to read and debug than local functions. The lack of names means stack traces are more difficult to understand. Expressiveness is limited because the function may only contain an expression.
 
 .. _s2.10.4-decision:
 .. _2104-decision:
@@ -1343,15 +1369,15 @@ function may only contain an expression.
 
 .. tab:: 中文
 
+    允许使用 Lambda 表达式。如果 Lambda 函数内的代码跨越多行或长度超过 60-80 个字符，最好将其定义为常规的 :ref:`嵌套函数 <lexical-scoping>`。
+
+    对于乘法等常见运算，请使用 :code:`operator` 模块中的函数，而不是 Lambda 函数。例如，建议使用 :code:`operator.mul` 而不是 :code:`lambda x, y: x * y`。
+
 .. tab:: 英文
 
-Lambdas are allowed. If the code inside the lambda function spans multiple lines
-or is longer than 60-80 chars, it might be better to define it as a regular
-`nested function <lexical-scoping_>`_.
+    Lambdas are allowed. If the code inside the lambda function spans multiple lines or is longer than 60-80 chars, it might be better to define it as a regular :ref:`nested function <lexical-scoping>`.
 
-For common operations like multiplication, use the functions from the :code:`operator`
-module instead of lambda functions. For example, prefer :code:`operator.mul` to
-:code:`lambda x, y: x * y`.
+    For common operations like multiplication, use the functions from the :code:`operator` module instead of lambda functions. For example, prefer :code:`operator.mul` to :code:`lambda x, y: x * y`.
 
 .. _s2.11-conditional-expressions:
 .. _211-conditional-expressions:
@@ -1365,9 +1391,11 @@ module instead of lambda functions. For example, prefer :code:`operator.mul` to
 
 .. tab:: 中文
 
+    对于简单的情况来说还行。
+
 .. tab:: 英文
 
-Okay for simple cases.
+    Okay for simple cases.
 
 .. _s2.11.1-definition:
 .. _2111-definition:
@@ -1381,10 +1409,11 @@ Okay for simple cases.
 
 .. tab:: 中文
 
+    条件表达式（有时也称为“三元运算符”）是一种为 if 语句提供更简洁语法的机制。例如：:code:`x = 1 if cond else 2` 。
+
 .. tab:: 英文
 
-Conditional expressions (sometimes called a “ternary operator”) are mechanisms
-that provide a shorter syntax for if statements. For example: :code:`x = 1 if cond else 2`.
+    Conditional expressions (sometimes called a “ternary operator”) are mechanisms that provide a shorter syntax for if statements. For example: :code:`x = 1 if cond else 2`.
 
 .. _s2.11.2-pros:
 .. _2112-pros:
@@ -1398,9 +1427,11 @@ that provide a shorter syntax for if statements. For example: :code:`x = 1 if co
 
 .. tab:: 中文
 
+    比 if 语句更短、更方便。
+
 .. tab:: 英文
 
-Shorter and more convenient than an if statement.
+    Shorter and more convenient than an if statement.
 
 .. _s2.11.3-cons:
 .. _2113-cons:
@@ -1414,10 +1445,11 @@ Shorter and more convenient than an if statement.
 
 .. tab:: 中文
 
+    可能比 if 语句更难读。如果表达式很长，可能难以找到条件。
+
 .. tab:: 英文
 
-May be harder to read than an if statement. The condition may be difficult to
-locate if the expression is long.
+    May be harder to read than an if statement. The condition may be difficult to locate if the expression is long.
 
 .. _s2.11.4-decision:
 .. _2114-decision:
@@ -1431,11 +1463,11 @@ locate if the expression is long.
 
 .. tab:: 中文
 
+    适用于简单情况。每个部分必须放在一行：真值表达式、if 表达式、else 表达式。如果情况更复杂，请使用完整的 if 语句。
+
 .. tab:: 英文
 
-Okay to use for simple cases. Each portion must fit on one line:
-true-expression, if-expression, else-expression. Use a complete if statement
-when things get more complicated.
+    Okay to use for simple cases. Each portion must fit on one line: true-expression, if-expression, else-expression. Use a complete if statement when things get more complicated.
 
 .. code-block:: python
 
@@ -1470,9 +1502,11 @@ when things get more complicated.
 
 .. tab:: 中文
 
+    大多数情况下都可以。
+
 .. tab:: 英文
 
-Okay in most cases.
+    Okay in most cases.
 
 .. _s2.12.1-definition:
 .. _2121-definition:
@@ -1486,12 +1520,11 @@ Okay in most cases.
 
 .. tab:: 中文
 
+    您可以在函数参数列表的末尾指定变量的值，例如：:code:`def foo(a, b=0):`。如果仅使用一个参数调用 :code:`foo`，则 :code:`b` 设置为 0。如果使用两个参数调用，则 :code:`b` 具有第二个参数的值。
+
 .. tab:: 英文
 
-You can specify values for variables at the end of a function's parameter list,
-e.g., :code:`def foo(a, b=0):`. If :code:`foo` is called with only one argument, :code:`b` is set
-to 0. If it is called with two arguments, :code:`b` has the value of the second
-argument.
+    You can specify values for variables at the end of a function's parameter list, e.g., :code:`def foo(a, b=0):`. If :code:`foo` is called with only one argument, :code:`b` is set to 0. If it is called with two arguments, :code:`b` has the value of the second argument.
 
 .. _s2.12.2-pros:
 .. _2122-pros:
@@ -1505,13 +1538,11 @@ argument.
 
 .. tab:: 中文
 
+    通常，你会遇到一个使用大量默认值的函数，但在极少数情况下，你会想要覆盖这些默认值。默认参数值提供了一种简单的方法来实现这一点，而无需为这些罕见的例外情况定义大量的函数。由于 Python 不支持重载方法/函数，默认参数是一种“伪造(faking)”重载行为的简单方法。
+
 .. tab:: 英文
 
-Often you have a function that uses lots of default values, but on rare
-occasions you want to override the defaults. Default argument values provide an
-easy way to do this, without having to define lots of functions for the rare
-exceptions. As Python does not support overloaded methods/functions, default
-arguments are an easy way of "faking" the overloading behavior.
+    Often you have a function that uses lots of default values, but on rare occasions you want to override the defaults. Default argument values provide an easy way to do this, without having to define lots of functions for the rare exceptions. As Python does not support overloaded methods/functions, default arguments are an easy way of "faking" the overloading behavior.
 
 .. _s2.12.3-cons:
 .. _2123-cons:
@@ -1525,12 +1556,11 @@ arguments are an easy way of "faking" the overloading behavior.
 
 .. tab:: 中文
 
+    默认参数在模块加载时会被求值一次。如果参数是可变对象（例如列表或字典），则可能会导致问题。如果函数修改了该对象（例如，将一个项附加到列表中），则默认值也会被修改。
+
 .. tab:: 英文
 
-Default arguments are evaluated once at module load time. This may cause
-problems if the argument is a mutable object such as a list or a dictionary. If
-the function modifies the object (e.g., by appending an item to a list), the
-default value is modified.
+    Default arguments are evaluated once at module load time. This may cause problems if the argument is a mutable object such as a list or a dictionary. If the function modifies the object (e.g., by appending an item to a list), the default value is modified.
 
 .. _s2.12.4-decision:
 .. _2124-decision:
@@ -1544,37 +1574,66 @@ default value is modified.
 
 .. tab:: 中文
 
+    可以使用，但需要注意以下事项：
+
+    请勿在函数或方法定义中使用可变对象作为默认值。
+
+    .. code-block:: python
+
+        Yes: def foo(a, b=None):
+                if b is None:
+                    b = []
+        Yes: def foo(a, b: Sequence | None = None):
+                if b is None:
+                    b = []
+        Yes: def foo(a, b: Sequence = ()):  # 空元组可以，因为元组是不可变的.
+                ...
+
+    .. code-block:: python
+
+        from absl import flags
+        _FOO = flags.DEFINE_string(...)
+
+        No:  def foo(a, b=[]):
+                ...
+        No:  def foo(a, b=time.time()):  # “b” 是否应该代表该模块的加载时间？
+                ...
+        No:  def foo(a, b=_FOO.value):  # sys.argv 尚未被解析...
+                ...
+        No:  def foo(a, b: Mapping = {}):  # 仍可能传递给未经检查的代码。
+                ...
+
+
 .. tab:: 英文
 
-Okay to use with the following caveat:
+    Okay to use with the following caveat:
 
-Do not use mutable objects as default values in the function or method
-definition.
+    Do not use mutable objects as default values in the function or method definition.
 
-.. code-block:: python
+    .. code-block:: python
 
-    Yes: def foo(a, b=None):
-            if b is None:
-                b = []
-    Yes: def foo(a, b: Sequence | None = None):
-            if b is None:
-                b = []
-    Yes: def foo(a, b: Sequence = ()):  # Empty tuple OK since tuples are immutable.
-            ...
+        Yes: def foo(a, b=None):
+                if b is None:
+                    b = []
+        Yes: def foo(a, b: Sequence | None = None):
+                if b is None:
+                    b = []
+        Yes: def foo(a, b: Sequence = ()):  # Empty tuple OK since tuples are immutable.
+                ...
 
-.. code-block:: python
+    .. code-block:: python
 
-    from absl import flags
-    _FOO = flags.DEFINE_string(...)
+        from absl import flags
+        _FOO = flags.DEFINE_string(...)
 
-    No:  def foo(a, b=[]):
-            ...
-    No:  def foo(a, b=time.time()):  # Is `b` supposed to represent when this module was loaded?
-            ...
-    No:  def foo(a, b=_FOO.value):  # sys.argv has not yet been parsed...
-            ...
-    No:  def foo(a, b: Mapping = {}):  # Could still get passed to unchecked code.
-            ...
+        No:  def foo(a, b=[]):
+                ...
+        No:  def foo(a, b=time.time()):  # Is `b` supposed to represent when this module was loaded?
+                ...
+        No:  def foo(a, b=_FOO.value):  # sys.argv has not yet been parsed...
+                ...
+        No:  def foo(a, b: Mapping = {}):  # Could still get passed to unchecked code.
+                ...
 
 .. _s2.13-properties:
 .. _213-properties:
@@ -1588,12 +1647,11 @@ definition.
 
 .. tab:: 中文
 
+    属性可用于控制需要简单计算或逻辑的属性的获取或设置。属性的实现必须符合常规属性访问的一般期望：简洁、直接且不令人意外。
+
 .. tab:: 英文
 
-Properties may be used to control getting or setting attributes that require
-trivial computations or logic. Property implementations must match the general
-expectations of regular attribute access: that they are cheap, straightforward,
-and unsurprising.
+    Properties may be used to control getting or setting attributes that require trivial computations or logic. Property implementations must match the general expectations of regular attribute access: that they are cheap, straightforward, and unsurprising.
 
 .. _s2.13.1-definition:
 .. _2131-definition:
@@ -1607,10 +1665,11 @@ and unsurprising.
 
 .. tab:: 中文
 
+    将获取和设置属性的方法调用包装为标准属性访问的方式。
+
 .. tab:: 英文
 
-A way to wrap method calls for getting and setting an attribute as a standard
-attribute access.
+    A way to wrap method calls for getting and setting an attribute as a standard attribute access.
 
 .. _s2.13.2-pros:
 .. _2132-pros:
@@ -1624,14 +1683,17 @@ attribute access.
 
 .. tab:: 中文
 
+    * 允许使用属性访问和赋值 API，而不是 :ref:`getter 和 setter <getters-and-setters>` 方法调用。
+    * 可用于将属性设为只读。
+    * 允许延迟计算。
+    * 当类的内部结构独立于类的使用者而发展时，提供一种维护类的公共接口的方法。
+
 .. tab:: 英文
 
-* Allows for an attribute access and assignment API rather than
-  [getter and setter](#getters-and-setters) method calls.
-* Can be used to make an attribute read-only.
-* Allows calculations to be lazy.
-* Provides a way to maintain the public interface of a class when the
-  internals evolve independently of class users.
+    * Allows for an attribute access and assignment API rather than :ref:`getter and setter <getters-and-setters>` method calls.
+    * Can be used to make an attribute read-only.
+    * Allows calculations to be lazy.
+    * Provides a way to maintain the public interface of a class when the internals evolve independently of class users.
 
 .. _s2.13.3-cons:
 .. _2133-cons:
@@ -1645,10 +1707,13 @@ attribute access.
 
 .. tab:: 中文
 
+    * 可以像运算符重载一样隐藏副作用。
+    * 可能会使子类感到困惑。
+
 .. tab:: 英文
 
-* Can hide side-effects much like operator overloading.
-* Can be confusing for subclasses.
+    * Can hide side-effects much like operator overloading.
+    * Can be confusing for subclasses.
 
 .. _s2.13.4-decision:
 .. _2134-decision:
@@ -1662,24 +1727,23 @@ attribute access.
 
 .. tab:: 中文
 
+    允许使用属性，但与运算符重载类似，应仅在必要时使用，并且应符合典型属性访问的预期；否则，请遵循 :ref:`getters 和 setters <getters-and-setters>` 规则。
+
+    例如，不允许使用属性简单地同时获取和设置内部属性：因为没有进行任何计算，因此该属性是不必要的（:ref:`改为将属性公开 <getters-and-setters>`）。相比之下，允许使用属性来控制属性访问或计算 *简单* 派生的值：其逻辑简单且不足为奇。
+
+    应使用 :code:`@property` :ref:`装饰器 <s2.17-function-and-method-decorators>` 创建属性。手动实现属性描述符被视为一项 :ref:`强大功能 <power-features>`。
+
+    属性的继承可能不明显。请勿使用属性来实现子类可能想要重写和扩展的计算。
+
 .. tab:: 英文
 
-Properties are allowed, but, like operator overloading, should only be used when
-necessary and match the expectations of typical attribute access; follow the
-[getters and setters](#getters-and-setters) rules otherwise.
+    Properties are allowed, but, like operator overloading, should only be used when necessary and match the expectations of typical attribute access; follow the :ref:`getters 和 setters <getters-and-setters>` rules otherwise.
 
-For example, using a property to simply both get and set an internal attribute
-isn't allowed: there is no computation occurring, so the property is unnecessary
-([make the attribute public instead](#getters-and-setters)). In comparison,
-using a property to control attribute access or to calculate a *trivially*
-derived value is allowed: the logic is simple and unsurprising.
+    For example, using a property to simply both get and set an internal attribute isn't allowed: there is no computation occurring, so the property is unnecessary (:ref:`make the attribute public instead <getters-and-setters>`). In comparison, using a property to control attribute access or to calculate a *trivially* derived value is allowed: the logic is simple and unsurprising.
 
-Properties should be created with the `@property`
-[decorator](#s2.17-function-and-method-decorators). Manually implementing a
-property descriptor is considered a [power feature](#power-features).
+    Properties should be created with the :code:`@property` :ref:`decorator <s2.17-function-and-method-decorators>` Manually implementing a property descriptor is considered a :ref:`power feature <power-features>`.
 
-Inheritance with properties can be non-obvious. Do not use properties to
-implement computations a subclass may ever want to override and extend.
+    Inheritance with properties can be non-obvious. Do not use properties to implement computations a subclass may ever want to override and extend.
 
 .. _s2.14-truefalse-evaluations:
 .. _214-truefalse-evaluations:
@@ -1693,9 +1757,11 @@ implement computations a subclass may ever want to override and extend.
 
 .. tab:: 中文
 
+    如果可能的话，使用“隐式”错误（有一些警告）。
+
 .. tab:: 英文
 
-Use the "implicit" false if at all possible (with a few caveats).
+    Use the "implicit" false if at all possible (with a few caveats).
 
 .. _s2.14.1-definition:
 .. _2141-definition:
@@ -1709,10 +1775,11 @@ Use the "implicit" false if at all possible (with a few caveats).
 
 .. tab:: 中文
 
+    Python 在布尔上下文中将某些值计算为 :code:`False`。一个简单的“经验法则”是，所有“空”值都被视为 false，因此 :code:`0、None、[]、{}、''` 在布尔上下文中均被计算为 false。
+
 .. tab:: 英文
 
-Python evaluates certain values as :code:`False` when in a boolean context. A quick
-"rule of thumb" is that all "empty" values are considered false, so :code:`0, None, [], {}, ''` all evaluate as false in a boolean context.
+    Python evaluates certain values as :code:`False` when in a boolean context. A quick "rule of thumb" is that all "empty" values are considered false, so :code:`0, None, [], {}, ''` all evaluate as false in a boolean context.
 
 .. _s2.14.2-pros:
 .. _2142-pros:
@@ -1726,10 +1793,11 @@ Python evaluates certain values as :code:`False` when in a boolean context. A qu
 
 .. tab:: 中文
 
+    使用 Python 布尔值来设置条件更易于阅读，且不易出错。在大多数情况下，它们的速度也更快。
+
 .. tab:: 英文
 
-Conditions using Python booleans are easier to read and less error-prone. In
-most cases, they're also faster.
+    Conditions using Python booleans are easier to read and less error-prone. In most cases, they're also faster.
 
 .. _s2.14.3-cons:
 .. _2143-cons:
@@ -1743,9 +1811,11 @@ most cases, they're also faster.
 
 .. tab:: 中文
 
+    对于 C/C++ 开发人员来说可能看起来很奇怪。
+
 .. tab:: 英文
 
-May look strange to C/C++ developers.
+    May look strange to C/C++ developers.
 
 .. _s2.14.4-decision:
 .. _2144-decision:
@@ -1759,56 +1829,95 @@ May look strange to C/C++ developers.
 
 .. tab:: 中文
 
+    尽可能使用“隐式”假值判断，例如使用 :code:`if foo:` 而不是 :code:`if foo != []:`。不过，也有一些注意事项需要留意：
+
+    -   检查一个值是否为 :code:`None` 时，应始终使用 :code:`if foo is None:` （或 :code:`is not None` ）。
+        例如，在判断一个默认值为 :code:`None` 的变量或参数是否被赋予了其他值时。其他值可能在布尔上下文中也会被判断为假！
+
+    -   永远不要通过 :code:`==` 将布尔变量与 :code:`False` 进行比较，应使用 :code:`if not x:`。
+        如果你需要区分 :code:`False` 和 :code:`None`，可以链式组合表达式，如 :code:`if not x and x is not None:`。
+
+    -   对于序列（字符串、列表、元组），应利用空序列为假值的事实，因此使用 :code:`if seq:` 和 :code:`if not seq:` 比使用 :code:`if len(seq):` 和 :code:`if not len(seq):` 更佳。
+
+    -   在处理整数时，隐式假值可能弊大于利（例如，可能会误将 :code:`None` 当作 0 处理）。你可以将已知为整数（且不是 :code:`len()` 的结果）的值与整数 0 进行比较。
+
+        .. code-block:: python
+
+            Yes: if not users:
+                    print('no users')
+
+                 if i % 10 == 0:
+                    self.handle_multiple_of_ten()
+
+                 def f(x=None):
+                    if x is None:
+                        x = []
+
+        .. code-block:: python
+
+            No: if len(users) == 0:
+                    print('no users')
+            
+                if not i % 10:
+                    self.handle_multiple_of_ten()
+            
+                def f(x=None):
+                    x = x or []
+
+    -   注意，:code:`'0'` （即字符串形式的 :code:`0` ）在布尔上下文中会被视为真值。
+
+    -   注意，Numpy 数组在隐式布尔上下文中可能会抛出异常。判断 :code:`np.array` 是否为空时，推荐使用其 :code:`.size` 属性（例如 :code:`if not users.size`）。
+
+
 .. tab:: 英文
 
-Use the "implicit" false if possible, e.g., :code:`if foo:` rather than :code:`if foo != []:`. There are a few caveats that you should keep in mind though:
+    Use the "implicit" false if possible, e.g., :code:`if foo:` rather than :code:`if foo != []:`. There are a few caveats that you should keep in mind though:
 
--   Always use :code:`if foo is None:` (or :code:`is not None`) to check for a :code:`None` value.
-    E.g., when testing whether a variable or argument that defaults to :code:`None`
-    was set to some other value. The other value might be a value that's false
-    in a boolean context!
+    -   Always use :code:`if foo is None:` (or :code:`is not None`) to check for a :code:`None` value.
+        E.g., when testing whether a variable or argument that defaults to :code:`None`
+        was set to some other value. The other value might be a value that's false
+        in a boolean context!
 
--   Never compare a boolean variable to :code:`False` using :code:`==`. Use :code:`if not x:`
-    instead. If you need to distinguish :code:`False` from :code:`None` then chain the
-    expressions, such as :code:`if not x and x is not None:`.
+    -   Never compare a boolean variable to :code:`False` using :code:`==`. Use :code:`if not x:`
+        instead. If you need to distinguish :code:`False` from :code:`None` then chain the
+        expressions, such as :code:`if not x and x is not None:`.
 
--   For sequences (strings, lists, tuples), use the fact that empty sequences
-    are false, so :code:`if seq:` and :code:`if not seq:` are preferable to :code:`if len(seq):`
-    and :code:`if not len(seq):` respectively.
+    -   For sequences (strings, lists, tuples), use the fact that empty sequences
+        are false, so :code:`if seq:` and :code:`if not seq:` are preferable to :code:`if len(seq):`
+        and :code:`if not len(seq):` respectively.
 
--   When handling integers, implicit false may involve more risk than benefit
-    (i.e., accidentally handling :code:`None` as 0). You may compare a value which is
-    known to be an integer (and is not the result of :code:`len()`) against the
-    integer 0.
+    -   When handling integers, implicit false may involve more risk than benefit
+        (i.e., accidentally handling :code:`None` as 0). You may compare a value which is
+        known to be an integer (and is not the result of :code:`len()`) against the
+        integer 0.
 
-    .. code-block:: python
+        .. code-block:: python
 
-        Yes: if not users:
-                print('no users')
+            Yes: if not users:
+                    print('no users')
 
-             if i % 10 == 0:
-                self.handle_multiple_of_ten()
+                if i % 10 == 0:
+                    self.handle_multiple_of_ten()
 
-             def f(x=None):
-                if x is None:
-                    x = []
+                def f(x=None):
+                    if x is None:
+                        x = []
 
-    .. code-block:: python
+        .. code-block:: python
 
-        No:  if len(users) == 0:
-                 print('no users')
-    
-             if not i % 10:
-                 self.handle_multiple_of_ten()
-    
-             def f(x=None):
-                 x = x or []
+            No:  if len(users) == 0:
+                    print('no users')
+        
+                if not i % 10:
+                    self.handle_multiple_of_ten()
+        
+                def f(x=None):
+                    x = x or []
 
--   Note that :code:`'0'` (i.e., :code:`0` as string) evaluates to true.
+    -   Note that :code:`'0'` (i.e., :code:`0` as string) evaluates to true.
 
--   Note that Numpy arrays may raise an exception in an implicit boolean
-    context. Prefer the :code:`.size` attribute when testing emptiness of a :code:`np.array`
-    (e.g. :code:`if not users.size`).
+    -   Note that Numpy arrays may raise an exception in an implicit boolean
+        context. Prefer the :code:`.size` attribute when testing emptiness of a :code:`np.array` (e.g. :code:`if not users.size`).
 
 .. _s2.16-lexical-scoping:
 .. _216-lexical-scoping:
@@ -1822,9 +1931,11 @@ Use the "implicit" false if possible, e.g., :code:`if foo:` rather than :code:`i
 
 .. tab:: 中文
 
+    可以用。
+
 .. tab:: 英文
 
-Okay to use.
+    Okay to use.
 
 .. _s2.16.1-definition:
 .. _2161-definition:
@@ -1838,25 +1949,38 @@ Okay to use.
 
 .. tab:: 中文
 
+    嵌套的 Python 函数可以引用封闭函数中定义的变量，但不能赋值给它们。变量绑定使用词法作用域进行解析，即基于静态程序文本。在代码块中对名称的任何赋值都会导致 Python 将所有对该名称的引用视为局部变量，即使使用先于赋值。如果出现全局声明，则该名称将被视为全局变量。
+
+    此功能的一个使用示例如下：
+
+    .. code-block:: python
+
+        def get_adder(summand1: float) -> Callable[[float], float]:
+            """返回将数字添加到给定数字的函数."""
+            def adder(summand2: float) -> float:
+                return summand1 + summand2
+        
+            return adder
+
 .. tab:: 英文
 
-A nested Python function can refer to variables defined in enclosing functions,
-but cannot assign to them. Variable bindings are resolved using lexical scoping,
-that is, based on the static program text. Any assignment to a name in a block
-will cause Python to treat all references to that name as a local variable, even
-if the use precedes the assignment. If a global declaration occurs, the name is
-treated as a global variable.
+    A nested Python function can refer to variables defined in enclosing functions,
+    but cannot assign to them. Variable bindings are resolved using lexical scoping,
+    that is, based on the static program text. Any assignment to a name in a block
+    will cause Python to treat all references to that name as a local variable, even
+    if the use precedes the assignment. If a global declaration occurs, the name is
+    treated as a global variable.
 
-An example of the use of this feature is:
+    An example of the use of this feature is:
 
-.. code-block:: python
+    .. code-block:: python
 
-    def get_adder(summand1: float) -> Callable[[float], float]:
-        """Returns a function that adds numbers to a given number."""
-        def adder(summand2: float) -> float:
-            return summand1 + summand2
-    
-        return adder
+        def get_adder(summand1: float) -> Callable[[float], float]:
+            """Returns a function that adds numbers to a given number."""
+            def adder(summand2: float) -> float:
+                return summand1 + summand2
+        
+            return adder
 
 .. _s2.16.2-pros:
 .. _2162-pros:
@@ -1870,10 +1994,11 @@ An example of the use of this feature is:
 
 .. tab:: 中文
 
+    通常会导致代码更清晰、更优雅。尤其适合经验丰富的 Lisp 和 Scheme（以及 Haskell、ML 等等）程序员。
+
 .. tab:: 英文
 
-Often results in clearer, more elegant code. Especially comforting to
-experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
+    Often results in clearer, more elegant code. Especially comforting to experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
 
 .. _s2.16.3-cons:
 .. _2163-cons:
@@ -1887,24 +2012,41 @@ experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
 
 .. tab:: 中文
 
+    可能会导致令人困惑的错误，例如基于 `PEP-0227 <https://peps.python.org/pep-0227/>`_ 的这个示例：
+
+    .. code-block:: python
+
+        i = 4
+        def foo(x: Iterable[int]):
+            def bar():
+                print(i, end='')
+            # ...
+            # 这里有一堆代码
+            # ...
+            for i in x:  # 阿哈, i *is* local to foo, so this is what bar sees
+                print(i, end='')
+            bar()
+
+    So :code:`foo([1, 2, 3])` will print :code:`1 2 3 3`, not :code:`1 2 3 4`.
+
 .. tab:: 英文
 
-Can lead to confusing bugs, such as this example based on `PEP-0227 <https://peps.python.org/pep-0227/>`_:
+    Can lead to confusing bugs, such as this example based on `PEP-0227 <https://peps.python.org/pep-0227/>`_:
 
-.. code-block:: python
+    .. code-block:: python
 
-    i = 4
-    def foo(x: Iterable[int]):
-        def bar():
-            print(i, end='')
-        # ...
-        # A bunch of code here
-        # ...
-        for i in x:  # Ah, i *is* local to foo, so this is what bar sees
-            print(i, end='')
-        bar()
+        i = 4
+        def foo(x: Iterable[int]):
+            def bar():
+                print(i, end='')
+            # ...
+            # A bunch of code here
+            # ...
+            for i in x:  # Ah, i *is* local to foo, so this is what bar sees
+                print(i, end='')
+            bar()
 
-So :code:`foo([1, 2, 3])` will print :code:`1 2 3 3`, not :code:`1 2 3 4`.
+    So :code:`foo([1, 2, 3])` will print :code:`1 2 3 3`, not :code:`1 2 3 4`.
 
 .. _s2.16.4-decision:
 .. _2164-decision:
@@ -1918,9 +2060,11 @@ So :code:`foo([1, 2, 3])` will print :code:`1 2 3 3`, not :code:`1 2 3 4`.
 
 .. tab:: 中文
 
+    可以用。
+
 .. tab:: 英文
 
-Okay to use.
+    Okay to use.
 
 .. _s2.17-function-and-method-decorators:
 .. _217-function-and-method-decorators:
@@ -1935,9 +2079,11 @@ Okay to use.
 
 .. tab:: 中文
 
+    当装饰器有明显优势时，请谨慎使用。避免使用 :code:`staticmethod` 并限制使用 :code:`classmethod`。
+
 .. tab:: 英文
 
-Use decorators judiciously when there is a clear advantage. Avoid :code:`staticmethod` and limit use of :code:`classmethod`.
+    Use decorators judiciously when there is a clear advantage. Avoid :code:`staticmethod` and limit use of :code:`classmethod`.
 
 .. _s2.17.1-definition:
 .. _2171-definition:
@@ -1951,29 +2097,49 @@ Use decorators judiciously when there is a clear advantage. Avoid :code:`staticm
 
 .. tab:: 中文
 
+    `函数和方法的装饰器 <https://docs.python.org/3/glossary.html#term-decorator>`_（又称“ :code:`@` 符号 ”）。一个常见的装饰器是 :code:`@property`，用于将普通方法转换为动态计算的属性。然而，装饰器语法也允许用户自定义装饰器。具体来说，对于某个函数 :code:`my_decorator`，如下所示：
+
+    .. code-block:: python
+
+        class C:
+            @my_decorator
+            def method(self):
+                # method body ...
+
+    相当于:
+
+    .. code-block:: python
+
+        class C:
+            def method(self):
+                # method body ...
+
+            method = my_decorator(method)
+
 .. tab:: 英文
 
-`Decorators for Functions and Methods <https://docs.python.org/3/glossary.html#term-decorator>`_
-(a.k.a "the :code:`@` notation"). One common decorator is :code:`@property`, used for
-converting ordinary methods into dynamically computed attributes. However, the
-decorator syntax allows for user-defined decorators as well. Specifically, for
-some function :code:`my_decorator`, this:
+    `Decorators for Functions and Methods <https://docs.python.org/3/glossary.html#term-decorator>`_
+    (a.k.a "the :code:`@` notation"). One common decorator is :code:`@property`, used for
+    converting ordinary methods into dynamically computed attributes. However, the
+    decorator syntax allows for user-defined decorators as well. Specifically, for
+    some function :code:`my_decorator`, this:
 
-.. code-block:: python
+    .. code-block:: python
 
-    class C:
-        @my_decorator
-        def method(self):
-            # method body ...
+        class C:
+            @my_decorator
+            def method(self):
+                # method body ...
 
-is equivalent to:
+    is equivalent to:
 
-.. code-block:: python
+    .. code-block:: python
 
-    class C:
-        def method(self):
-            # method body ...
-        method = my_decorator(method)
+        class C:
+            def method(self):
+                # method body ...
+
+            method = my_decorator(method)
 
 .. _s2.17.2-pros:
 .. _2172-pros:
@@ -1987,9 +2153,11 @@ is equivalent to:
 
 .. tab:: 中文
 
+    优雅地指定方法上的一些转换；转换可能会消除一些重复的代码，强制执行不变量等。
+
 .. tab:: 英文
 
-Elegantly specifies some transformation on a method; the transformation might eliminate some repetitive code, enforce invariants, etc.
+    Elegantly specifies some transformation on a method; the transformation might eliminate some repetitive code, enforce invariants, etc.
 
 .. _s2.17.3-cons:
 .. _2173-cons:
@@ -2003,13 +2171,11 @@ Elegantly specifies some transformation on a method; the transformation might el
 
 .. tab:: 中文
 
+    装饰器可以对函数的参数或返回值执行任意操作，从而导致令人意外的隐式行为。此外，装饰器在对象定义时执行。对于模块级对象（类、模块函数等），这发生在导入时。装饰器代码中的错误几乎无法恢复。
+
 .. tab:: 英文
 
-Decorators can perform arbitrary operations on a function's arguments or return
-values, resulting in surprising implicit behavior. Additionally, decorators
-execute at object definition time. For module-level objects (classes, module
-functions, ...) this happens at import time. Failures in decorator code are
-pretty much impossible to recover from.
+    Decorators can perform arbitrary operations on a function's arguments or return values, resulting in surprising implicit behavior. Additionally, decorators execute at object definition time. For module-level objects (classes, module functions, ...) this happens at import time. Failures in decorator code are pretty much impossible to recover from.
 
 .. _s2.17.4-decision:
 .. _2174-decision:
@@ -2023,27 +2189,28 @@ pretty much impossible to recover from.
 
 .. tab:: 中文
 
+    当装饰器有明显优势时，请谨慎使用。装饰器应遵循与函数相同的导入和命名准则。装饰器文档字符串应清晰地声明该函数是一个装饰器。请为装饰器编写单元测试。
+
+    避免在装饰器本身中引入外部依赖（例如，不要依赖文件、套接字、数据库连接等），因为这些依赖在装饰器运行时可能不可用（在导入时，可能是从 :code:`pydoc` 或其他工具导入）。使用有效参数调用的装饰器应（尽可能）保证在所有情况下都能成功调用。
+
+    装饰器是“顶层代码”的一种特殊情况 - 更多讨论请参阅 :ref:`main <s3.17-main>`。
+
+    除非为了与现有库中定义的 API 集成而被迫使用 :code:`staticmethod`，否则切勿使用 :code:`staticmethod`。请改为编写模块级函数。
+
+    仅在编写命名构造函数或修改必要的全局状态（例如进程范围的缓存）的特定于类的例程时使用 :code:`classmethod`。
+
 .. tab:: 英文
 
-Use decorators judiciously when there is a clear advantage. Decorators should
-follow the same import and naming guidelines as functions. A decorator docstring
-should clearly state that the function is a decorator. Write unit tests for
-decorators.
+    Use decorators judiciously when there is a clear advantage. Decorators should follow the same import and naming guidelines as functions. A decorator docstring should clearly state that the function is a decorator. Write unit tests for decorators.
 
-Avoid external dependencies in the decorator itself (e.g. don't rely on files,
-sockets, database connections, etc.), since they might not be available when the
-decorator runs (at import time, perhaps from :code:`pydoc` or other tools). A
-decorator that is called with valid parameters should (as much as possible) be
-guaranteed to succeed in all cases.
+    Avoid external dependencies in the decorator itself (e.g. don't rely on files, sockets, database connections, etc.), since they might not be available when the decorator runs (at import time, perhaps from :code:`pydoc` or other tools). A decorator that is called with valid parameters should (as much as possible) be guaranteed to succeed in all cases.
 
-Decorators are a special case of "top-level code" - see [main](#s3.17-main) for
-more discussion.
+    Decorators are a special case of "top-level code" - see :ref:`main <s3.17-main>` for
+    more discussion.
 
-Never use :code:`staticmethod` unless forced to in order to integrate with an API
-defined in an existing library. Write a module-level function instead.
+    Never use :code:`staticmethod` unless forced to in order to integrate with an API defined in an existing library. Write a module-level function instead.
 
-Use :code:`classmethod` only when writing a named constructor, or a class-specific
-routine that modifies necessary global state such as a process-wide cache.
+    Use :code:`classmethod` only when writing a named constructor, or a class-specific routine that modifies necessary global state such as a process-wide cache.
 
 .. _s2.18-threading:
 .. _218-threading:
@@ -2057,36 +2224,37 @@ routine that modifies necessary global state such as a process-wide cache.
 
 .. tab:: 中文
 
+    不要依赖内置类型的原子性。
+
+    虽然 Python 的内置数据类型（例如字典）似乎具有原子操作，但在某些情况下它们并非原子操作（例如，如果 :code:`__hash__` 或 :code:`__eq__` 被实现为 Python 方法），则不应依赖它们的原子性。也不应该依赖原子变量赋值（因为这反过来又依赖于字典）。
+
+    使用 :code:`queue` 模块的 :code:`Queue` 数据类型作为线程间数据通信的首选方式。否则，请使用 :code:`threading` 模块及其锁定原语。优先使用条件变量和 :code:`threading.Condition`，而不是使用低级锁。
+
 .. tab:: 英文
 
-Do not rely on the atomicity of built-in types.
+    Do not rely on the atomicity of built-in types.
 
-While Python's built-in data types such as dictionaries appear to have atomic
-operations, there are corner cases where they aren't atomic (e.g. if :code:`__hash__`
-or :code:`__eq__` are implemented as Python methods) and their atomicity should not be
-relied upon. Neither should you rely on atomic variable assignment (since this
-in turn depends on dictionaries).
+    While Python's built-in data types such as dictionaries appear to have atomic operations, there are corner cases where they aren't atomic (e.g. if :code:`__hash__` or :code:`__eq__` are implemented as Python methods) and their atomicity should not be relied upon. Neither should you rely on atomic variable assignment (since this in turn depends on dictionaries).
 
-Use the :code:`queue` module's :code:`Queue` data type as the preferred way to communicate
-data between threads. Otherwise, use the :code:`threading` module and its locking
-primitives. Prefer condition variables and :code:`threading.Condition` instead of
-using lower-level locks.
+    Use the :code:`queue` module's :code:`Queue` data type as the preferred way to communicate data between threads. Otherwise, use the :code:`threading` module and its locking primitives. Prefer condition variables and :code:`threading.Condition` instead of using lower-level locks.
 
 .. _s2.19-power-features:
 .. _219-power-features:
 
 .. _power-features:
 
-2.19 强大功能
+2.19 强大的功能
 ----------------------------
 
 2.19 Power Features 
 
 .. tab:: 中文
 
+    避免这些功能。
+
 .. tab:: 英文
 
-Avoid these features.
+    Avoid these features.
 
 .. _s2.19.1-definition:
 .. _2191-definition:
@@ -2100,13 +2268,11 @@ Avoid these features.
 
 .. tab:: 中文
 
+    Python 是一种非常灵活的语言，它为您提供了许多奇特的功能，例如自定义元类、访问字节码、动态编译、动态继承、对象重新父级、导入黑客、反射（例如 :code:`getattr()` 的一些用途）、修改系统内部、 :code:`__del__` 方法实现自定义清理等。
+
 .. tab:: 英文
 
-Python is an extremely flexible language and gives you many fancy features such
-as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic
-inheritance, object reparenting, import hacks, reflection (e.g. some uses of
-:code:`getattr()`), modification of system internals, :code:`__del__` methods implementing
-customized cleanup, etc.
+    Python is an extremely flexible language and gives you many fancy features such as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic inheritance, object reparenting, import hacks, reflection (e.g. some uses of :code:`getattr()`), modification of system internals, :code:`__del__` methods implementing customized cleanup, etc.
 
 .. _s2.19.2-pros:
 .. _2192-pros:
@@ -2120,9 +2286,11 @@ customized cleanup, etc.
 
 .. tab:: 中文
 
+    这些都是强大的语言特性。它们可以让你的代码更加紧凑。
+
 .. tab:: 英文
 
-These are powerful language features. They can make your code more compact.
+    These are powerful language features. They can make your code more compact.
 
 .. _s2.19.3-cons:
 .. _2193-cons:
@@ -2136,13 +2304,11 @@ These are powerful language features. They can make your code more compact.
 
 .. tab:: 中文
 
+    当这些“酷炫”的功能并非绝对必要的时候，人们很容易就会去使用这些功能。然而，如果代码中使用了不常见的功能，阅读、理解和调试起来就会更加困难。乍一看（对原作者来说）似乎并非如此，但当你重新审视这些代码时，你会发现，它们往往比那些更长但更简单的代码更难理解。
+
 .. tab:: 英文
 
-It's very tempting to use these "cool" features when they're not absolutely
-necessary. It's harder to read, understand, and debug code that's using unusual
-features underneath. It doesn't seem that way at first (to the original author),
-but when revisiting the code, it tends to be more difficult than code that is
-longer but is straightforward.
+    It's very tempting to use these "cool" features when they're not absolutely necessary. It's harder to read, understand, and debug code that's using unusual features underneath. It doesn't seem that way at first (to the original author), but when revisiting the code, it tends to be more difficult than code that is longer but is straightforward.
 
 .. _s2.19.4-decision:
 .. _2194-decision:
@@ -2156,12 +2322,15 @@ longer but is straightforward.
 
 .. tab:: 中文
 
+    避免在代码中使用这些功能。
+
+    内部使用这些功能的标准库模块和类是可以使用的（例如：:code:`abc.ABCMeta` 、:code:`dataclasses` 和 :code:`enum`）。
+
 .. tab:: 英文
 
-Avoid these features in your code.
+    Avoid these features in your code.
 
-Standard library modules and classes that internally use these features are okay
-to use (for example, :code:`abc.ABCMeta`, :code:`dataclasses`, and :code:`enum`).
+    Standard library modules and classes that internally use these features are okay to use (for example, :code:`abc.ABCMeta`, :code:`dataclasses`, and :code:`enum`).
 
 .. _s2.20-modern-python:
 .. _220-modern-python:
@@ -2169,17 +2338,18 @@ to use (for example, :code:`abc.ABCMeta`, :code:`dataclasses`, and :code:`enum`)
 
 .. _modern-python:
 
-2.20 现代 Python：from \_\_future\_\_ imports
+2.20 现代 Python：从 ``__future__`` 导入
 --------------------------------------------------------
 
-2.20 Modern Python: from \_\_future\_\_ imports 
+2.20 Modern Python: from ``__future__`` imports
 
 .. tab:: 中文
 
+    新的语言版本语义变化可能会受到特殊未来导入的控制，以便在早期运行时按文件启用它们。
+
 .. tab:: 英文
 
-New language version semantic changes may be gated behind a special future
-import to enable them on a per-file basis within earlier runtimes.
+    New language version semantic changes may be gated behind a special future import to enable them on a per-file basis within earlier runtimes.
 
 .. _s2.20.1-definition:
 .. _2201-definition:
@@ -2193,10 +2363,11 @@ import to enable them on a per-file basis within earlier runtimes.
 
 .. tab:: 中文
 
+    能够通过 :code:`from __future__ import` 语句启用一些更现代的功能，从而可以提前使用预期的未来 Python 版本中的功能。
+
 .. tab:: 英文
 
-Being able to turn on some of the more modern features via :code:`from __future__ import` statements allows early use of features from expected future Python
-versions.
+    Being able to turn on some of the more modern features via :code:`from __future__ import` statements allows early use of features from expected future Python versions.
 
 .. _s2.20.2-pros:
 .. _2202-pros:
@@ -2210,13 +2381,11 @@ versions.
 
 .. tab:: 中文
 
+    事实证明，这可以使运行时版本升级更加顺畅，因为可以逐个文件进行更改，同时声明兼容性并防止这些文件中出现回归问题。现代代码更易于维护，因为它不太可能积累技术债务，而这些债务在未来的运行时升级中会造成问题。
+
 .. tab:: 英文
 
-This has proven to make runtime version upgrades smoother as changes can be made
-on a per-file basis while declaring compatibility and preventing regressions
-within those files. Modern code is more maintainable as it is less likely to
-accumulate technical debt that will be problematic during future runtime
-upgrades.
+    This has proven to make runtime version upgrades smoother as changes can be made on a per-file basis while declaring compatibility and preventing regressions within those files. Modern code is more maintainable as it is less likely to accumulate technical debt that will be problematic during future runtime upgrades.
 
 .. _s2.20.3-cons:
 .. _2203-cons:
@@ -2230,11 +2399,11 @@ upgrades.
 
 .. tab:: 中文
 
+    此类代码可能无法在引入所需的 Future 语句之前的旧解释器版本上运行。这种需求在支持极其多样化环境的项目中更为常见。
+
 .. tab:: 英文
 
-Such code may not work on very old interpreter versions prior to the
-introduction of the needed future statement. The need for this is more common in
-projects supporting an extremely wide variety of environments.
+    Such code may not work on very old interpreter versions prior to the introduction of the needed future statement. The need for this is more common in projects supporting an extremely wide variety of environments.
 
 .. _s2.20.4-decision:
 .. _2204-decision:
@@ -2246,44 +2415,43 @@ projects supporting an extremely wide variety of environments.
 
 2.20.4 Decision 
 
-.. tab:: 中文
 
-.. tab:: 英文
-
-
-from \_\_future\_\_ imports
+从 ``__future__`` 导入
 """"""""""""""""""""""""""""""""""""
 
-from \_\_future\_\_ imports
+from ``__future__`` imports
 
 .. tab:: 中文
 
+    鼓励使用 :code:`from __future__ import` 语句。它允许给定的源文件立即使用更现代的 Python 语法特性。当您不再需要运行隐藏在 :code:`__future__` 导入语句后面的版本时，请随时删除这些代码行。
+
+    在可能在 3.5 版（而非 >= 3.7 版）上执行的代码中，导入：
+
+    .. code-block:: python
+        
+        from __future__ import generator_stop
+
+    更多信息请阅读 `Python Future 语句定义 <https://docs.python.org/3/library/__future__.html>`_ 文档。
+
+    除非您确信代码只会在足够现代化的环境中运行，否则请勿删除这些导入语句。即使您目前没有在代码中使用特定 Future 导入语句启用的功能，将其保留在文件中也可以防止以后对代码的修改无意中依赖于旧的行为。
+
+    请根据需要使用其他 :code:`from __future__` 导入语句。
+
 .. tab:: 英文
 
+    Use of :code:`from __future__ import` statements is encouraged. It allows a given source file to start using more modern Python syntax features today. Once you no longer need to run on a version where the features are hidden behind a :code:`__future__` import, feel free to remove those lines.
 
+    In code that may execute on versions as old as 3.5 rather than >= 3.7, import:
 
-Use of :code:`from __future__ import` statements is encouraged. It allows a given
-source file to start using more modern Python syntax features today. Once you no
-longer need to run on a version where the features are hidden behind a
-:code:`__future__` import, feel free to remove those lines.
+    .. code-block:: python
+        
+        from __future__ import generator_stop
 
-In code that may execute on versions as old as 3.5 rather than >= 3.7, import:
+    For more information read the `Python future statement definitions <https://docs.python.org/3/library/__future__.html>`_ documentation.
 
-.. code-block:: python
-    
-    from __future__ import generator_stop
+    Please don't remove these imports until you are confident the code is only ever used in a sufficiently modern environment. Even if you do not currently use the feature a specific future import enables in your code today, keeping it in place in the file prevents later modifications of the code from inadvertently depending on the older behavior.
 
-For more information read the
-`Python future statement definitions <https://docs.python.org/3/library/__future__.html>`_
-documentation.
-
-Please don't remove these imports until you are confident the code is only ever
-used in a sufficiently modern environment. Even if you do not currently use the
-feature a specific future import enables in your code today, keeping it in place
-in the file prevents later modifications of the code from inadvertently
-depending on the older behavior.
-
-Use other :code:`from __future__` import statements as you see fit.
+    Use other :code:`from __future__` import statements as you see fit.
 
 .. _s2.21-type-annotated-code:
 .. _s2.21-typed-code:
@@ -2299,14 +2467,15 @@ Use other :code:`from __future__` import statements as you see fit.
 
 .. tab:: 中文
 
+    您可以使用 `类型提示 <https://docs.python.org/3/library/typing.html>`_ 为 Python 代码添加注释。在构建时，请使用 `pytype <https://github.com/google/pytype>`_ 等类型检查工具对代码进行类型检查。在大多数情况下，如果可行，类型注释都包含在源文件中。对于第三方或扩展模块，注释可以包含在 `stub .pyi 文件 <https://peps.python.org/pep-0484/#stub-filespytype>`_ 中。
+
+    .. admonition:: 译注
+
+        `mypy <https://hellowac.github.io/mypy-zh-cn/>`_ 是一个python官方支持的静态类型检查工具, 可以较好的结合各类IDE来检查你写的代码的静态类型。
+
 .. tab:: 英文
 
-You can annotate Python code with
- `type hints <https://docs.python.org/3/library/typing.html>`_ . Type-check the code
-at build time with a type checking tool like `pytype <https://github.com/google/pytype>`_ .
-In most cases, when feasible, type annotations are in source files. For
-third-party or extension modules, annotations can be in
-`stub .pyi files <https://peps.python.org/pep-0484/#stub-filespytype>`_ .
+    You can annotate Python code with `type hints <https://docs.python.org/3/library/typing.html>`_ . Type-check the code at build time with a type checking tool like `pytype <https://github.com/google/pytype>`_ . In most cases, when feasible, type annotations are in source files. For third-party or extension modules, annotations can be in `stub .pyi files <https://peps.python.org/pep-0484/#stub-filespytype>`_ .
 
 
 .. _s2.21.1-definition:
@@ -2321,20 +2490,31 @@ third-party or extension modules, annotations can be in
 
 .. tab:: 中文
 
+    类型注释（或“类型提示”）用于函数或方法的参数和返回值：
+
+    .. code-block:: python
+
+        def func(a: int) -> list[int]:
+
+    您还可以使用类似的语法声明变量的类型：
+
+    .. code-block:: python
+
+        a: SomeType = some_func()
+
 .. tab:: 英文
 
-Type annotations (or "type hints") are for function or method arguments and
-return values:
+    Type annotations (or "type hints") are for function or method arguments and return values:
 
-.. code-block:: python
+    .. code-block:: python
 
-    def func(a: int) -> list[int]:
+        def func(a: int) -> list[int]:
 
-You can also declare the type of a variable using similar syntax:
+    You can also declare the type of a variable using similar syntax:
 
-.. code-block:: python
+    .. code-block:: python
 
-    a: SomeType = some_func()
+        a: SomeType = some_func()
 
 
 .. _s2.21.2-pros:
@@ -2349,11 +2529,11 @@ You can also declare the type of a variable using similar syntax:
 
 .. tab:: 中文
 
+    类型注解可以提升代码的可读性和可维护性。类型检查器会将许多运行时错误转换为构建时错误，从而降低您使用 :ref:`强大功能 <power-features>` 的能力。
+
 .. tab:: 英文
 
-Type annotations improve the readability and maintainability of your code. The
-type checker will convert many runtime errors to build-time errors, and reduce
-your ability to use [Power Features](#power-features).
+    Type annotations improve the readability and maintainability of your code. The type checker will convert many runtime errors to build-time errors, and reduce your ability to use :ref:`Power Features <power-features>`.
 
 .. _s2.21.3-cons:
 .. _2213-cons:
@@ -2367,13 +2547,11 @@ your ability to use [Power Features](#power-features).
 
 .. tab:: 中文
 
+    您必须保持类型声明的更新。您可能会看到一些您认为是有效代码的类型错误。使用 `类型检查器 <https://github.com/google/pytype>`_ 可能会降低您使用 :ref:`强大功能 <power-features>` 的能力。
+
 .. tab:: 英文
 
-You will have to keep the type declarations up to date.
-You might see type errors that you think are
-valid code. Use of a
- `type checker <https://github.com/google/pytype>`_ 
-may reduce your ability to use `Power Features <power-features_>`_ .
+    You will have to keep the type declarations up to date. You might see type errors that you think are valid code. Use of a  `type checker <https://github.com/google/pytype>`_  may reduce your ability to use :ref:`Power Features <power-features>` .
 
 .. _s2.21.4-decision:
 .. _2214-decision:
@@ -2387,14 +2565,8 @@ may reduce your ability to use `Power Features <power-features_>`_ .
 
 .. tab:: 中文
 
+    强烈建议您在更新代码时启用 Python 类型分析。添加或修改公共 API 时，请在构建系统中添加类型注解并启用通过 pytype 进行检查的功能。由于静态分析对于 Python 来说相对较新，我们承认一些不良副作用（例如错误的类型推断）可能会阻碍某些项目的采用。在这种情况下，我们鼓励作者在 BUILD 文件或代码中添加 TODO 注释或指向 bug 的链接，以描述当前阻碍类型注解采用的问题。
+
 .. tab:: 英文
 
-You are strongly encouraged to enable Python type analysis when updating code.
-When adding or modifying public APIs, include type annotations and enable
-checking via pytype in the build system. As static analysis is relatively new to
-Python, we acknowledge that undesired side-effects (such as
-wrongly
-inferred types) may prevent adoption by some projects. In those situations,
-authors are encouraged to add a comment with a TODO or link to a bug describing
-the issue(s) currently preventing type annotation adoption in the BUILD file or
-in the code itself as appropriate.
+    You are strongly encouraged to enable Python type analysis when updating code. When adding or modifying public APIs, include type annotations and enable checking via pytype in the build system. As static analysis is relatively new to Python, we acknowledge that undesired side-effects (such as wrongly inferred types) may prevent adoption by some projects. In those situations, authors are encouraged to add a comment with a TODO or link to a bug describing the issue(s) currently preventing type annotation adoption in the BUILD file or in the code itself as appropriate.
