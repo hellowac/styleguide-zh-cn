@@ -10,10 +10,6 @@
 
 3 Python Style Rules 
 
-.. tab:: 中文
-
-.. tab:: 英文
-
 .. _s3.1-semicolons:
 .. _31-semicolons:
 
@@ -352,7 +348,7 @@
     
     .. code-block:: python
     
-        正确：  # 与起始定界符对齐
+        Yes:  # 与起始定界符对齐
                 foo = long_function_name(var_one, var_two,
                                          var_three, var_four)
                 meal = (spam,
@@ -392,7 +388,7 @@
     
     .. code-block:: python
     
-        错误：  # 禁止首行包含内容
+        No:  # 禁止首行包含内容
                 foo = long_function_name(var_one, var_two,
                     var_three, var_four)
                 meal = (spam,
@@ -574,24 +570,24 @@
     
     .. code-block:: python
     
-        正确：spam(ham[1], {'eggs': 2}, [])
+        Yes:spam(ham[1], {'eggs': 2}, [])
     
     .. code-block:: python
     
-        错误：spam( ham[ 1 ], { 'eggs': 2 }, [ ] )
+        No:spam( ham[ 1 ], { 'eggs': 2 }, [ ] )
     
     逗号、分号或冒号前不应有空格。逗号、分号或冒号后应有一个空格，
     除非它出现在行尾。
     
     .. code-block:: python
     
-        正确：if x == 4:
+        Yes:if x == 4:
                  print(x, y)
              x, y = y, x
     
     .. code-block:: python
     
-        错误：if x == 4 :
+        No:if x == 4 :
                  print(x , y)
              x , y = y , x
     
@@ -599,19 +595,19 @@
     
     .. code-block:: python
     
-        正确：spam(1)
+        Yes:spam(1)
     
     .. code-block:: python
     
-        错误：spam (1)
+        No:spam (1)
     
     .. code-block:: python
     
-        正确：dict['key'] = list[index]
+        Yes:dict['key'] = list[index]
     
     .. code-block:: python
     
-        错误：dict ['key'] = list [index]
+        No:dict ['key'] = list [index]
     
     禁止使用行尾空格。
     
@@ -619,31 +615,31 @@
     
     .. code-block:: python
     
-        正确：x == 1
+        Yes:x == 1
     
     .. code-block:: python
     
-        错误：x<1
+        No:x<1
     
     传递关键字参数或定义默认参数值时，等号两边 **不应** 添加空格。
     **唯一的例外** 是：若带有类型注解（见 :ref:`typing-default-values`），则 **应** 在等号两边添加空格。
     
     .. code-block:: python
     
-        正确：def complex(real, imag=0.0): return Magic(r=real, i=imag)
-        正确：def complex(real, imag: float = 0.0): return Magic(r=real, i=imag)
+        Yes:def complex(real, imag=0.0): return Magic(r=real, i=imag)
+        Yes:def complex(real, imag: float = 0.0): return Magic(r=real, i=imag)
     
     .. code-block:: python
     
-        错误：def complex(real, imag = 0.0): return Magic(r = real, i = imag)
-        错误：def complex(real, imag: float=0.0): return Magic(r = real, i = imag)
+        No:def complex(real, imag = 0.0): return Magic(r = real, i = imag)
+        No:def complex(real, imag: float=0.0): return Magic(r = real, i = imag)
     
     不要使用空格对齐连续行上的符号（例如 :code:`:`、:code:`#`、:code:`=` 等），
     因为这会增加维护负担：
     
     .. code-block:: python
     
-        正确：
+        Yes:
             foo = 1000  # comment
             long_name = 2  # comment that should not be aligned
     
@@ -654,7 +650,7 @@
     
     .. code-block:: python
     
-        错误：
+        No:
             foo       = 1000  # comment
             long_name = 2     # comment that should not be aligned
     
@@ -1387,7 +1383,7 @@
 .. tab:: 英文
 
     Classes should have a docstring below the class definition describing the class.
-    Public attributes, excluding `properties <properties_>`_ , should be documented
+    Public attributes, excluding :ref:`properties <properties>` , should be documented
     here in an :code:`Attributes` section and follow the same formatting as a
     `function's Args <doc-function-args_>`_ section.
 
@@ -1775,8 +1771,6 @@
 .. _3101-logging:
 .. _logging:
 
-.. _logging:
-
 3.10.1 日志记录
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1861,8 +1855,6 @@
 
 .. _s3.10.2-error-messages:
 .. _3102-error-messages:
-.. _error-messages:
-
 .. _error-messages:
 
 3.10.2 错误消息
@@ -2266,7 +2258,7 @@
         
             from __future__ import annotations
 
-        See `above <from-future-imports_>`_ for more information about those.
+        See :ref:`above <from-future-imports>` for more information about those.
 
     2.  Python standard library imports. For example:
 
@@ -2596,10 +2588,6 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 3.16.4 Guidelines derived from `Guido <https://en.wikipedia.org/wiki/Guido_van_Rossum>`_ 's Recommendations 
-
-.. tab:: 中文
-
-.. tab:: 英文
 
 .. csv-table:: 
    :header: "Type", "Public", "Internal"
@@ -3083,6 +3071,7 @@
         ...
 
 .. code-block:: python
+
     Yes:
     class MyClass:
         def __init__(self, stack: Sequence['MyClass'], item: 'OtherClass') -> None:

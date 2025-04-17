@@ -20,7 +20,6 @@ extensions = [
     "sphinx.ext.coverage",
     "sphinx_copybutton",
     "sphinx_inline_tabs",
-    "sphinx_paramlinks",
 ]
 
 templates_path = ["_templates"]
